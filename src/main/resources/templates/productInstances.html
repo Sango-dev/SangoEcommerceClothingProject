@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+
+</head>
+
+
+<body>
+
+<header>
+    <a th:href="@{/shop-cart}" class="basket">
+        🛒
+    </a>
+
+    <div sec:authorize="isAuthenticated()">
+        Hello, <span sec:authentication="principal.username">Bill</span>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{/logout}">logout</a>
+    </div>
+</header>
+
+
+<h1>Product Instances</h1>
+<form id="filter-form" method="get" action="http://localhost:8080/product/filter/list">
+    <div>
+        <label for="brands">Brands:</label>
+        <select value="urlParams.getAll('brands')" id="brands" name="brands" multiple="multiple">
+                <option th:each="brand : ${brands}" th:value="${brand.title}"
+                        th:text="${brand.title}"
+                >
+                </option>
+        </select>
+    </div>
+    <div>
+        <label for="categories">Brands:</label>
+        <select id="categories" name="categories" multiple="multiple">
+            <option th:each="category : ${categories}" th:value="${category.title}"
+                    th:text="${category.title}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="genders">Genders:</label>
+        <select id="genders" name="genders" multiple="multiple">
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+        </select>
+    </div>
+    <div>
+        <label for="colors">Colors:</label>
+        <select id="colors" name="colors" multiple="multiple">
+            <script>
+                const colors = ['BLACK', 'BLUE', 'BROWN', 'GOLDCOLORED', 'GREY', 'GREEN', 'MULTI', 'ORANGE', 'PINK', 'PURPLE', 'RED', 'SILVERCOLORED', 'TURQUOISE', 'WHITE', 'YELLOW'];
+                colors.forEach((color) => {
+                    document.write(`<option value="${color}">${color}</option>`);
+                });
+            </script>
+        </select>
+    </div>
+    <div>
+        <label for="sizes">Sizes:</label>
+        <select id="sizes" name="sizes" multiple="multiple">
+            <script>
+                const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XLL', '3XL', '29', '30', '31', '32', '33', '34'];
+                sizes.forEach((size) => {
+                    document.write(`<option value="${size}">${size}</option>`);
+                });
+            </script>
+        </select>
+    </div>
+    <div>
+        <label for="sort">Sort:</label>
+        <select id="sort" name="sort">
+            <option value="date_created_desc">Date created (newest first)</option>
+            <option value="date_created_asc">Date created (oldes first)</option>
+            <option value="price_asc">Price (low to high)</option>
+            <option value="price_desc">Price (high to low)</option>
+        </select>
+    </div>
+    <button type="submit">Filter</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>Picture</th>
+        <th>Title</th>
+        <th>Brand</th>
+        <th>price</th>
+        <th>Sizes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="productInstance : ${productInstances}">
+        <td><img th:src="@{${productInstance.linkOfMainPicture}}" class="image"></td>
+        <td th:text="${productInstance.product.title}"></td>
+        <td th:text="${productInstance.product.brand.title}"></td>
+        <td th:text="${productInstance.product.price}"></td>
+        <td th:each="size : ${productInstance.sizes}">
+            <p th:text="${size.size}"></p>
+        </td>
+        <td>
+            <button>
+                <a th:href="@{~/product/{id}/info(id=${productInstance.getId()})}">
+                    <span>About</span>
+                </a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagination" th:if="${totalPages > 0}">
+    <ul>
+        <li th:if="${currentPage > 0}">
+            <a th:href="@{${'/product/list?page=' + (currentPage - 1)}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li th:each="page : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == page ? 'active' : ''}">
+            <a th:href="@{${'/product/list?page=' + page}}" th:text="${page + 1}"></a>
+        </li>
+        <li th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{${'/product/list?page=' + (currentPage + 1)}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
+</body>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedBrands = urlParams.getAll('brands');
+    const selectedCategories = urlParams.getAll('categories');
+    const selectedSizes = urlParams.getAll('sizes');
+    const selectedColors = urlParams.getAll('colors');
+    const selectedGenders = urlParams.getAll('genders');
+
+    const brandsSelect = document.getElementById('brands');
+     for (let i = 0; i < brandsSelect.options.length; i++) {
+
+         if (selectedBrands.includes(brandsSelect.options[i].value)) {
+             brandsSelect.options[i].selected = true;
+         }
+     }
+
+    const categoriesSelect = document.getElementById('categories');
+    for (let i = 0; i < categoriesSelect.options.length; i++) {
+        if (selectedCategories.includes(categoriesSelect.options[i].value)) {
+            categoriesSelect.options[i].selected = true;
+        }
+    }
+
+    const sizesSelect = document.getElementById('sizes');
+    for (let i = 0; i < sizesSelect.options.length; i++) {
+        if (selectedSizes.includes(sizesSelect.options[i].value)) {
+            sizesSelect.options[i].selected = true;
+        }
+    }
+
+    const colorsSelect = document.getElementById('colors');
+    for (let i = 0; i < colorsSelect.options.length; i++) {
+        if (selectedColors.includes(colorsSelect.options[i].value)) {
+            colorsSelect.options[i].selected = true;
+        }
+    }
+
+    const gendersSelect = document.getElementById('genders');
+    for (let i = 0; i < gendersSelect.options.length; i++) {
+        if (selectedGenders.includes(gendersSelect.options[i].value)) {
+            gendersSelect.options[i].selected = true;
+        }
+    }
+</script>
+
+</html>

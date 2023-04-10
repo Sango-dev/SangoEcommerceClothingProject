@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ProductInstance Info</title>
+</head>
+
+
+
+<body>
+<header>
+    <a th:href="@{/shop-cart}" class="basket">
+        🛒
+    </a>
+
+    <div sec:authorize="isAuthenticated()">
+        Hello, <span sec:authentication="principal.username">Bill</span>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <a  th:href="@{/logout}">logout</a>
+    </div>
+</header>
+
+
+<img th:src="@{${productInstance.linkOfFrontPicture}}" class="image">
+<img th:src="@{${productInstance.linkOfBackPicture}}" class="image">
+
+<p th:each="entry : ${productInstance.links}">
+    <a th:href="@{~/product/{id}/info(id=${entry.id})}">
+        <span th:text="${entry.colorDefinition}">Wtf</span>
+    </a>
+</p>
+
+<p th:text="${productInstance.product.title}"></p>
+<p th:text="${productInstance.product.price}"></p>
+
+<p th:text="${productInstance.product.description}"></p>
+<p th:text="${productInstance.product.composition}"></p>
+
+<form method="post" th:action="@{/product/{id}/add-to-cart(id=${productInstance.id})}">
+    <select name="size">
+        <option th:each="size : ${productInstance.sizes}" th:value="${size.size}">
+            <p th:text="${size.size}"></p>
+        </option>
+    </select>
+    <button type="submit">Add to Cart</button>
+</form>
+
+
+</body>
+
+</html>

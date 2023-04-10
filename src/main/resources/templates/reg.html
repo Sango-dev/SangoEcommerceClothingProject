@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/regstyle.css}"/>
+</head>
+
+<body>
+<header>
+    <div class="logo">Clothes👘</div>
+    <nav>
+        <a href="/products" class="nav_item">Products</a>
+    </nav>
+
+</header>
+<div class="form_box">
+    <form th:action="@{/users/new}" method="post" class="register_form" th:object="${user}">
+
+        <h2 style="background-color: whitesmoke">Registration</h2>
+        <input type="text" id="firstName" th:field="*{firstName}" th:value="${firstName}" required="true"
+               autofocus="true" placeholder="First Name">
+        <input type="text" id="lastName" th:field="*{lastName}" th:value="${lastName}" required="true"
+               placeholder="Last Name">
+        <input type="email" id="email" th:field="*{email}" th:value="${email}" required="true" placeholder="Email">
+        <input type="text" id="nickName" th:field="*{nickName}" th:value="${nickName}" required="true"
+               placeholder="Nickname">
+        <input type="password" id="password" th:field="*{password}" th:value="${password}" required="true"
+               placeholder="Password">
+        <input type="password" id="matchingPassword" th:field="*{matchingPassword}" th:value="${matchingPassword}"
+               required="true" placeholder="Matching password">
+        <div th:if="${errorFlag}" style="background-color: whitesmoke">
+            <p th:text="${errorMessage}"
+               style="color: red; font-weight: bold; font-size: 25px; background-color: whitesmoke"></p>
+        </div>
+        <button type="submit">Registration</button>
+
+        <div style="background-color: whitesmoke" sec:authorize="!hasAnyAuthority('ADMIN')">
+            <a href="/login" style="background-color: whitesmoke">Login</a>
+        </div>
+    </form>
+</div>
+<footer>
+    <div style="background-color: blue">Made by Klymenchuk Oleksandrⓒ</div>
+    <a href="https://github.com/Sango-dev/InternetClothingStore"
+       style="color: white; margin: 0 10px; background-color: blue;">Git</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginstyle.css}"/>
+</head>
+
+<body>
+<header>
+  <!--  <div class="logo">Clothes👘</div>
+    <nav>
+        <a href="/products" class="nav_item">Products</a>
+    </nav>
+-->
+</header>
+
+<div class="form_box">
+    <form action="/auth" method="post" class="login_form">
+        <h2 style="background-color: whitesmoke">Login</h2>
+        <input type="text" name="username" placeholder="Nickname" autofocus="true" required="true">
+        <input type="password" name="password" placeholder="Password" required="true">
+        <div th:if="${loginError}" style="background-color: whitesmoke">
+            <p th:text="${errorMessage}"
+               style="color: red; font-weight: bold; font-size: 20px; background-color: whitesmoke"></p>
+        </div>
+        <button type="submit">Login</button>
+        <div style="background-color: whitesmoke">
+            <a style="background-color: whitesmoke" href="/users/new">Register</a>
+        </div>
+
+    </form>
+</div>
+
+<footer>
+    <div style="background-color: blue">Made by Klymenchuk Oleksandrⓒ</div>
+    <a href="https://github.com/Sango-dev/InternetClothingStore"
+       style="color: white; margin: 0 10px; background-color: blue;">Git</a>
+</footer>
+
+</body>
+</html>

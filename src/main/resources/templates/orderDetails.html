@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/orderdetailstyle.css}"/>
+</head>
+
+<body>
+
+<div class="box">
+    <form th:action="@{/order/save-order}" th:object="${order}" method="post">
+        <div style="display: none;">
+            <input type="hidden" th:field="*{sum}" title="sum"/>
+            <input type="hidden" th:field="*{status}" title="status"/>
+            <th:block th:each="detail, i : ${order.details}">
+                <input type="hidden" th:field="*{details[__${i.index}__].productInstanceId}" th:value="${detail.productInstanceId}"/>
+                <input type="hidden" th:field="*{details[__${i.index}__].productInstanceTitle}" th:value="${detail.productInstanceTitle}"/>
+                <input type="hidden" th:field="*{details[__${i.index}__].linkOfMainPicture}" th:value="${detail.linkOfMainPicture}"/>
+                <input type="hidden" th:field="*{details[__${i.index}__].size}" th:value="${detail.size}"/>
+                <input type="hidden" th:field="*{details[__${i.index}__].amount}" th:value="${detail.amount}"/>
+                <input type="hidden" th:field="*{details[__${i.index}__].price}" th:value="${detail.price}"/>
+            </th:block>
+        </div>
+
+        <input type="text" th:field="*{recipient}" placeholder="Recipient" required="true"/>
+        <input type="text" th:field="*{address}" placeholder="Address" required="true"/>
+        <input type="text" th:field="*{email}" required="true" placeholder="Email"/>
+        <input type="tel" th:field="*{phone}" placeholder="Phone" required="true" pattern="[0]{1}[0-9]{9}"/>
+
+        <div>
+            <label for="payment-option">Payment Option:</label>
+            <select th:field="*{payment}" id="payment-option" required>
+                <option value="">Select an option</option>
+                <option value="CASH">Cash</option>
+                <option value="CREDIT_CARD">Credit Card</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="delivery-option">Delivery Option:</label>
+            <select th:field="*{delivery}" id="delivery-option" required>
+                <option value="">Select an option</option>
+                <option value="SELF_DELIVERY">Self Delivery</option>
+                <option value="DELIVERY_COMPANY">Delivery Company</option>
+                <option value="COURIER">Courier</option>
+            </select>
+        </div>
+        <button type="submit">Ok</button>
+    </form>
+
+
+    <table class="order">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Size</th>
+            <th>Amount</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="detail : ${order.details}">
+            <td><img th:src="@{${detail.linkOfMainPicture}}"></td>
+            <td th:text="${detail.productInstanceTitle}">Cap</td>
+            <td th:text="${detail.size}">good cap</td>
+            <td th:text="${detail.amount}">2</td>
+            <td th:text="${(detail.price * detail.amount) + ' ' + '$'}">11.0</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4" style="padding: 0 0 0 50px;">
+                All sum:
+            </td>
+            <td align="center">
+                <b th:text="${order.sum  + ' ' + '$'}">1000</b>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: 'update'
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/SangoClothingStore
+    username: postgres
+    password: rootroot
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+

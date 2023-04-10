@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<title>Bucket</title>
+</head>
+<body>
+
+<header>
+    <div sec:authorize="isAuthenticated()">
+        Hello, <span sec:authentication="principal.username">Bill</span>
+    </div>
+</header>
+
+<div th:if="${!cart.cartDetails.isEmpty()}">
+    <table>
+        <tr align="center">
+            <th>Picture</th>
+            <th>Title</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Total</th>
+        </tr>
+        <tr id="cart" th:each="detail : ${cart.cartDetails}">
+            <td><img th:src="@{${detail.linkOfPicture}}" class="image"></td>
+            <td th:text="${detail.title}">Vendor Code</td>
+            <td th:text="${detail.size}">Vendor Code</td>
+            <td th:text="${detail.price}">Title</td>
+            <td th:text="${detail.amount}">Description</td>
+            <td th:text="${detail.sum}" align="right">Price</td>
+        </tr>
+    </table>
+    <div class="">
+        <p th:text="${totalPrice}"></p>
+    </div>
+</div>
+<form th:action="@{/shop-cart}" method="post">
+    <!--<button class="btn btn-info" type="submit" name="submit">Create Order</button>
+    <button class="btn btn-danger" type="submit" name="clear">Clear Cart</button>-->
+    <span sec:authorize="isAuthenticated()">
+                    <span>......................</span>
+                    <button class="btn btn-success" type="submit" name="store" style="margin-left: 40">Save Cart</button>
+                    <button class="btn btn-secondary" type="submit" name="load">Load Cart</button>
+                </span>
+</form>
+<form th:action="@{/shop-cart/confirmation-order}" method="post">
+    <span sec:authorize="isAuthenticated()">
+                    <button class="btn btn-secondary" type="submit">Create Order</button>
+                </span>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+*, body {
+    margin: 0;
+    padding: 0;
+}
+.box {
+    margin: 30px auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order {
+    width: 60vw;
+    font-size: 18px;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.order thead th {
+    width: 200px;
+    color: white;
+    background-color: blue;
+    text-align: center;
+    padding: 10px;
+}
+
+.order tbody td {
+    text-align: center;
+    width: 200px;
+    padding: 8px;
+}
+
+.order tbody tr {
+    height: 120px;
+}
+
+td img {
+    width: 100px;
+    height: 100px;
+}
+
+tfoot {
+    height: 50px;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: wheat;
+    height: 300px;
+}
+
+form input{
+    font-size: 18px;
+    padding: 5px 10px;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 30px;
+    border: solid 2px blue
+}
+form button{
+    width: 200px;
+    align-self: center;
+    font-size: 20px;
+    border-radius: 10px;
+    border-radius: 30px;
+    border: solid 2px blue;
+    background-color: white;
+    color: blue;
+}
+form button:hover{
+    background: lightgray;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    margin: 0 0 20px 0;
+    background: blue;
+}
+
+nav {
+    background: none;
+    margin: 30px;
+}
+
+.basket {
+    font-size: 30px;
+    background: none;
+    border: none;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.nav_item {
+    background: none;
+    color: white;
+    padding: 20px;
+    border: solid 2px white;
+    font-size: 20px;
+}
+
+.nav_item:hover {
+    font-weight: bold;
+}
+
+.nav_item:first-child {
+    border: solid 2px white;
+}
+
+.nav_item:last-child {
+
+    border-top-right-radius: 10px;
+}
+
+.logo {
+    font-size: 30px;
+    cursor: pointer;
+    margin: 10px 20px;
+    color: white;
+    background: none;
+}
