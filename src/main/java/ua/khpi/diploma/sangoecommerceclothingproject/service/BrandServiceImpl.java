@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.BrandRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.BrandDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.mapper.BrandMapper;
-import ua.khpi.diploma.sangoecommerceclothingproject.mapper.ProductInstanceMapper;
 
 import java.util.List;
 

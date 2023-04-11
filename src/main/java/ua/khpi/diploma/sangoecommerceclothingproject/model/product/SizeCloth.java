@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-import ua.khpi.diploma.sangoecommerceclothingproject.model.product.ProductInstanceCloth;
 
 import javax.persistence.*;
 
@@ -12,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "size_quantities")
-public class SizeQuantity {
+@Table(name = "sizes")
+public class SizeCloth {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -24,12 +23,6 @@ public class SizeQuantity {
             nullable = false
     )
     private String size;
-
-    @Column(
-            name = "quantity",
-            nullable = false
-    )
-    private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_instance_id", nullable = false)

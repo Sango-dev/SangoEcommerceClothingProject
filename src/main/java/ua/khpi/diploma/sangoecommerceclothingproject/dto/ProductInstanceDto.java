@@ -22,6 +22,6 @@ public class ProductInstanceDto {
     private String colorDefinition;
     private LocalDate dateCreated;
     private ProductDto product;
-    private List<SizeQuantityDto> sizes;
+    private List<SizeClothDto> sizes;
     List<ProductInstanceLink> links;
 }

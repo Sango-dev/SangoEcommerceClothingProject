@@ -59,9 +59,8 @@ create table products (
     primary key (id)
  );
 
-  create table size_quantities (
+  create table sizes (
     id varchar(255) not null,
-    quantity int4 not null,
     size varchar(255) not null,
     product_instance_id varchar(255) not null,
     primary key (id)

@@ -31,10 +31,10 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
 
     @Override
     public List<ProductInstanceDto> findAllProductInstancesWithFilters(List<Color> colors,
-                                               List<String> brands,
-                                               List<String> categories,
-                                               List<Gender> genders,
-                                               List<String> sizes) {
+                                                                       List<String> brands,
+                                                                       List<String> categories,
+                                                                       List<Gender> genders,
+                                                                       List<String> sizes) {
 
         List<ProductInstanceCloth> list = productInstanceRepository.findDistinctByColorInAndProduct_Brand_TitleInAndProduct_Category_TitleInAndProduct_GenderInAndSizes_SizeIn(colors, brands, categories, genders, sizes);
         List<ProductInstanceDto> productInstancesDtos = mapper.fromProductInstancesList(list);

@@ -77,7 +77,7 @@ public class ProductInstanceCloth {
     private LocalDate dateCreated;
 
     @OneToMany(mappedBy = "productInstance", cascade = CascadeType.ALL)
-    private List<SizeQuantity> sizes;
+    private List<SizeCloth> sizes;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", nullable = false)

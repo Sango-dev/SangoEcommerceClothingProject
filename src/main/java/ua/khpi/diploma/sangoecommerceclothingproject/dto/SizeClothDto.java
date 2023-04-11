@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SizeQuantityDto {
+public class SizeClothDto {
     private String id;
     private String size;
-    private int quantity;
 }
