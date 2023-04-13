@@ -29,9 +29,6 @@ public class ProductCloth {
     )
     private String id;
 
-
-
-
     @Column(
             name = "product_code",
             nullable = false

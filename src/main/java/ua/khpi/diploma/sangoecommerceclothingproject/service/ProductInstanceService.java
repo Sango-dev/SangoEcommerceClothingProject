@@ -13,5 +13,7 @@ public interface ProductInstanceService {
 
     ProductInstanceDto findProductInstanceById(String id) throws Exception;
 
-    List<ProductInstanceDto> findAllProductInstancesWithFilters(List<Color> colors, List<String> brands, List<String> categories, List<Gender> genders, List<String> sizes);
+    List<ProductInstanceDto> findAllProductInstancesWithFilters(List<Color> colors, List<String> brands, List<String> categories, List<Gender> genders, List<String> sizes, String sort);
+
+    List<ProductInstanceDto> findAllProductInstancesBySearchParam(String param);
 }

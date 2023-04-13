@@ -1,54 +1,212 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>ProductInstance Info</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-
-
 <body>
-<header>
-    <a th:href="@{/shop-cart}" class="basket">
-        🛒
-    </a>
-
-    <div sec:authorize="isAuthenticated()">
-        Hello, <span sec:authentication="principal.username">Bill</span>
+<!-- Header -->
+<header
+        class="w-full h-[80px] bg-neutral-200 grid justify-items-stretch grid-cols-3"
+>
+    <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-2xl">
+        Hello, <span sec:authentication="principal.username">Billi</span>
     </div>
-
-    <div sec:authorize="isAuthenticated()">
-        <a  th:href="@{/logout}">logout</a>
+    <div
+            class="justify-self-center text-4xl my-auto text-red-500 font-mono font-bold"
+    >
+        SanGo
+    </div>
+    <div
+            sec:authorize="isAuthenticated()"
+            class="justify-self-end mx-2 my-auto text-2xl"
+    >
+        <a th:href="@{/logout}" class="mx-2">logout</a>
+        <a th:href="@{/shop-cart}" class="basket mx-2 no-underline"> 🛒 </a>
     </div>
 </header>
+<!-- End Header -->
 
+<!-- Tovar card -->
+<div class="m-10 flex justify-between">
+    <!--Info block-->
+    <div class="bg-neutral-50">
+        <!--Images-->
+        <div class="flex">
+            <img
+                    th:src="@{${productInstance.linkOfFrontPicture}}"
+                    src="https://picsum.photos/600/800"
+                    class="w-[600px] h-[800px] p-2"
+            />
+            <img
+                    th:src="@{${productInstance.linkOfBackPicture}}"
+                    src="https://picsum.photos/600/800"
+                    class="w-[600px] h-[800px] p-2"
+            />
+        </div>
+        <!--End images-->
 
-<img th:src="@{${productInstance.linkOfFrontPicture}}" class="image">
-<img th:src="@{${productInstance.linkOfBackPicture}}" class="image">
+        <!--Description-->
+        <div class="w-[1000px] p-10">
+            <p th:text="${productInstance.product.description}" class="break-all">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde minima
+                maxime facilis est. Perferendis ipsa reiciendis tempora commodi
+                accusamus, recusandae mollitia corrupti soluta sint eos, velit
+                facilis nulla dignissimos cupiditate? Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Doloribus distinctio ex hic architecto
+                alias tempore unde quis consequatur in quos! Alias, ex dignissimos
+                velit numquam assumenda odit ducimus aspernatur? Assumenda?
+            </p>
+            <p class="mt-3" th:text="${productInstance.product.composition}">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+                consequuntur cum officia, earum laborum rem porro eaque eveniet
+                inventore! Perferendis doloremque sed commodi, ad voluptatem sunt
+                labore quasi unde itaque.
+            </p>
+        </div>
+        <!--End description-->
+    </div>
+    <!--End info block-->
 
-<p th:each="entry : ${productInstance.links}">
-    <a th:href="@{~/product/{id}/info(id=${entry.id})}">
-        <span th:text="${entry.colorDefinition}">Wtf</span>
-    </a>
-</p>
+    <!--Tovar info-->
+    <div class="fixed right-10 bg-neutral-50 p-10 w-[600px]">
+        <div class="flex justify-between">
+            <div
+                    th:text="${productInstance.product.title}"
+                    class="text-xl font-bold"
+            >
+                Штани бля
+            </div>
+            <div class="flex items-center">
+                <svg
+                        aria-hidden="true"
+                        class="w-5 h-5 text-black"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>20</title>
+                    <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                </svg>
+                <svg
+                        aria-hidden="true"
+                        class="w-5 h-5 text-black"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>40</title>
+                    <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                </svg>
+                <svg
+                        aria-hidden="true"
+                        class="w-5 h-5 text-black"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>60</title>
+                    <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                </svg>
+                <svg
+                        aria-hidden="true"
+                        class="w-5 h-5 text-black"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>80</title>
+                    <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                </svg>
+                <svg
+                        aria-hidden="true"
+                        class="w-5 h-5 text-gray-300"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>100</title>
+                    <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    ></path>
+                </svg>
+            </div>
+        </div>
 
-<p th:text="${productInstance.product.title}"></p>
-<p th:text="${productInstance.product.price}"></p>
+        <!--Price-->
+        <div class="flex mt-10">
+            <div th:text="${productInstance.product.price}" class="mr-1">40</div>
+            <div>гривень блять</div>
+        </div>
+        <!--End Price-->
 
-<p th:text="${productInstance.product.description}"></p>
-<p th:text="${productInstance.product.composition}"></p>
+        <!--Select color-->
+        <div class="flex mt-10">
+            <div th:each="entry : ${productInstance.links}" class="ml-1">
+                <a th:href="@{~/product/{id}/info(id=${entry.id})}">
+                    <span th:text="${entry.colorDefinition}"
+                    class="rounded-sm p-3 border-black border-[1px]">
+            </span>
+                </a>
+            </div>
+        </div>
+        <!--End select color-->
 
-<form method="post" th:action="@{/product/{id}/add-to-cart(id=${productInstance.id})}">
-    <select name="size">
-        <option th:each="size : ${productInstance.sizes}" th:value="${size.size}">
-            <p th:text="${size.size}"></p>
-        </option>
-    </select>
-    <button type="submit">Add to Cart</button>
-</form>
-
-
+        <!--Select size add to card-->
+        <form
+                class="w-full flex flex-col mt-10"
+                method="post"
+                th:action="@{/product/{id}/add-to-cart(id=${productInstance.id})}"
+        >
+            <select name="size" class="p-3">
+                <option hidden>Select size</option>
+                <option
+                        class="p-3"
+                        th:each="size : ${productInstance.sizes}"
+                        th:value="${size.size}"
+                >
+                    <p th:text="${size.size}"></p>
+                </option>
+            </select>
+            <button
+                    type="submit"
+                    class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50"
+            >
+                <div class="mr-1">Add</div>
+                <div class="w-6 h-6">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <title />
+                        <path
+                                fill="white"
+                                d="M23.52,29h-15a5.48,5.48,0,0,1-5.31-6.83L6.25,9.76a1,1,0,0,1,1-.76H24a1,1,0,0,1,1,.7l3.78,12.16a5.49,5.49,0,0,1-.83,4.91A5.41,5.41,0,0,1,23.52,29ZM8,11,5.11,22.65A3.5,3.5,0,0,0,8.48,27h15a3.44,3.44,0,0,0,2.79-1.42,3.5,3.5,0,0,0,.53-3.13L23.28,11Z"
+                        />
+                        <path
+                                fill="white"
+                                d="M20,17a1,1,0,0,1-1-1V8a3,3,0,0,0-6,0v8a1,1,0,0,1-2,0V8A5,5,0,0,1,21,8v8A1,1,0,0,1,20,17Z"
+                        />
+                    </svg>
+                </div>
+            </button>
+        </form>
+        <!--End select size add to card-->
+    </div>
+    <!--End tovar info-->
+</div>
+<!-- End tovar card-->
 </body>
 
 </html>

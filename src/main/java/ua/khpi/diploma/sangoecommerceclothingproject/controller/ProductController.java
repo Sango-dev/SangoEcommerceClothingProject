@@ -22,6 +22,7 @@ import ua.khpi.diploma.sangoecommerceclothingproject.service.ShopCartService;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,10 +48,10 @@ public class ProductController {
         model.addAttribute("productInstances", productInstancePageResponse.getProductInstanceDtos());
         model.addAttribute("totalPages", productInstancePageResponse.getTotalPages());
         model.addAttribute("currentPage", page);
-        return "productInstances";
+        return "productInstancesd";
     }
 
-    @GetMapping("/filter/list")
+    @GetMapping(value = "/filter/list")
     public String findAllProductInstancesWithFilters(
             @RequestParam(required = false) List<String> brands,
             @RequestParam(required = false) List<String> categories,
@@ -83,14 +84,29 @@ public class ProductController {
         }
 
             List<ProductInstanceDto> list = productInstanceService.findAllProductInstancesWithFilters(
-                    colors, brands, categories, genders, sizes);
+                    colors, brands, categories, genders, sizes, sort);
+
+
 
         model.addAttribute("productInstances", list);
         model.addAttribute("brands", brandDtos);
         model.addAttribute("categories", categoryDtos);
         model.addAttribute("totalPages", 0);
         model.addAttribute("currentPage", 0);
-        return "productInstances";
+        return "productInstancesd";
+    }
+
+    @GetMapping("/search-by-param")
+    public String searchByParam(Model model, @RequestParam("str") String param) {
+        List<CategoryDto> categoryDtos = categoryService.findAll();
+        List<BrandDto> brandDtos = brandService.findAll();
+        final List<ProductInstanceDto> list = productInstanceService.findAllProductInstancesBySearchParam(param);
+        model.addAttribute("productInstances", list);
+        model.addAttribute("brands", brandDtos);
+        model.addAttribute("categories", categoryDtos);
+        model.addAttribute("totalPages", 0);
+        model.addAttribute("currentPage", 0);
+        return "productInstancesd";
     }
 
     @GetMapping("/{id}/info")
