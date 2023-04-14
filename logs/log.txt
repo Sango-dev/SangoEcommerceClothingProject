@@ -1,155 +1,153 @@
-2023-04-13 10:50:45,206 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 12528 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
-2023-04-13 10:50:45,215 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-04-13 10:50:45,263 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-04-13 10:50:45,263 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-04-13 10:50:45,967 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-13 10:50:46,048 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 72 ms. Found 8 JPA repository interfaces.
-2023-04-13 10:50:46,632 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2023-04-13 10:50:46,641 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:50:46,641 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-04-13 10:50:46,641 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
-2023-04-13 10:50:46,724 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-04-13 10:50:46,725 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1461 ms
-2023-04-13 10:50:46,877 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
-2023-04-13 10:50:46,877 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
-2023-04-13 10:50:46,878 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
-2023-04-13 10:50:46,889 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-04-13 10:50:47,042 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-04-13 10:50:47,063 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
-2023-04-13 10:50:47,127 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.033s)
-2023-04-13 10:50:47,134 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
-2023-04-13 10:50:47,136 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
-2023-04-13 10:50:47,246 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-13 10:50:47,296 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
-2023-04-13 10:50:47,410 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-04-13 10:50:47,504 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-2023-04-13 10:50:48,376 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-13 10:50:48,392 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 10:50:48,462 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-13 10:50:49,560 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@77f043cd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@160b9fd7, org.springframework.security.web.context.SecurityContextPersistenceFilter@5077a600, org.springframework.security.web.header.HeaderWriterFilter@199b995a, org.springframework.security.web.authentication.logout.LogoutFilter@15d4c880, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3f5e51bc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@35a675a6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@699acaa9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@49fcb821, org.springframework.security.web.session.SessionManagementFilter@6dd03979, org.springframework.security.web.access.ExceptionTranslationFilter@5b3b2d69, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4d38b73f]
-2023-04-13 10:50:49,936 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2023-04-13 10:50:49,958 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:50:49,978 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-13 10:50:49,989 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 5.117 seconds (JVM running for 5.89)
-2023-04-13 10:51:36,748 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 10:51:36,755 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-04-13 10:51:36,770 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
-2023-04-13 10:51:43,905 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 16156 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
-2023-04-13 10:51:43,908 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-04-13 10:51:43,958 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-04-13 10:51:43,959 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-04-13 10:51:44,651 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-13 10:51:44,739 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 81 ms. Found 8 JPA repository interfaces.
-2023-04-13 10:51:45,482 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2023-04-13 10:51:45,489 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:51:45,490 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-04-13 10:51:45,490 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
-2023-04-13 10:51:45,568 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-04-13 10:51:45,568 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1609 ms
-2023-04-13 10:51:45,696 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
-2023-04-13 10:51:45,697 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
-2023-04-13 10:51:45,697 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
-2023-04-13 10:51:45,712 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-04-13 10:51:45,825 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-04-13 10:51:45,835 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
-2023-04-13 10:51:45,869 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.020s)
-2023-04-13 10:51:45,875 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
-2023-04-13 10:51:45,876 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
-2023-04-13 10:51:45,973 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-13 10:51:46,002 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
-2023-04-13 10:51:46,088 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-04-13 10:51:46,155 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-2023-04-13 10:51:46,770 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-13 10:51:46,776 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 10:51:46,829 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-13 10:51:47,720 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@160b9fd7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49fcb821, org.springframework.security.web.context.SecurityContextPersistenceFilter@3c804686, org.springframework.security.web.header.HeaderWriterFilter@770b2e14, org.springframework.security.web.authentication.logout.LogoutFilter@424de426, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@37578827, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@598a8f60, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a7f4779, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@70b59c56, org.springframework.security.web.session.SessionManagementFilter@3b36533b, org.springframework.security.web.access.ExceptionTranslationFilter@35eb72b7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5f6d51db]
-2023-04-13 10:51:48,133 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2023-04-13 10:51:48,158 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:51:48,170 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-13 10:51:48,180 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 4.666 seconds (JVM running for 5.64)
-2023-04-13 10:51:48,451 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-04-13 10:51:48,452 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2023-04-13 10:51:48,453 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
-2023-04-13 10:53:24,480 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 10:53:24,489 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-04-13 10:53:24,502 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
-2023-04-13 10:53:31,725 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 7516 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
-2023-04-13 10:53:31,731 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-04-13 10:53:31,809 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-04-13 10:53:31,810 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-04-13 10:53:32,709 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-13 10:53:32,819 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 99 ms. Found 8 JPA repository interfaces.
-2023-04-13 10:53:33,553 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2023-04-13 10:53:33,562 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:53:33,562 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-04-13 10:53:33,563 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
-2023-04-13 10:53:33,664 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-04-13 10:53:33,665 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1853 ms
-2023-04-13 10:53:33,818 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
-2023-04-13 10:53:33,819 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
-2023-04-13 10:53:33,819 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
-2023-04-13 10:53:33,828 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-04-13 10:53:33,969 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-04-13 10:53:33,984 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
-2023-04-13 10:53:34,029 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.028s)
-2023-04-13 10:53:34,039 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
-2023-04-13 10:53:34,040 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
-2023-04-13 10:53:34,171 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-13 10:53:34,209 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
-2023-04-13 10:53:34,334 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-04-13 10:53:34,439 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-2023-04-13 10:53:35,346 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-13 10:53:35,355 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 10:53:35,420 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-13 10:53:36,284 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2a7622d7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@36744e3b, org.springframework.security.web.context.SecurityContextPersistenceFilter@10786990, org.springframework.security.web.header.HeaderWriterFilter@a2ab183, org.springframework.security.web.authentication.logout.LogoutFilter@51c9ecf4, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@38503172, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4d44f5d2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e901d4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@728ed9, org.springframework.security.web.session.SessionManagementFilter@28b98a1b, org.springframework.security.web.access.ExceptionTranslationFilter@3c804686, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@b123fc9]
-2023-04-13 10:53:36,739 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2023-04-13 10:53:36,764 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:53:36,779 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-13 10:53:36,791 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 5.638 seconds (JVM running for 6.609)
-2023-04-13 10:53:37,547 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-04-13 10:53:37,547 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2023-04-13 10:53:37,549 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
-2023-04-13 10:57:02,306 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 10:57:02,311 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-04-13 10:57:02,318 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
-2023-04-13 10:57:10,225 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 11560 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
-2023-04-13 10:57:10,231 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-04-13 10:57:10,311 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-04-13 10:57:10,311 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-04-13 10:57:11,244 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-13 10:57:11,399 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 140 ms. Found 8 JPA repository interfaces.
-2023-04-13 10:57:12,297 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2023-04-13 10:57:12,305 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:57:12,306 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-04-13 10:57:12,306 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
-2023-04-13 10:57:12,441 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-04-13 10:57:12,441 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2128 ms
-2023-04-13 10:57:12,682 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
-2023-04-13 10:57:12,683 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
-2023-04-13 10:57:12,684 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
-2023-04-13 10:57:12,699 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-04-13 10:57:12,878 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-04-13 10:57:12,904 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
-2023-04-13 10:57:12,966 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.037s)
-2023-04-13 10:57:12,976 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
-2023-04-13 10:57:12,978 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
-2023-04-13 10:57:13,094 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-13 10:57:13,140 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
-2023-04-13 10:57:13,258 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-04-13 10:57:13,412 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-2023-04-13 10:57:14,594 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-13 10:57:14,607 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 10:57:14,700 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-13 10:57:15,573 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2382a65a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@345de771, org.springframework.security.web.context.SecurityContextPersistenceFilter@16d5fbb9, org.springframework.security.web.header.HeaderWriterFilter@7f3ec89, org.springframework.security.web.authentication.logout.LogoutFilter@4c692a9e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@687da32a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@10786990, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@15d4c880, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a7622d7, org.springframework.security.web.session.SessionManagementFilter@10d266dc, org.springframework.security.web.access.ExceptionTranslationFilter@15b814e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3f8b668a]
-2023-04-13 10:57:15,975 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2023-04-13 10:57:16,000 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2023-04-13 10:57:16,017 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-13 10:57:16,027 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 6.394 seconds (JVM running for 7.417)
-2023-04-13 10:57:16,266 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-04-13 10:57:16,266 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2023-04-13 10:57:16,267 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
-2023-04-13 12:00:35,724 WARN com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m51s911ms851µs200ns).
-2023-04-13 13:10:12,183 WARN com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m5s948ms831µs900ns).
-2023-04-13 13:12:23,351 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-04-13 13:12:23,357 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-04-13 13:12:23,371 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-04-14 09:05:20,103 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 444 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
+2023-04-14 09:05:20,110 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-04-14 09:05:20,153 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-14 09:05:20,154 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-14 09:05:20,756 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-14 09:05:20,828 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 64 ms. Found 8 JPA repository interfaces.
+2023-04-14 09:05:21,369 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-04-14 09:05:21,376 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:05:21,376 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-04-14 09:05:21,376 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-14 09:05:21,443 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-04-14 09:05:21,444 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1290 ms
+2023-04-14 09:05:21,569 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
+2023-04-14 09:05:21,569 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2023-04-14 09:05:21,570 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
+2023-04-14 09:05:21,578 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-04-14 09:05:21,717 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-04-14 09:05:21,736 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
+2023-04-14 09:05:21,783 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.026s)
+2023-04-14 09:05:21,788 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
+2023-04-14 09:05:21,788 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
+2023-04-14 09:05:21,880 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-14 09:05:21,927 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-14 09:05:22,039 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-14 09:05:22,130 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-04-14 09:05:22,789 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-14 09:05:22,796 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:05:22,835 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-14 09:05:23,413 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@b123fc9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@687da32a, org.springframework.security.web.context.SecurityContextPersistenceFilter@342075f7, org.springframework.security.web.header.HeaderWriterFilter@7ea24c4e, org.springframework.security.web.authentication.logout.LogoutFilter@295dd959, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@70b59c56, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@c27ee25, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@10d266dc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c262799, org.springframework.security.web.session.SessionManagementFilter@3c804686, org.springframework.security.web.access.ExceptionTranslationFilter@199b995a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@77f043cd]
+2023-04-14 09:05:23,767 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-04-14 09:05:23,789 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:05:23,803 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-14 09:05:23,814 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 4.017 seconds (JVM running for 4.887)
+2023-04-14 09:05:42,865 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-14 09:05:42,865 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-04-14 09:05:42,866 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2023-04-14 09:11:01,370 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:11:01,372 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-04-14 09:11:01,374 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-04-14 09:11:07,550 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 3112 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
+2023-04-14 09:11:07,552 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-04-14 09:11:07,589 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-14 09:11:07,589 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-14 09:11:08,070 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-14 09:11:08,134 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 60 ms. Found 8 JPA repository interfaces.
+2023-04-14 09:11:08,594 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-04-14 09:11:08,601 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:11:08,601 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-04-14 09:11:08,601 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-14 09:11:08,666 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-04-14 09:11:08,666 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1077 ms
+2023-04-14 09:11:08,763 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
+2023-04-14 09:11:08,764 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2023-04-14 09:11:08,764 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
+2023-04-14 09:11:08,770 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-04-14 09:11:08,864 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-04-14 09:11:08,877 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
+2023-04-14 09:11:08,912 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.020s)
+2023-04-14 09:11:08,918 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
+2023-04-14 09:11:08,919 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
+2023-04-14 09:11:08,990 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-14 09:11:09,018 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-14 09:11:09,092 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-14 09:11:09,155 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-04-14 09:11:09,704 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-14 09:11:09,710 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:11:09,747 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-14 09:11:10,258 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2308d1e5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@ca237d7, org.springframework.security.web.context.SecurityContextPersistenceFilter@9fd413f, org.springframework.security.web.header.HeaderWriterFilter@186de1ad, org.springframework.security.web.authentication.logout.LogoutFilter@5dd9243a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@13c9a422, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@11c3c404, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2fb25ff8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f7f82fc, org.springframework.security.web.session.SessionManagementFilter@2927cb83, org.springframework.security.web.access.ExceptionTranslationFilter@4ab6e213, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@665fe8d2]
+2023-04-14 09:11:10,568 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-04-14 09:11:10,589 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:11:10,601 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-14 09:11:10,611 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 3.332 seconds (JVM running for 4.177)
+2023-04-14 09:11:16,359 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-14 09:11:16,359 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-04-14 09:11:16,360 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2023-04-14 09:12:12,496 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:12:12,498 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-04-14 09:12:12,501 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-04-14 09:12:16,034 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 12260 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
+2023-04-14 09:12:16,037 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-04-14 09:12:16,073 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-14 09:12:16,074 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-14 09:12:16,560 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-14 09:12:16,622 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 55 ms. Found 8 JPA repository interfaces.
+2023-04-14 09:12:17,079 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-04-14 09:12:17,084 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:12:17,085 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-04-14 09:12:17,085 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-14 09:12:17,147 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-04-14 09:12:17,148 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1073 ms
+2023-04-14 09:12:17,252 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
+2023-04-14 09:12:17,252 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2023-04-14 09:12:17,252 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
+2023-04-14 09:12:17,258 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-04-14 09:12:17,355 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-04-14 09:12:17,369 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
+2023-04-14 09:12:17,402 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.020s)
+2023-04-14 09:12:17,409 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
+2023-04-14 09:12:17,410 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
+2023-04-14 09:12:17,483 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-14 09:12:17,510 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-14 09:12:17,589 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-14 09:12:17,664 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-04-14 09:12:18,215 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-14 09:12:18,221 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:12:18,259 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-14 09:12:18,763 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@469188c6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2c842d0a, org.springframework.security.web.context.SecurityContextPersistenceFilter@11048d18, org.springframework.security.web.header.HeaderWriterFilter@1d719f36, org.springframework.security.web.authentication.logout.LogoutFilter@13849d76, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@631d40a8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@56b14ee7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@27c4db8b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4743e671, org.springframework.security.web.session.SessionManagementFilter@4c692a9e, org.springframework.security.web.access.ExceptionTranslationFilter@793549fd, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@d4d2a68]
+2023-04-14 09:12:19,088 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-04-14 09:12:19,108 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:12:19,121 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-14 09:12:19,131 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 3.388 seconds (JVM running for 4.036)
+2023-04-14 09:12:21,673 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:12:21,675 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-04-14 09:12:21,679 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-04-14 09:16:59,051 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Starting SangoEcommerceClothingProjectApplication using Java 17 on DESKTOP-8IFDJ1S with PID 15956 (D:\diploma_project\SangoEcommerceClothingProject\target\classes started by Sango in D:\diploma_project\SangoEcommerceClothingProject)
+2023-04-14 09:16:59,054 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-04-14 09:16:59,092 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-14 09:16:59,092 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-14 09:16:59,612 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-14 09:16:59,680 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 62 ms. Found 8 JPA repository interfaces.
+2023-04-14 09:17:00,154 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-04-14 09:17:00,160 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:17:00,160 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-04-14 09:17:00,160 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-14 09:17:00,226 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-04-14 09:17:00,226 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1133 ms
+2023-04-14 09:17:00,331 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] Flyway Community Edition 8.5.13 by Redgate
+2023-04-14 09:17:00,331 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2023-04-14 09:17:00,332 INFO org.flywaydb.core.internal.license.VersionPrinter [restartedMain] 
+2023-04-14 09:17:00,339 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-04-14 09:17:00,440 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-04-14 09:17:00,454 INFO org.flywaydb.core.internal.database.base.BaseDatabaseType [restartedMain] Database: jdbc:postgresql://localhost:5432/SangoClothingStore (PostgreSQL 14.2)
+2023-04-14 09:17:00,483 INFO org.flywaydb.core.internal.command.DbValidate [restartedMain] Successfully validated 6 migrations (execution time 00:00.018s)
+2023-04-14 09:17:00,490 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Current version of schema "public": 2.0.6
+2023-04-14 09:17:00,491 INFO org.flywaydb.core.internal.command.DbMigrate [restartedMain] Schema "public" is up to date. No migration necessary.
+2023-04-14 09:17:00,562 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-14 09:17:00,588 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-14 09:17:00,662 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-14 09:17:00,727 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-04-14 09:17:01,290 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-14 09:17:01,296 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:17:01,334 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-14 09:17:01,836 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@71c5cdaa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a586505, org.springframework.security.web.context.SecurityContextPersistenceFilter@444fc76c, org.springframework.security.web.header.HeaderWriterFilter@5510362a, org.springframework.security.web.authentication.logout.LogoutFilter@28b98a1b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5f6d51db, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@35eb72b7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7ea24c4e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77f043cd, org.springframework.security.web.session.SessionManagementFilter@6e33115, org.springframework.security.web.access.ExceptionTranslationFilter@223744e4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@641b6784]
+2023-04-14 09:17:02,162 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-04-14 09:17:02,186 INFO org.apache.coyote.http11.Http11NioProtocol [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-04-14 09:17:02,199 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-14 09:17:02,209 INFO ua.khpi.diploma.sangoecommerceclothingproject.SangoEcommerceClothingProjectApplication [restartedMain] Started SangoEcommerceClothingProjectApplication in 3.439 seconds (JVM running for 4.115)
+2023-04-14 09:17:06,186 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-14 09:17:06,186 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-04-14 09:17:06,187 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2023-04-14 09:28:33,913 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-14 09:28:33,915 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-04-14 09:28:33,920 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
