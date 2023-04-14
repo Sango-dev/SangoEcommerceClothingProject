@@ -30,6 +30,7 @@
         }
 
         function getSizeOver(chest, waist, hips, height, gender) {
+            console.log(gender + "over")
             let arraySize;
             if (gender === 'MALE') {
                 arraySize = ManSizeOver;
@@ -62,17 +63,59 @@
             return closestSize;
         }
 
-        function calculateSize() {
+        function getSizeUnder(waist, hips, height, gender) {
+            console.log(gender + "under")
+            let arraySize;
+            if (gender === 'MALE') {
+                arraySize = ManSizeOver;
+            } else {
+                arraySize = WomenSizeOver;
+            }
+
+            let closestSize;
+            let closestDistance = Infinity;
+
+            for (const [size, ranges] of Object.entries(arraySize)) {
+                const waistRange = ranges.waist;
+                const hipsRange = ranges.hips;
+                const heightRange = ranges.height;
+
+                const waistDistance = Math.min(Math.abs(waist - waistRange[0]), Math.abs(waist - waistRange[1]));
+                const hipsDistance = Math.min(Math.abs(hips - hipsRange[0]), Math.abs(hips - hipsRange[1]));
+                const heightDistance = Math.min(Math.abs(height - heightRange[0]), Math.abs(height - heightRange[1]));
+
+                const totalDistance = waistDistance + hipsDistance + heightDistance;
+
+                if (totalDistance < closestDistance) {
+                    closestSize = size;
+                    closestDistance = totalDistance;
+                }
+            }
+
+            return closestSize;
+        }
+
+        function calculateSizeOver() {
             const chest = Number(document.getElementById("chest").value);
             const waist = Number(document.getElementById("waist").value);
             const hips = Number(document.getElementById("hips").value);
             const height = Number(document.getElementById("height").value);
-            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const gender = document.getElementById("gender").value;
 
             const sizeOver = getSizeOver(chest, waist, hips, height, gender);
 
             document.getElementById("result").innerHTML = `Your size is: ${sizeOver}`;
-            console.log('kek')
+        }
+
+        function calculateSizeUnder() {
+            const waist = Number(document.getElementById("waist").value);
+            const hips = Number(document.getElementById("hips").value);
+            const height = Number(document.getElementById("height").value);
+            const gender = document.getElementById("gender").value;
+
+            const sizeOver = getSizeUnder(waist, hips, height, gender);
+
+            document.getElementById("result").innerHTML = `Your size is: ${sizeOver}`;
         }
 
     </script>
@@ -279,21 +322,18 @@
 
 <h1>Size Calculator</h1>
 <p>Fill in the following fields to calculate your size:</p>
-<form th:if="${productInstance.product.brand != }">
-    <label for="gender">Gender:</label>
-    <input type="radio" id="male" name="gender" value="MALE" checked>
-    <label for="male">Male</label>
-    <input type="radio" id="female" name="gender" value="FEMALE">
-    <label for="female">Female</label><br><br>
-    <label for="chest">Chest measurement (in cm):</label>
-    <input type="number" id="chest" name="chest" required><br><br>
+<form>
+    <input type="hidden" th:value="${productInstance.product.gender}" id="gender" name="gender"/>
+    <label for="chest" th:if="${productInstance.product.isUnderwear == false }">Chest measurement (in cm):</label>
+    <input type="number" id="chest" name="chest" required th:if="${productInstance.product.isUnderwear == false }"><br><br>
     <label for="waist">Waist measurement (in cm):</label>
     <input type="number" id="waist" name="waist" required><br><br>
     <label for="hips">Hips measurement (in cm):</label>
     <input type="number" id="hips" name="hips" required><br><br>
     <label for="height">Height measurement (in cm):</label>
     <input type="number" id="height" name="height" required><br><br>
-    <input type="button" onclick="calculateSize()" value="Calculate Size">
+    <input th:if="${productInstance.product.isUnderwear == false }" type="button" onclick="calculateSizeOver()" value="Calculate Size">
+    <input th:if="${productInstance.product.isUnderwear == true }" type="button" onclick="calculateSizeUnder()" value="Calculate Size">
 </form>
 <div id="result"></div>
 </body>

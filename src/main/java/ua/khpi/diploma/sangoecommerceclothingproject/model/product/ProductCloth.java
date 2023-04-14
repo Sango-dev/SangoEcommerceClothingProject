@@ -71,6 +71,12 @@ public class ProductCloth {
     private Boolean available;
 
     @Column(
+            name = "underwear",
+            nullable = false
+    )
+    private Boolean isUnderwear;
+
+    @Column(
             name = "price",
             nullable = false
     )

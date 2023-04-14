@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.OrderDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.ShopCartDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
@@ -52,5 +53,11 @@ public class ShopCartController {
         OrderDto dto = cartService.commitCartToOrder();
         model.addAttribute("order", dto);
         return "orderDetails";
+    }
+
+    @PostMapping("/removeItem")
+    public String removeItem(@RequestParam("id") String id, @RequestParam("size") String size) {
+        cartService.removeProdFromShopCartByIdAndSize(id, size);
+        return "redirect:/shop-cart";
     }
 }

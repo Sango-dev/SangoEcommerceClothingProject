@@ -35,6 +35,7 @@ create table categories (
 create table products (
     id varchar(255) not null,
     available boolean not null,
+    underwear boolean not null,
     price float8 not null,
     composition TEXT not null,
     description TEXT not null,

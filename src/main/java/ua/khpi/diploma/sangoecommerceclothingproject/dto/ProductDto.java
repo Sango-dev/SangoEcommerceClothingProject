@@ -17,6 +17,7 @@ public class ProductDto {
     private Gender gender;
     private Boolean available;
     private Double price;
+    private Boolean isUnderwear;
     private BrandDto brand;
     private CategoryDto category;
 }

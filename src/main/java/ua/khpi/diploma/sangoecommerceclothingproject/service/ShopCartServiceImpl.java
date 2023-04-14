@@ -121,16 +121,12 @@ public class ShopCartServiceImpl implements ShopCartService {
         return mapper.fromOrder(order);
     }
 
+    @Override
+    public void removeProdFromShopCartByIdAndSize(String id, String size) {
+       shopCart.getProducts().removeIf(bu -> bu.getProduct().getId().equals(id) && bu.getSize().equals(size));
+    }
 }
 
-
-
-
-
-    /* @Override
-    public void removeProdFromCartById(String id) {
-        shopCart.getProducts().remove(productInstanceRepository.getOne(id));
-    }*/
 
     /*
     @Override

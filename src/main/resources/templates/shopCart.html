@@ -2,7 +2,30 @@
 <html lang="en"
       xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.w3.org/1999/xhtml">
-<title>Bucket</title>
+<head>
+    <title>Bucket</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).on("click", ".del-full-btn", function() {
+            var id = $(this).data("id");
+            var size = $(this).data("size");
+            console.log(id + " " + size);
+            $.ajax({
+                url: "/shop-cart/removeItem",
+                type: "POST",
+                data: {
+                    "id": id,
+                    "size": size
+                },
+                success: function(result) {
+                    $("#cart").find("[data-id='" + id + "'][data-size='" + size + "']").closest("tr").remove();
+                },
+                error: function(xhr, status, error) {
+                    // handle error
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -21,6 +44,9 @@
             <th>Price</th>
             <th>Amount</th>
             <th>Total</th>
+            <th>Plus One</th>
+            <th>Del One</th>
+            <th> Del full</th>
         </tr>
         <tr id="cart" th:each="detail : ${cart.cartDetails}">
             <td><img th:src="@{${detail.linkOfPicture}}" class="image"></td>
@@ -29,6 +55,13 @@
             <td th:text="${detail.price}">Title</td>
             <td th:text="${detail.amount}">Description</td>
             <td th:text="${detail.sum}" align="right">Price</td>
+            <th></th>
+            <th></th>
+            <th>
+                <button class="del-full-btn"
+                        th:attr="data-id=${detail.productInstanceId}, data-size=${detail.size}">
+                    Del full</button>
+            </th>
         </tr>
     </table>
     <div class="">
@@ -40,7 +73,8 @@
     <button class="btn btn-danger" type="submit" name="clear">Clear Cart</button>-->
     <span sec:authorize="isAuthenticated()">
                     <span>......................</span>
-                    <button class="btn btn-success" type="submit" name="store" style="margin-left: 40">Save Cart</button>
+                    <button class="btn btn-success" type="submit" name="store"
+                            style="margin-left: 40">Save Cart</button>
                     <button class="btn btn-secondary" type="submit" name="load">Load Cart</button>
                 </span>
 </form>

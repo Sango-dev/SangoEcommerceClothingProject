@@ -1,5 +1,5 @@
 -- H&M
-INSERT INTO products(id, product_code, title, description,composition, gender, available, price, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description,composition, gender, available, price, underwear, brand_id, category_id)
  VALUES('b822a8e8-bc4c-11ed-afa1-0242ac120002',
          'HD-2023-06-0001',
          'Relaxed Fit Hoodie',
@@ -8,11 +8,12 @@ INSERT INTO products(id, product_code, title, description,composition, gender, a
          'MALE',
          'true',
          '39.99',
+         'false',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
          '70953c9c-4c95-11ed-bdc3-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
  VALUES('f8467e02-c176-11ed-afa1-0242ac120002',
          'CT-2023-03-0001',
          'Essentials No 14: THE CARCOAT',
@@ -21,11 +22,12 @@ INSERT INTO products(id, product_code, title, description, composition, gender, 
          'MALE',
          'true',
          '84.15',
+         'false',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
          '70953b34-4c95-11ed-bdc3-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
  VALUES('2e300bf8-c188-11ed-afa1-0242ac120002',
          'JA-2023-03-0001',
          'Oversized Fit Satin Baseball Jacket',
@@ -34,11 +36,12 @@ INSERT INTO products(id, product_code, title, description, composition, gender, 
          'MALE',
          'true',
          '72.25',
+         'false',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
          '5420f03a-bc46-11ed-afa1-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
  VALUES('aebbd71a-c1c0-11ed-afa1-0242ac120002',
          'JE-2023-03-0001',
          'Loose Jeans',
@@ -47,12 +50,13 @@ INSERT INTO products(id, product_code, title, description, composition, gender, 
          'MALE',
          'true',
          '39.99',
+         'true',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
          'afbda09c-bc45-11ed-afa1-0242ac120002'
         );
 -- --------------------------------------------------------
 -- Pull&Bear
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
  VALUES('13c31526-c23c-11ed-afa1-0242ac120002',
          'JEPB-2023-03-0001',
          'Baggy Jeans',
@@ -61,11 +65,12 @@ INSERT INTO products(id, product_code, title, description, composition, gender, 
          'MALE',
          'true',
          '64.95',
+         'true',
          '3cf53abe-4c94-11ed-bdc3-0242ac120002',
          'afbda09c-bc45-11ed-afa1-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
  VALUES('85f46668-c24b-11ed-afa1-0242ac120002',
          'JEPB-2023-03-0002',
          '90s Baggy High Cargo Jeans',
@@ -74,6 +79,7 @@ INSERT INTO products(id, product_code, title, description, composition, gender, 
          'FEMALE',
          'true',
          '49.95',
+         'true',
          '3cf53abe-4c94-11ed-bdc3-0242ac120002',
          'afbda09c-bc45-11ed-afa1-0242ac120002'
         );
