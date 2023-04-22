@@ -1,5 +1,6 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.model.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import ua.khpi.diploma.sangoecommerceclothingproject.model.basket_cart.Basket;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.order.Order;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -28,6 +30,16 @@ public class User {
     private String lastName;
     private String password;
     private String email;
+    private String phone;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(
+            name = "birth_date",
+           /* nullable = false,*/
+            columnDefinition = "DATE"
+    )
+    private LocalDate birthDate;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

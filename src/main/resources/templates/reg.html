@@ -19,13 +19,14 @@
     <form th:action="@{/users/new}" method="post" class="register_form" th:object="${user}">
 
         <h2 style="background-color: whitesmoke">Registration</h2>
+        <input type="text" id="nickName" th:field="*{nickName}" th:value="${nickName}" required="true"
+               placeholder="Nickname">
         <input type="text" id="firstName" th:field="*{firstName}" th:value="${firstName}" required="true"
                autofocus="true" placeholder="First Name">
         <input type="text" id="lastName" th:field="*{lastName}" th:value="${lastName}" required="true"
                placeholder="Last Name">
         <input type="email" id="email" th:field="*{email}" th:value="${email}" required="true" placeholder="Email">
-        <input type="text" id="nickName" th:field="*{nickName}" th:value="${nickName}" required="true"
-               placeholder="Nickname">
+        <input type="tel" id="phone" th:field="*{phone}" th:value="${phone}" required="true" placeholder="Phone number">
         <input type="password" id="password" th:field="*{password}" th:value="${password}" required="true"
                placeholder="Password">
         <input type="password" id="matchingPassword" th:field="*{matchingPassword}" th:value="${matchingPassword}"

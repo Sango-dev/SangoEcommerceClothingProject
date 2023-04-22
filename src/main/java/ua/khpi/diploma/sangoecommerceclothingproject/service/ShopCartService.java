@@ -11,7 +11,7 @@ public interface ShopCartService {
     ShopCartDto getCartDto();
     void storeShopCartToBasket(User user);
     void loadCartFromBasket(User user);
-    OrderDto commitCartToOrder();
+    OrderDto commitCartToOrder(String nickname);
     void removeProdFromShopCartByIdAndSize(String id, String size);
-    /*void updateCartProductAmount(Long productId, final long amountDif);*/
+    void updateShopCartProductAmount(String id, String size, final long amountDif);
 }

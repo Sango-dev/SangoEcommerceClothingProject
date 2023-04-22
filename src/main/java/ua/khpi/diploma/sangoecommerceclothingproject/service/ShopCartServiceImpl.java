@@ -99,7 +99,8 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     @Override
     @Transactional
-    public OrderDto commitCartToOrder() {
+    public OrderDto commitCartToOrder(String nickname) {
+        User user = userService.findFirstByNickName(nickname);
         Order order = new Order();
         order.setStatus(OrderStatus.NEW);
 
@@ -117,6 +118,9 @@ public class ShopCartServiceImpl implements ShopCartService {
         order.setDetails(orderDetails);
         order.setSum(total);
         order.setAddress("none");
+        order.setEmail(user.getEmail());
+        order.setPhone(user.getPhone());
+        order.setRecipient(user.getFirstName() + " " + user.getLastName());
         flushShopCart();
         return mapper.fromOrder(order);
     }
@@ -125,14 +129,23 @@ public class ShopCartServiceImpl implements ShopCartService {
     public void removeProdFromShopCartByIdAndSize(String id, String size) {
        shopCart.getProducts().removeIf(bu -> bu.getProduct().getId().equals(id) && bu.getSize().equals(size));
     }
+
+    @Override
+    public void updateShopCartProductAmount(String id, String size, long amountDif) {
+        BasketUnit basketUnit = shopCart.getProducts()
+                .stream()
+                .filter(bu -> bu.getProduct().getId().equals(id) && bu.getSize().equals(size))
+                .findFirst()
+                .get();
+
+
+        basketUnit.setQuantity(basketUnit.getQuantity() + amountDif);
+        if (basketUnit.getQuantity() == 0) {
+            shopCart.getProducts().remove(basketUnit);
+        }
+    }
 }
 
 
-    /*
-    @Override
-    public void updateCartProductAmount(Long productId, long amountDif) {
-        cart.getProducts().computeIfPresent(productRepository.getOne(productId),
-                (key, value) -> (value + amountDif) > 1 ? value + amountDif : 1L);
-    }
-*/
+
 

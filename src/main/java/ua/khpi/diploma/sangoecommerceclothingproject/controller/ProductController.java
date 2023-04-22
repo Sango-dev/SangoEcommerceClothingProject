@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.BrandDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.CategoryDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.ProductInstanceDto;
-import ua.khpi.diploma.sangoecommerceclothingproject.model.*;
+import ua.khpi.diploma.sangoecommerceclothingproject.model.ProductInstancePage;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.Color;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.Gender;
 import ua.khpi.diploma.sangoecommerceclothingproject.service.BrandService;
@@ -22,7 +22,6 @@ import ua.khpi.diploma.sangoecommerceclothingproject.service.ShopCartService;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -5,34 +5,104 @@
         xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <title>ProductInstance Info</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         const ManSizeOver = {
-            "XS": {chest: [86, 91], waist: [71, 76], hips: [86, 91], height: [0, 167]},
-            "S": {chest: [91, 96], waist: [76, 81], hips: [91, 96], height: [167, 173]},
-            "M": {chest: [96, 101], waist: [81, 86], hips: [96, 101], height: [173, 178]},
-            "L": {chest: [101, 106], waist: [86, 91], hips: [101, 106], height: [178, 183]},
-            "XL": {chest: [106, 111], waist: [91, 97], hips: [106, 111], height: [183, 188]},
-            "XXL": {chest: [116, 121], waist: [102, 107], hips: [117, 122], height: [188, 193]},
-            "3XL": {chest: [127, 132], waist: [112, 117], hips: [127, 132], height: [193, Infinity]},
+            XS: {
+                chest: [86, 91],
+                waist: [71, 76],
+                hips: [86, 91],
+                height: [0, 167],
+            },
+            S: {
+                chest: [91, 96],
+                waist: [76, 81],
+                hips: [91, 96],
+                height: [167, 173],
+            },
+            M: {
+                chest: [96, 101],
+                waist: [81, 86],
+                hips: [96, 101],
+                height: [173, 178],
+            },
+            L: {
+                chest: [101, 106],
+                waist: [86, 91],
+                hips: [101, 106],
+                height: [178, 183],
+            },
+            XL: {
+                chest: [106, 111],
+                waist: [91, 97],
+                hips: [106, 111],
+                height: [183, 188],
+            },
+            XXL: {
+                chest: [116, 121],
+                waist: [102, 107],
+                hips: [117, 122],
+                height: [188, 193],
+            },
+            "3XL": {
+                chest: [127, 132],
+                waist: [112, 117],
+                hips: [127, 132],
+                height: [193, Infinity],
+            },
         };
 
         const WomenSizeOver = {
-            "XS": {chest: [76, 81], waist: [56, 61], hips: [81, 86], height: [147, 157]},
-            "S": {chest: [81, 86], waist: [61, 66], hips: [86, 91], height: [157, 165]},
-            "M": {chest: [86, 91], waist: [66, 71], hips: [91, 96], height: [165, 170]},
-            "L": {chest: [91, 96], waist: [71, 76], hips: [96, 101], height: [170, 175]},
-            "XL": {chest: [96, 101], waist: [76, 81], hips: [101, 106], height: [175, 180]},
-            "XXL": {chest: [101, 106], waist: [81, 86], hips: [106, 111], height: [180, 185]},
-            "3XL": {chest: [106, Infinity], waist: [86, Infinity], hips: [111, Infinity], height: [185, Infinity]}
-        }
+            XS: {
+                chest: [76, 81],
+                waist: [56, 61],
+                hips: [81, 86],
+                height: [147, 157],
+            },
+            S: {
+                chest: [81, 86],
+                waist: [61, 66],
+                hips: [86, 91],
+                height: [157, 165],
+            },
+            M: {
+                chest: [86, 91],
+                waist: [66, 71],
+                hips: [91, 96],
+                height: [165, 170],
+            },
+            L: {
+                chest: [91, 96],
+                waist: [71, 76],
+                hips: [96, 101],
+                height: [170, 175],
+            },
+            XL: {
+                chest: [96, 101],
+                waist: [76, 81],
+                hips: [101, 106],
+                height: [175, 180],
+            },
+            XXL: {
+                chest: [101, 106],
+                waist: [81, 86],
+                hips: [106, 111],
+                height: [180, 185],
+            },
+            "3XL": {
+                chest: [106, Infinity],
+                waist: [86, Infinity],
+                hips: [111, Infinity],
+                height: [185, Infinity],
+            },
+        };
 
         function getSizeOver(chest, waist, hips, height, gender) {
-            console.log(gender + "over")
+            console.log(gender + "over");
             let arraySize;
-            if (gender === 'MALE') {
+            if (gender === "MALE") {
                 arraySize = ManSizeOver;
             } else {
                 arraySize = WomenSizeOver;
@@ -47,12 +117,25 @@
                 const hipsRange = ranges.hips;
                 const heightRange = ranges.height;
 
-                const chestDistance = Math.min(Math.abs(chest - chestRange[0]), Math.abs(chest - chestRange[1]));
-                const waistDistance = Math.min(Math.abs(waist - waistRange[0]), Math.abs(waist - waistRange[1]));
-                const hipsDistance = Math.min(Math.abs(hips - hipsRange[0]), Math.abs(hips - hipsRange[1]));
-                const heightDistance = Math.min(Math.abs(height - heightRange[0]), Math.abs(height - heightRange[1]));
+                const chestDistance = Math.min(
+                    Math.abs(chest - chestRange[0]),
+                    Math.abs(chest - chestRange[1])
+                );
+                const waistDistance = Math.min(
+                    Math.abs(waist - waistRange[0]),
+                    Math.abs(waist - waistRange[1])
+                );
+                const hipsDistance = Math.min(
+                    Math.abs(hips - hipsRange[0]),
+                    Math.abs(hips - hipsRange[1])
+                );
+                const heightDistance = Math.min(
+                    Math.abs(height - heightRange[0]),
+                    Math.abs(height - heightRange[1])
+                );
 
-                const totalDistance = chestDistance + waistDistance + hipsDistance + heightDistance;
+                const totalDistance =
+                    chestDistance + waistDistance + hipsDistance + heightDistance;
 
                 if (totalDistance < closestDistance) {
                     closestSize = size;
@@ -64,9 +147,9 @@
         }
 
         function getSizeUnder(waist, hips, height, gender) {
-            console.log(gender + "under")
+            console.log(gender + "under");
             let arraySize;
-            if (gender === 'MALE') {
+            if (gender === "MALE") {
                 arraySize = ManSizeOver;
             } else {
                 arraySize = WomenSizeOver;
@@ -80,9 +163,18 @@
                 const hipsRange = ranges.hips;
                 const heightRange = ranges.height;
 
-                const waistDistance = Math.min(Math.abs(waist - waistRange[0]), Math.abs(waist - waistRange[1]));
-                const hipsDistance = Math.min(Math.abs(hips - hipsRange[0]), Math.abs(hips - hipsRange[1]));
-                const heightDistance = Math.min(Math.abs(height - heightRange[0]), Math.abs(height - heightRange[1]));
+                const waistDistance = Math.min(
+                    Math.abs(waist - waistRange[0]),
+                    Math.abs(waist - waistRange[1])
+                );
+                const hipsDistance = Math.min(
+                    Math.abs(hips - hipsRange[0]),
+                    Math.abs(hips - hipsRange[1])
+                );
+                const heightDistance = Math.min(
+                    Math.abs(height - heightRange[0]),
+                    Math.abs(height - heightRange[1])
+                );
 
                 const totalDistance = waistDistance + hipsDistance + heightDistance;
 
@@ -104,7 +196,9 @@
 
             const sizeOver = getSizeOver(chest, waist, hips, height, gender);
 
-            document.getElementById("result").innerHTML = `Your size is: ${sizeOver}`;
+            document.getElementById(
+                "result"
+            ).innerHTML = `${sizeOver}`;
         }
 
         function calculateSizeUnder() {
@@ -115,9 +209,10 @@
 
             const sizeOver = getSizeUnder(waist, hips, height, gender);
 
-            document.getElementById("result").innerHTML = `Your size is: ${sizeOver}`;
+            document.getElementById(
+                "result"
+            ).innerHTML = `${sizeOver}`;
         }
-
     </script>
 </head>
 
@@ -260,8 +355,7 @@
 
         <!--Price-->
         <div class="flex mt-10">
-            <div th:text="${productInstance.product.price}" class="mr-1">40</div>
-            <div>гривень блять</div>
+            <div th:text="${productInstance.product.price} + '$'" class="mr-1">40</div>
         </div>
         <!--End Price-->
 
@@ -269,9 +363,11 @@
         <div class="flex mt-10">
             <div th:each="entry : ${productInstance.links}" class="ml-1">
                 <a th:href="@{~/product/{id}/info(id=${entry.id})}">
-                    <span th:text="${entry.colorDefinition}"
-                          class="rounded-sm p-3 border-black border-[1px]">
-            </span>
+              <span
+                      th:text="${entry.colorDefinition}"
+                      class="rounded-sm p-3 border-black border-[1px]"
+              >
+              </span>
                 </a>
             </div>
         </div>
@@ -300,7 +396,7 @@
                 <div class="mr-1">Add</div>
                 <div class="w-6 h-6">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                        <title/>
+                        <title />
                         <path
                                 fill="white"
                                 d="M23.52,29h-15a5.48,5.48,0,0,1-5.31-6.83L6.25,9.76a1,1,0,0,1,1-.76H24a1,1,0,0,1,1,.7l3.78,12.16a5.49,5.49,0,0,1-.83,4.91A5.41,5.41,0,0,1,23.52,29ZM8,11,5.11,22.65A3.5,3.5,0,0,0,8.48,27h15a3.44,3.44,0,0,0,2.79-1.42,3.5,3.5,0,0,0,.53-3.13L23.28,11Z"
@@ -314,28 +410,66 @@
             </button>
         </form>
         <!--End select size add to card-->
+
+        <!--Choose size-->
+        <div class="mt-5 w-full bg-neutral-200 bg-opacity-90 p-5">
+            <div class="text-xl text-center font-bold m-1s">Size Calculator</div>
+            <form class="flex flex-col gap-[10px]">
+                <input
+                        type="hidden"
+                        th:value="${productInstance.product.gender}"
+                        id="gender"
+                        name="gender"
+                />
+                <div class="flex flex-col mx-1 mt-1 ">
+                    <label
+                            for="chest"
+                            th:if="${productInstance.product.isUnderwear == false }"
+                            class="tracking-wide p-1 hover:underline">Chest measurement (in cm):</label
+                    >
+                    <input
+                            type="number"
+                            id="chest"
+                            name="chest"
+                            required
+                            th:if="${productInstance.product.isUnderwear == false }"
+                            class="p-1 text-center outline-0"
+                            min="0"
+                    />
+                </div>
+                <div class="flex flex-col mx-1 mt-1 ">
+                    <label for="waist" class="tracking-wide p-1 hover:underline">Waist measurement (in cm):</label>
+                    <input type="number" id="waist" name="waist" required min="0" class="p-1 text-center outline-0"/>
+                </div>
+                <div class="flex flex-col mx-1 mt-1 ">
+                    <label for="hips" class="tracking-wide p-1 hover:underline">Hips measurement (in cm):</label>
+                    <input type="number" id="hips" name="hips" required min="0" class="p-1 text-center outline-0"/>
+                </div>
+                <div class="flex flex-col mx-1 mt-1 ">
+                    <label for="height" class="tracking-wide p-1 hover:underline">Height measurement (in cm):</label>
+                    <input type="number" id="height" name="height" required min="0" class="p-1 text-center outline-0"/>
+                </div>
+                 <input
+                  th:if="${productInstance.product.isUnderwear == false }"
+                  type="button"
+                  onclick="calculateSizeOver()"
+                  value="Calculate Size"
+                  class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
+                />
+                <input
+                        th:if="${productInstance.product.isUnderwear == true }"
+                        type="button"
+                        onclick="calculateSizeUnder()"
+                        value="Calculate Size"
+                        class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
+                />
+            </form>
+            <div id="result" class="text-center underline text-4xl mt-3"></div>
+        </div>
+        <!--End Choose size-->
     </div>
     <!--End tovar info-->
 </div>
 <!-- End tovar card-->
-
-
-<h1>Size Calculator</h1>
-<p>Fill in the following fields to calculate your size:</p>
-<form>
-    <input type="hidden" th:value="${productInstance.product.gender}" id="gender" name="gender"/>
-    <label for="chest" th:if="${productInstance.product.isUnderwear == false }">Chest measurement (in cm):</label>
-    <input type="number" id="chest" name="chest" required th:if="${productInstance.product.isUnderwear == false }"><br><br>
-    <label for="waist">Waist measurement (in cm):</label>
-    <input type="number" id="waist" name="waist" required><br><br>
-    <label for="hips">Hips measurement (in cm):</label>
-    <input type="number" id="hips" name="hips" required><br><br>
-    <label for="height">Height measurement (in cm):</label>
-    <input type="number" id="height" name="height" required><br><br>
-    <input th:if="${productInstance.product.isUnderwear == false }" type="button" onclick="calculateSizeOver()" value="Calculate Size">
-    <input th:if="${productInstance.product.isUnderwear == true }" type="button" onclick="calculateSizeUnder()" value="Calculate Size">
-</form>
-<div id="result"></div>
 </body>
-
 </html>

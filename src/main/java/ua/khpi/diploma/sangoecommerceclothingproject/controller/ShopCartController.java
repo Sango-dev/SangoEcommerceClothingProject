@@ -48,11 +48,17 @@ public class ShopCartController {
         return "redirect:/shop-cart";
     }
 
-    @PostMapping("/confirmation-order")
-    public String commitCartToOrder(Model model) {
-        OrderDto dto = cartService.commitCartToOrder();
+    @PostMapping(params = "confirm-order")
+    public String commitCartToOrder(Model model, Principal principal) {
+        OrderDto dto = cartService.commitCartToOrder(principal.getName());
         model.addAttribute("order", dto);
         return "orderDetails";
+    }
+
+    @PostMapping(params = "clear")
+    public String clearCart() {
+        cartService.flushShopCart();
+        return "redirect:/shop-cart";
     }
 
     @PostMapping("/removeItem")
@@ -60,4 +66,18 @@ public class ShopCartController {
         cartService.removeProdFromShopCartByIdAndSize(id, size);
         return "redirect:/shop-cart";
     }
+
+    @PostMapping("/incamount")
+    public String addAmountToShopCart(@RequestParam("id") String id, @RequestParam("size") String size) {
+        cartService.updateShopCartProductAmount(id, size, 1);
+        return "redirect:/shop-cart";
+    }
+
+    @PostMapping("/decamount")
+    public String decAmountToShopCart(@RequestParam("id") String id, @RequestParam("size") String size) {
+        cartService.updateShopCartProductAmount(id, size, -1);
+        return "redirect:/shop-cart";
+    }
+
+
 }

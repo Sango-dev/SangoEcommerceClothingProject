@@ -1,10 +1,12 @@
 create table users (
     id varchar(255) not null,
-    email varchar(255),
-    first_name varchar(255),
-    last_name varchar(255),
-    nick_name varchar(255),
-    password varchar(255),
+    email varchar(255) unique not null,
+    first_name varchar(255) not null,
+    last_name varchar(255) not null,
+    nick_name varchar(255) unique not null,
+    password varchar(255) not null,
+    phone varchar(255) unique not null,
+    birth_date DATE /*NOT NULL*/,
     role varchar(255),
     primary key (id)
 );
@@ -67,6 +69,15 @@ create table products (
     primary key (id)
  );
 
+ create table reviews (
+    id varchar(255) not null,
+    product_id varchar(255) not null,
+    user_id varchar(255) not null,
+    rate integer,
+    comment TEXT,
+    primary key (id)
+);
+
  alter table if exists products
     drop constraint if exists products_product_code_unique;
 
@@ -84,4 +95,16 @@ alter table if exists products_instances
 
 alter table if exists size_quantities
     add constraint FKpbyu30xd4s2b8c959nfw9qym9 foreign key (product_instance_id) references products_instances;
+
+alter table if exists reviews
+add constraint fk_product_clothes
+FOREIGN KEY (product_id)
+REFERENCES products(id)
+ON DELETE CASCADE;
+
+alter table if exists reviews
+add constraint fk_users
+FOREIGN KEY (user_id)
+REFERENCES users(id)
+ON DELETE CASCADE;
 
