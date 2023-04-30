@@ -1,58 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Order Details</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/orderdetailstyle.css}"/>
+    <!-- <link rel="stylesheet" type="text/css" th:href="@{/css/orderdetailstyle.css}"/> -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
+<header
+        class="w-full h-[80px] bg-neutral-200 grid justify-items-stretch grid-cols-3"
+>
+    <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-2xl">
+        Hello, <span sec:authentication="principal.username">Billi</span>
+    </div>
+    <div
+            class="justify-self-center text-4xl my-auto text-red-500 font-mono font-bold"
+    >
+        SanGo
+    </div>
+    <div
+            sec:authorize="isAuthenticated()"
+            class="justify-self-end mx-2 my-auto text-2xl"
+    >
+        <a th:href="@{/logout}" class="mx-2">logout</a>
+        <a th:href="@{/shop-cart}" class="basket mx-2 no-underline"> 🛒 </a>
+    </div>
+</header>
 
-<div class="box">
-    <form th:action="@{/order/save-order}" th:object="${order}" method="post">
-        <div style="display: none;">
-            <input type="hidden" th:field="*{sum}" title="sum"/>
-            <input type="hidden" th:field="*{status}" title="status"/>
-            <th:block th:each="detail, i : ${order.details}">
-                <input type="hidden" th:field="*{details[__${i.index}__].productInstanceId}" th:value="${detail.productInstanceId}"/>
-                <input type="hidden" th:field="*{details[__${i.index}__].productInstanceTitle}" th:value="${detail.productInstanceTitle}"/>
-                <input type="hidden" th:field="*{details[__${i.index}__].linkOfMainPicture}" th:value="${detail.linkOfMainPicture}"/>
-                <input type="hidden" th:field="*{details[__${i.index}__].size}" th:value="${detail.size}"/>
-                <input type="hidden" th:field="*{details[__${i.index}__].amount}" th:value="${detail.amount}"/>
-                <input type="hidden" th:field="*{details[__${i.index}__].price}" th:value="${detail.price}"/>
-            </th:block>
-        </div>
-
-        <input type="text" th:field="*{recipient}" placeholder="Recipient" required="true"/>
-        <input type="text" th:field="*{address}" placeholder="Address" required="true"/>
-        <input type="text" th:field="*{email}" required="true" placeholder="Email"/>
-        <input type="tel" th:field="*{phone}" placeholder="Phone" required="true" pattern="[0]{1}[0-9]{9}"/>
-
-        <div>
-            <label for="payment-option">Payment Option:</label>
-            <select th:field="*{payment}" id="payment-option" required>
-                <option value="">Select an option</option>
-                <option value="CASH">Cash</option>
-                <option value="CREDIT_CARD">Credit Card</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="delivery-option">Delivery Option:</label>
-            <select th:field="*{delivery}" id="delivery-option" required>
-                <option value="">Select an option</option>
-                <option value="SELF_DELIVERY">Self Delivery</option>
-                <option value="DELIVERY_COMPANY">Delivery Company</option>
-                <option value="COURIER">Courier</option>
-            </select>
-        </div>
-        <button type="submit">Ok</button>
-    </form>
-
-
-    <table class="order">
-        <thead>
+<div class="w-screen">
+    <table class="order absolute left-[300px] my-[100px]" width="1000px">
+        <thead class="bg-neutral-100">
+        <tr class="border-b bg-neutral-200">
+            <th class="py-3" colspan="5">Order details</th>
+        </tr>
         <tr>
             <th>Image</th>
             <th>Title</th>
@@ -61,28 +46,154 @@
             <th>Price</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="detail : ${order.details}">
-            <td><img th:src="@{${detail.linkOfMainPicture}}"></td>
-            <td th:text="${detail.productInstanceTitle}">Cap</td>
-            <td th:text="${detail.size}">good cap</td>
-            <td th:text="${detail.amount}">2</td>
-            <td th:text="${(detail.price * detail.amount) + ' ' + '$'}">11.0</td>
+        <tbody class="">
+        <tr
+                th:each="detail : ${order.details}"
+                class="hover:opacity-40 cursor-pointer"
+        >
+            <td class="w-[150px] h-auto p-3" align="center">
+                <img
+                        th:src="@{${detail.linkOfMainPicture}}"
+                        src="https://picsum.photos/200/300"
+                />
+            </td>
+            <td th:text="${detail.productInstanceTitle}" align="center">Cap</td>
+            <td th:text="${detail.size}" align="center">good cap</td>
+            <td th:text="${detail.amount}" align="center">2</td>
+            <td
+                    th:text="${(detail.price * detail.amount) + ' ' + '$'}"
+                    align="center"
+            >
+                11.0
+            </td>
         </tr>
         </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="4" style="padding: 0 0 0 50px;">
-                All sum:
-            </td>
+        <tfoot class="text-xl">
+        <tr class="">
+            <td colspan="4">All sum:</td>
             <td align="center">
                 <b th:text="${order.sum  + ' ' + '$'}">1000</b>
             </td>
         </tr>
         </tfoot>
     </table>
+
+    <form
+            th:action="@{/order/save-order}"
+            th:object="${order}"
+            method="post"
+            class="absolute right-[300px] flex flex-col w-[300px] p-2 mt-[100px] bg-neutral-50"
+    >
+        <div style="display: none">
+            <input type="hidden" th:field="*{sum}" title="sum"/>
+            <input type="hidden" th:field="*{status}" title="status"/>
+            <th:block th:each="detail, i : ${order.details}">
+                <input
+                        type="hidden"
+                        th:field="*{details[__${i.index}__].productInstanceId}"
+                        th:value="${detail.productInstanceId}"
+                />
+                <input
+                        type="hidden"
+                        th:field="*{details[__${i.index}__].productInstanceTitle}"
+                        th:value="${detail.productInstanceTitle}"
+                />
+                <input
+                        type="hidden"
+                        th:field="*{details[__${i.index}__].linkOfMainPicture}"
+                        th:value="${detail.linkOfMainPicture}"
+                />
+                <input
+                        type="hidden"
+                        th:field="*{details[__${i.index}__].size}"
+                        th:value="${detail.size}"
+                />
+                <input
+                        type="hidden"
+                        th:field="*{details[__${i.index}__].amount}"
+                        th:value="${detail.amount}"
+                />
+                <input
+                        type="hidden"
+                        th:field="*{details[__${i.index}__].price}"
+                        th:value="${detail.price}"
+                />
+            </th:block>
+        </div>
+        <label class="flex flex-col border-b-[2px] mb-3">
+            Recipient:
+            <input
+                    type="text"
+                    th:field="*{recipient}"
+                    placeholder="Brad pitt"
+                    required="true"
+                    class="outline-0 bg-inherit px-2 pt-2 focus:placeholder:text-neutral-300"
+            />
+        </label>
+
+        <label class="flex flex-col border-b-[2px] mb-3">
+            Address:
+            <input
+                    type="text"
+                    th:field="*{address}"
+                    placeholder="Florida, 4289 Chestnut Street"
+                    required="true"
+                    class="outline-0 bg-inherit px-2 pt-2 focus:placeholder:text-neutral-300"
+            />
+        </label>
+
+        <label class="flex flex-col border-b-[2px] mb-3">
+            Email:
+            <input
+                    type="text"
+                    th:field="*{email}"
+                    required="true"
+                    placeholder="example@mail.com"
+                    class="outline-0 bg-inherit px-2 pt-2 focus:placeholder:text-neutral-300"
+            />
+        </label>
+
+        <label class="flex flex-col border-b-[2px] mb-3">
+            Phone:
+            <input
+                    type="tel"
+                    th:field="*{phone}"
+                    placeholder="0938498394"
+                    required="true"
+                    pattern="[0]{1}[0-9]{9}"
+                    class="outline-0 bg-inherit px-2 pt-2 focus:placeholder:text-neutral-300"
+            />
+        </label>
+
+        <div class="flex justify-between mb-3">
+            <label for="payment-option">Payment Option:</label>
+            <select th:field="*{payment}" id="payment-option" required>
+                <option value="">Select an option</option>
+                <option value="CASH">Cash</option>
+                <option value="CREDIT_CARD">Credit Card</option>
+            </select>
+        </div>
+
+        <div class="flex justify-between mb-1">
+            <label for="delivery-option">Delivery Option:</label>
+            <select th:field="*{delivery}" id="delivery-option" required>
+                <option value="">Select an option</option>
+                <option value="SELF_DELIVERY">Self Delivery</option>
+                <option value="DELIVERY_COMPANY">Delivery Company</option>
+                <option value="COURIER">Courier</option>
+            </select>
+        </div>
+        <button
+                type="submit"
+                class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50"
+        >
+            Ок
+        </button>
+        <a th:href="@{/shop-cart}" class="mt-2 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50">
+                Скасувати замовлення
+        </a>
+    </form>
 </div>
-
 </body>
-
 </html>
+

@@ -121,7 +121,6 @@ public class ShopCartServiceImpl implements ShopCartService {
         order.setEmail(user.getEmail());
         order.setPhone(user.getPhone());
         order.setRecipient(user.getFirstName() + " " + user.getLastName());
-        flushShopCart();
         return mapper.fromOrder(order);
     }
 

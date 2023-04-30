@@ -6,7 +6,7 @@
 >
 <head>
     <meta charset="UTF-8" />
-    <title>Order History</title>
+    <title>Handle Orders</title>
     <!-- <link rel="stylesheet" type="text/css" th:href="@{/css/orderhistorystyle.css}"/> -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -34,36 +34,36 @@
 <div class="w-full flex mb-10 text-xl">
     <a
             id="status-new"
-            th:href="@{~/order/order-history?status=NEW}"
+            th:href="@{~/order/update-status?status=NEW}"
             class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
         New
     </a>
     <a
-            class="m-1 px-3 cursor-pointer underline hover:no-underline"
             id="status-processing"
-            th:href="@{~/order/order-history?status=PROCESSING}"
+            th:href="@{~/order/update-status?status=PROCESSING}"
+            class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
         Processing
     </a>
     <a
-            class="m-1 px-3 cursor-pointer underline hover:no-underline"
             id="status-delivering"
-            th:href="@{~/order/order-history?status=DELIVERING}"
+            th:href="@{~/order/update-status?status=DELIVERING}"
+            class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
         Delivering
     </a>
     <a
-            class="m-1 px-3 cursor-pointer underline hover:no-underline"
             id="status-canceled"
-            th:href="@{~/order/order-history?status=CANCELED}"
+            th:href="@{~/order/update-status?status=CANCELED}"
+            class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
         Canceled
     </a>
     <a
-            class="m-1 px-3 cursor-pointer underline hover:no-underline"
             id="status-completed"
-            th:href="@{~/order/order-history?status=COMPLETED}"
+            th:href="@{~/order/update-status?status=COMPLETED}"
+            class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
         Completed
     </a>
@@ -82,10 +82,10 @@
         <li><a id="sort-date-up"> Date oldest</a></li>
     </ul>
 </div>
+
 <p id="hide-current-page" th:text="${currentPage}" style="display: none">
     kek
 </p>
-
 <div th:each="order : ${orders}" class="my-10">
     <table align="center" width="1500px">
         <thead class="text-xl bg-neutral-100">
@@ -98,8 +98,10 @@
             <th>SUM</th>
             <th>STATUS</th>
             <th>UPDATED</th>
+            <th>Update Status</th>
         </tr>
         </thead>
+
         <tbody class="border-b">
         <tr>
             <td align="center" th:text="${order.created}">created</td>
@@ -110,12 +112,50 @@
             <td align="center" th:text="${order.sum   + ' ' + '$'}">sum</td>
             <td align="center" th:text="${order.status}">status</td>
             <td align="center" th:text="${order.updated}">updated</td>
+            <td align="center">
+                <form action="/order/update-status" method="post">
+                    <input
+                            type="text"
+                            name="id"
+                            th:value="${order.id}"
+                            style="display: none"
+                    />
+                    <select name="status">
+                        <div th:if="${order.status.toString() != 'NEW'}">
+                            <option>New</option>
+                        </div>
+                        <div th:if="${order.status.toString() != 'PROCESSING'}">
+                            <option th:selected="${order.status.toString() == 'NEW'}">
+                                Processing
+                            </option>
+                        </div>
+                        <div th:if="${order.status.toString() != 'DELIVERING'}">
+                            <option
+                                    th:selected="${order.status.toString() == 'PROCESSING'}"
+                            >
+                                Delivering
+                            </option>
+                        </div>
+                        <div th:if="${order.status.toString() != 'CANCELED'}">
+                            <option>Canceled</option>
+                        </div>
+                        <div th:if="${order.status.toString() != 'COMPLETED'}">
+                            <option
+                                    th:selected="${order.status.toString() == 'DELIVERING'}"
+                            >
+                                Completed
+                            </option>
+                        </div>
+                    </select>
+                    <input type="submit" value="Update" />
+                </form>
+            </td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
             <td
-                    colspan="8"
+                    colspan="9"
                     align="center"
                     id="show-details"
                     class="underline py-3 cursor-pointer hover:no-underline"
@@ -127,7 +167,7 @@
     </table>
 
     <div id="order-list" style="display: none">
-        <table align="center" width="1000px" class="border">
+        <table align="center" width="800px" class="border">
             <thead class="text-xl bg-neutral-200">
             <tr>
                 <th>Pic</th>
@@ -137,12 +177,13 @@
                 <th>Price</th>
             </tr>
             </thead>
+
             <tbody>
             <tr th:each="detail : ${order.details}" class="border-b">
-                <td class="w-[150px] h-auto p-3" align="center">
+                <td align="center" class="w-[150px] h-auto p-3">
                     <img
-                            src="https://picsum.photos/200/300"
                             th:src="@{${detail.linkOfMainPicture}}"
+                            src="https://picsum.photos/200/300"
                     />
                 </td>
                 <td align="center" th:text="${detail.productInstanceTitle}">
@@ -158,6 +199,28 @@
 </div>
 
 <!--&lt;!&ndash; Pagination &ndash;&gt;-->
+<!-- <div
+  class="pagination flex justify-center mt-10 text-xl"
+  th:if="${totalPages > 0}"
+>
+  <div class="w-fit flex">
+    <div th:if="${currentPage > 0}">
+      <a aria-label="Previous" id="prev">
+        <span aria-hidden="true">back</span>
+      </a>
+    </div>
+    <div>
+      <p th:text="${currentPage + 1 + ' - ' + totalPages}"></p>
+    </div>
+
+    <div th:if="${currentPage < totalPages - 1}">
+      <a aria-label="Next" id="next">
+        <span aria-hidden="true">next</span>
+      </a>
+    </div>
+  </div>
+</div> -->
+
 <div
         class="pagination flex justify-center my-5 text-xl"
         th:if="${totalPages > 0}"
@@ -195,19 +258,19 @@
 
     var linkPriceUp = document.getElementById("sort-price-up");
     linkPriceUp.href =
-        "/order/order-history?status=" + selectedStatus + "&sort=sum-asc";
+        "/order/update-status?status=" + selectedStatus + "&sort=sum-asc";
 
     var linkPriceDown = document.getElementById("sort-price-down");
     linkPriceDown.href =
-        "/order/order-history?status=" + selectedStatus + "&sort=sum-desc";
+        "/order/update-status?status=" + selectedStatus + "&sort=sum-desc";
 
     var linkDateDown = document.getElementById("sort-date-down");
     linkDateDown.href =
-        "/order/order-history?status=" + selectedStatus + "&sort=date-desc";
+        "/order/update-status?status=" + selectedStatus + "&sort=date-desc";
 
     var linkDateUp = document.getElementById("sort-date-up");
     linkDateUp.href =
-        "/order/order-history?status=" + selectedStatus + "&sort=date-asc";
+        "/order/update-status?status=" + selectedStatus + "&sort=date-asc";
 
     const statusNew = document.getElementById("status-new");
     const statusProcessing = document.getElementById("status-processing");
@@ -256,7 +319,7 @@
         const sort = urlParams.get("sort");
         if (linkPrev != null)
             linkPrev.href =
-                "/order/order-history?status=" +
+                "/order/update-status?status=" +
                 selectedStatus +
                 "&sort=" +
                 sort +
@@ -264,7 +327,7 @@
                 (currentPage - 1);
         if (linkNext != null)
             linkNext.href =
-                "/order/order-history?status=" +
+                "/order/update-status?status=" +
                 selectedStatus +
                 "&sort=" +
                 sort +
@@ -273,18 +336,17 @@
     } else {
         if (linkPrev != null)
             linkPrev.href =
-                "/order/order-history?status=" +
+                "/order/update-status?status=" +
                 selectedStatus +
                 "&page=" +
                 (currentPage - 1);
         if (linkNext != null)
             linkNext.href =
-                "/order/order-history?status=" +
+                "/order/update-status?status=" +
                 selectedStatus +
                 "&page=" +
                 (currentPage + 1);
     }
-
     const showDetails = document.querySelectorAll("#show-details");
     const orderList = document.querySelectorAll("#order-list");
     const sortBy = document.querySelector("#sort-by");

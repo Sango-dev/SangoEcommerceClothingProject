@@ -8,6 +8,7 @@ import ua.khpi.diploma.sangoecommerceclothingproject.model.product.ProductCloth;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -26,11 +27,11 @@ public class Review {
     )
     private String id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "product_id")
     private ProductCloth product;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -39,4 +40,12 @@ public class Review {
 
     @JoinColumn(name = "comment")
     private String comment;
+
+    public Review(ProductCloth product, User user, Integer rate, String comment) {
+        this.id = UUID.randomUUID().toString();
+        this.product = product;
+        this.user = user;
+        this.rate = rate;
+        this.comment = comment;
+    }
 }

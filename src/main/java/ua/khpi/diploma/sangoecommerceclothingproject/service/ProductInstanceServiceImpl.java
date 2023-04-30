@@ -70,6 +70,11 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
     }
 
     @Override
+    public String getIdOfProductCloth(String id) {
+        return productInstanceRepository.findProductInstanceById(id).getProduct().getId();
+    }
+
+    @Override
     public List<ProductInstanceDto> findAllProductInstancesBySearchParam(String param) {
         List<ProductInstanceDto> dtos = new ArrayList<>();
         productRepository.findProductsByParam(param.toLowerCase().trim()).stream()

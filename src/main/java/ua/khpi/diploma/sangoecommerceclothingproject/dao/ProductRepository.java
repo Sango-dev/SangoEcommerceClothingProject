@@ -12,4 +12,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<ProductCloth, String> {
     @Query(value = "select * from products p where lower(p.title) like %:str% or lower(p.description) like %:str% or lower(p.composition) like %:str%", nativeQuery = true)
     List<ProductCloth> findProductsByParam(@Param("str") String param);
+
+    ProductCloth findProductClothById(String id);
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.basket_cart.Basket;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.order.Order;
+import ua.khpi.diploma.sangoecommerceclothingproject.model.review.Review;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -48,4 +49,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
 }

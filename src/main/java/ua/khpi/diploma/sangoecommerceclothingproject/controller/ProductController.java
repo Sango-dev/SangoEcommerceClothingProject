@@ -47,7 +47,7 @@ public class ProductController {
         model.addAttribute("productInstances", productInstancePageResponse.getProductInstanceDtos());
         model.addAttribute("totalPages", productInstancePageResponse.getTotalPages());
         model.addAttribute("currentPage", page);
-        return "productInstancesd";
+        return "productInstances";
     }
 
     @GetMapping(value = "/filter/list")
@@ -92,7 +92,7 @@ public class ProductController {
         model.addAttribute("categories", categoryDtos);
         model.addAttribute("totalPages", 0);
         model.addAttribute("currentPage", 0);
-        return "productInstancesd";
+        return "productInstances";
     }
 
     @GetMapping("/search-by-param")

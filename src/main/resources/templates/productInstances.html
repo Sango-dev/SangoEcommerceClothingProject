@@ -1,183 +1,319 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Products</title>
-
-</head>
-
+    <head th:replace="fragments/header :: header-css">
+    </head>
 
 <body>
+<div th:replace="fragments/header :: header"></div>
+<div
+        class="w-full bg-neutral-100 py-3 mb-10 sticky top-0 z-10 bg-opacity-90 flex"
+>
+    <form
+            class="flex mx-10"
+            id="filter-form"
+            method="get"
+            action="http://localhost:8080/product/filter/list"
+    >
+        <div class="flex">
+                <div class="flex items-center">
+                    <input class="hidden peer/draft" type="checkbox" name="genders" value="MALE" id="male-radio">
+                    <label class="mx-2 cursor-pointer peer-checked/draft:underline" for="male-radio">
+                        Чоловічий одяг
+                    </label>
+                </div>
+                <div class="flex items-center">
+                    <input class="hidden peer/draft" type="checkbox" name="genders" value="FEMALE" id="female-radio">
+                    <label class="mx-2 cursor-pointer peer-checked/draft:underline" for="female-radio">
+                        Жіночий одяг
+                    </label>
+                </div>
 
-<header>
-    <a th:href="@{/shop-cart}" class="basket">
-        🛒
-    </a>
+            <div class="mx-10">
+                <label for="sort">Сортування:</label>
+                <select id="sort" name="sort" >
+                    <option value="non-sort">Відсутнє</option>
+                    <option value="date_created_desc">
+                        Дата створення (спочатку найновіші)
+                    </option>
+                    <option value="date_created_asc">
+                        Дата створення (спочатку давніші)
+                    </option>
+                    <option value="price_asc">Ціна (від низької до високої)</option>
+                    <option value="price_desc">Ціна (від високої до низької)</option>
+                </select>
+            </div>
+        </div>
 
-    <div sec:authorize="isAuthenticated()">
-        Hello, <span sec:authentication="principal.username">Bill</span>
-    </div>
-
-    <div sec:authorize="isAuthenticated()">
-        <a th:href="@{/logout}">logout</a>
-    </div>
-</header>
-
-
-<h1>Product Instances</h1>
-<form id="filter-form" method="get" action="http://localhost:8080/product/filter/list">
-    <div>
-        <label for="brands">Brands:</label>
-        <select value="urlParams.getAll('brands')" id="brands" name="brands" multiple="multiple">
-                <option th:each="brand : ${brands}" th:value="${brand.title}"
-                        th:text="${brand.title}"
+        <div class="hidden none" id="hidden-filter">
+            <div class="flex flex-col">
+                <label for="brands">Бренди: </label>
+                <select
+                        class="mx-10"
+                        value="urlParams.getAll('brands')"
+                        id="brands"
+                        name="brands"
+                        multiple
+                        size="7"
                 >
-                </option>
-        </select>
-    </div>
-    <div>
-        <label for="categories">Brands:</label>
-        <select id="categories" name="categories" multiple="multiple">
-            <option th:each="category : ${categories}" th:value="${category.title}"
-                    th:text="${category.title}"></option>
-        </select>
-    </div>
-    <div>
-        <label for="genders">Genders:</label>
-        <select id="genders" name="genders" multiple="multiple">
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
-        </select>
-    </div>
-    <div>
-        <label for="colors">Colors:</label>
-        <select id="colors" name="colors" multiple="multiple">
-            <script>
-                const colors = ['BLACK', 'BLUE', 'BROWN', 'GOLDCOLORED', 'GREY', 'GREEN', 'MULTI', 'ORANGE', 'PINK', 'PURPLE', 'RED', 'SILVERCOLORED', 'TURQUOISE', 'WHITE', 'YELLOW'];
-                colors.forEach((color) => {
-                    document.write(`<option value="${color}">${color}</option>`);
-                });
-            </script>
-        </select>
-    </div>
-    <div>
-        <label for="sizes">Sizes:</label>
-        <select id="sizes" name="sizes" multiple="multiple">
-            <script>
-                const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XLL', '3XL'];
-                sizes.forEach((size) => {
-                    document.write(`<option value="${size}">${size}</option>`);
-                });
-            </script>
-        </select>
-    </div>
-    <div>
-        <label for="sort">Sort:</label>
-        <select id="sort" name="sort">
-            <option value="date_created_desc">Date created (newest first)</option>
-            <option value="date_created_asc">Date created (oldes first)</option>
-            <option value="price_asc">Price (low to high)</option>
-            <option value="price_desc">Price (high to low)</option>
-        </select>
-    </div>
-    <button type="submit">Filter</button>
-</form>
+                    <option
+                            th:each="brand : ${brands}"
+                            th:value="${brand.title}"
+                            th:text="${brand.title}"
+                            th:title="${brand.title}"
+                    ></option>
+                </select>
+            </div>
+            <div class="flex flex-col">
+                <label for="categories">Категорії: </label>
+                <select id="categories" class="mx-10" name="categories" multiple size="7">
+                    <option
+                            th:each="category : ${categories}"
+                            th:value="${category.title}"
+                            th:text="${category.title}"
+                            th:title="${category.title}"
+                    ></option>
+                </select>
+            </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Picture</th>
-        <th>Title</th>
-        <th>Brand</th>
-        <th>price</th>
-        <th>Sizes</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="productInstance : ${productInstances}">
-        <td><img th:src="@{${productInstance.linkOfMainPicture}}" class="image"></td>
-        <td th:text="${productInstance.product.title}"></td>
-        <td th:text="${productInstance.product.brand.title}"></td>
-        <td th:text="${productInstance.product.price}"></td>
-        <td th:each="size : ${productInstance.sizes}">
-            <p th:text="${size.size}"></p>
-        </td>
-        <td>
-            <button>
-                <a th:href="@{~/product/{id}/info(id=${productInstance.getId()})}">
-                    <span>About</span>
-                </a>
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            <div class="flex flex-col">
+                <label for="sizes">Розміри: </label>
+                <select id="sizes" name="sizes" class="mx-10" multiple size="7">
+                    <script>
+                        const sizes = [
+                            "XS",
+                            "S",
+                            "M",
+                            "L",
+                            "XL",
+                            "XLL",
+                            "3XL",
+                        ];
+                        sizes.forEach((size) => {
+                            document.write(`<option value="${size}">${size}</option>`);
+                        });
+                    </script>
+                </select>
+            </div>
 
-<div class="pagination" th:if="${totalPages > 0}">
-    <ul>
-        <li th:if="${currentPage > 0}">
-            <a th:href="@{${'/product/list?page=' + (currentPage - 1)}}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li th:each="page : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == page ? 'active' : ''}">
-            <a th:href="@{${'/product/list?page=' + page}}" th:text="${page + 1}"></a>
-        </li>
-        <li th:if="${currentPage < totalPages - 1}">
-            <a th:href="@{${'/product/list?page=' + (currentPage + 1)}}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
+            <div class="flex flex-col">
+                <label for="colors">Кольори: </label>
+                <select id="colors" name="colors" class="mx-10" multiple size="7">
+                    <script>
+                        const colors = [
+                            "BLACK",
+                            "BLUE",
+                            "BROWN",
+                            "GOLDCOLORED",
+                            "GREY",
+                            "GREEN",
+                            "MULTI",
+                            "ORANGE",
+                            "PINK",
+                            "PURPLE",
+                            "RED",
+                            "SILVERCOLORED",
+                            "TURQUOISE",
+                            "WHITE",
+                            "YELLOW",
+                        ];
+                        colors.forEach((color) => {
+                            document.write(
+                                `<option value="${color}" title="${color}">${color}</option>`
+                            );
+                        });
+                    </script>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="mx-5 hover:underline">Фільтрація</button>
+    </form>
+    <button type="reset" class="mx-5 hover:underline"><a th:href="@{~/product/list}">Зкинути фільтри</a></button>
+    <div class="flex ml-auto mr-10 text-xl">
+        <form th:action="@{/product/search-by-param(str)}" method="get">
+            <div class="flex items-center border-b border-black">
+                <button class="flex-shrink-0 text-xl py-1 px-2" type="submit">
+                    🔎
+                </button>
+                <input
+                        class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
+                        type="search"
+                        placeholder="Search"
+                        name="str"
+                />
+            </div>
+        </form>
+        <div class="pl-5 cursor-pointer" id="filter">
+            👇🏼
+        </div>
+    </div>
 </div>
 
+<!-- Card list -->
+<div class="products_box w-screen flex justify-center">
+    <div class="product_list w-fit grid grid-cols-4 gap-[5px]">
+        <!-- Card  -->
+        <div
+                th:each="productInstance : ${productInstances}"
+                class="product_card cursor-pointer w-full bg-white shadow-md hover:shadow-none hover:opacity-90"
+        >
+            <div
+                    th:text="${productInstance.product.brand.title}"
+                    class="absolute p-1 bg-black text-xl text-white"
+            >
+                H&M
+            </div>
+            <a th:href="@{~/product/{id}/info(id=${productInstance.getId()})}">
+                <img
+                        class="w-[400px] h-[600px]"
+                        src="https://picsum.photos/400/500"
+                        th:src="@{${productInstance.linkOfMainPicture}}"
+                        th:alt="${productInstance.product.title}"
+                />
+            </a>
+            <div class="h-[100px] p-2">
+                <div
+                        th:text="${productInstance.product.title}"
+                        class="text-xl break-normal"
+                >
+                    Tie-belt wrap blouse Tie-belt
+                </div>
 
+                <div class="flex">
+                    <div class="mr-1">Sizes:</div>
 
+                    <div th:each="size : ${productInstance.sizes}" class="flex">
+                        <div th:text="${size.size}" class="mr-1">M</div>
+                    </div>
+                </div>
+
+                <div
+                        th:text="${productInstance.product.price}"
+                        class="flex text-sm font-bold mt-2"
+                >
+                    Member price: 100
+                    <div>$</div>
+                </div>
+            </div>
+        </div>
+        <!-- End card -->
+    </div>
+</div>
+<!-- End card list -->
+
+<!-- Pagination -->
+<div
+        class="pagination flex justify-center mt-10 text-xl"
+        th:if="${totalPages > 0}"
+>
+    <div class="w-fit flex">
+        <div th:if="${currentPage > 0}">
+            <a
+                    class="px-2 cursor-pointer hover:underline"
+                    th:href="@{${'/product/list?page=' + (currentPage - 1)}}"
+                    aria-label="Previous"
+            >
+                <span aria-hidden="true">back</span>
+                <!-- back page -->
+            </a>
+        </div>
+        <div
+                th:each="page : ${#numbers.sequence(0, totalPages - 1)}"
+                th:class="${currentPage == page ? 'active' : ''}"
+        >
+            <a
+                    class="px-2 cursor-pointer hover:underline"
+                    th:href="@{${'/product/list?page=' + page}}"
+                    th:text="${page + 1}"
+            ></a>
+            <!-- current page -->
+        </div>
+        <div th:if="${currentPage < totalPages - 1}">
+            <a
+                    class="px-2 cursor-pointer hover:underline"
+                    th:href="@{${'/product/list?page=' + (currentPage + 1)}}"
+                    aria-label="Next"
+            >
+                <span aria-hidden="true">next</span>
+                <!-- next page -->
+            </a>
+        </div>
+    </div>
+</div>
+<!-- End pagination -->
 </body>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const selectedBrands = urlParams.getAll('brands');
-    const selectedCategories = urlParams.getAll('categories');
-    const selectedSizes = urlParams.getAll('sizes');
-    const selectedColors = urlParams.getAll('colors');
-    const selectedGenders = urlParams.getAll('genders');
+    const selectedBrands = urlParams.getAll("brands");
+    const selectedCategories = urlParams.getAll("categories");
+    const selectedSizes = urlParams.getAll("sizes");
+    const selectedColors = urlParams.getAll("colors");
+    const selectedGenders = urlParams.getAll("genders");
+    const selectedSort = urlParams.getAll("sort");
 
-    const brandsSelect = document.getElementById('brands');
-     for (let i = 0; i < brandsSelect.options.length; i++) {
+    const brandsSelect = document.getElementById("brands");
+    for (let i = 0; i < brandsSelect.options.length; i++) {
+        if (selectedBrands.includes(brandsSelect.options[i].value)) {
+            brandsSelect.options[i].selected = true;
+        }
+    }
 
-         if (selectedBrands.includes(brandsSelect.options[i].value)) {
-             brandsSelect.options[i].selected = true;
-         }
-     }
-
-    const categoriesSelect = document.getElementById('categories');
+    const categoriesSelect = document.getElementById("categories");
     for (let i = 0; i < categoriesSelect.options.length; i++) {
         if (selectedCategories.includes(categoriesSelect.options[i].value)) {
             categoriesSelect.options[i].selected = true;
         }
     }
 
-    const sizesSelect = document.getElementById('sizes');
+    const sizesSelect = document.getElementById("sizes");
     for (let i = 0; i < sizesSelect.options.length; i++) {
         if (selectedSizes.includes(sizesSelect.options[i].value)) {
             sizesSelect.options[i].selected = true;
         }
     }
 
-    const colorsSelect = document.getElementById('colors');
+    const colorsSelect = document.getElementById("colors");
     for (let i = 0; i < colorsSelect.options.length; i++) {
         if (selectedColors.includes(colorsSelect.options[i].value)) {
             colorsSelect.options[i].selected = true;
         }
     }
 
-    const gendersSelect = document.getElementById('genders');
-    for (let i = 0; i < gendersSelect.options.length; i++) {
-        if (selectedGenders.includes(gendersSelect.options[i].value)) {
-            gendersSelect.options[i].selected = true;
+
+    if (selectedGenders.includes('MALE')) {
+        document.getElementById("male-radio").checked = true;
+    }
+
+    if (selectedGenders.includes('FEMALE')) {
+        document.getElementById("female-radio").checked = true;
+    }
+
+    const sortSelect = document.getElementById("sort");
+    for (let i = 0; i < sortSelect.options.length; i++) {
+        if (selectedSort.includes(sortSelect.options[i].value)) {
+            sortSelect.options[i].selected = true;
         }
     }
-</script>
 
+    const filterForm = document.querySelector("#filter");
+    const filterBox = document.querySelector("#hidden-filter");
+    filterForm.addEventListener("click", () => {
+        let blockStyle = filterBox.style.display;
+        if (blockStyle === "none") {
+            blockStyle = "flex";
+            filterForm.textContent = "👆🏼";
+        } else {
+            blockStyle = "none";
+            filterForm.textContent = "👇🏼";
+        }
+        filterBox.style.display = blockStyle;
+    });
+</script>
 </html>

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import ua.khpi.diploma.sangoecommerceclothingproject.model.review.Review;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,74 +13,40 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(
-        name = "products",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "products_product_code_unique", columnNames = "product_code")
-        }
-)
+@Table(name = "products", uniqueConstraints = {@UniqueConstraint(name = "products_product_code_unique", columnNames = "product_code")})
 public class ProductCloth {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @Column(name = "id", updatable = false)
     private String id;
 
-    @Column(
-            name = "product_code",
-            nullable = false
+    @Column(name = "product_code", nullable = false
 
     )
     private String productCode;
 
-    @Column(
-            name = "title",
-            nullable = false
-    )
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(
-            name = "description",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(
-            name = "composition",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(name = "composition", nullable = false, columnDefinition = "TEXT")
     private String composition;
 
-    @Column(
-            name = "gender",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(name = "gender", nullable = false, columnDefinition = "TEXT")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(
-            name = "available",
-            nullable = false
-    )
+    @Column(name = "available", nullable = false)
     private Boolean available;
 
-    @Column(
-            name = "underwear",
-            nullable = false
-    )
+    @Column(name = "underwear", nullable = false)
     private Boolean isUnderwear;
 
-    @Column(
-            name = "price",
-            nullable = false
-    )
+    @Column(name = "price", nullable = false)
     private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -92,4 +59,7 @@ public class ProductCloth {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductInstanceCloth> productInstances;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
 }
