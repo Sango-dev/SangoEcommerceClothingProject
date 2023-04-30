@@ -74,7 +74,9 @@ create table products (
     product_id varchar(255) not null,
     user_id varchar(255) not null,
     rate integer,
-    comment TEXT,
+    title varchar(255) not null,
+    picture TEXT not null,
+    comment TEXT not null,
     primary key (id)
 );
 

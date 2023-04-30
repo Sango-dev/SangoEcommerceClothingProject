@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews</title>
+</head>
+<body>
+<h1>Leave Reviews</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Picture</th>
+        <th>Leave Review</th>
+<!--
+        <th>comment rate</th>
+-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+        <td th:text="${review.titleOfReviewProduct}"></td>
+        <td><img th:src="${review.picture}" alt="" width="100"/></td>
+        <td th:if="${review.rate == 0}">
+            <a th:href="@{/review/{id}(id=${review.id})}">Залишити відгук</a>
+        </td>
+        <td th:if="${review.rate > 0}">
+        <a th:href="@{/review/{id}(id=${review.id})}">Змінити відгук</a>
+        </td>
+<!--
+        <td th:text="${review.rate + ' ' + review.comment}"></td>
+-->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Leave Reviews</title>
+    <style>
+        .rating {
+            float: left;
+            unicode-bidi: bidi-override;
+            direction: rtl;
+        }
+
+        .rating > label {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+            font-size: 2em;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .rating > label:before {
+            content: "\2605";
+            position: absolute;
+            color: gold;
+            opacity: 0;
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before,
+        .rating > input[type="radio"]:checked ~ label:before {
+            opacity: 1;
+        }
+
+        .rating > input[type="radio"] {
+            display: none;
+        }
+
+        .rating > input[type="radio"]:checked + label {
+            color: gold;
+        }
+
+        .rating > input[type="radio"]:checked + label:before {
+            opacity: 1;
+        }
+
+        .rating > input[type="radio"]:checked ~ label {
+            color: gold;
+        }
+
+        .rating > input[type="radio"]:checked ~ label:before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<h1>Leave Reviews</h1>
+<p th:text="${review.titleOfReviewProduct}"></p>
+<p><img th:src="${review.picture}" alt="" width="100"/></p>
+
+    <form th:action="@{/review/leave-review}" method="post">
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5"/>
+            <label for="star5">&#9733;</label>
+            <input type="radio" id="star4" name="rating" value="4"/>
+            <label for="star4">&#9733;</label>
+            <input type="radio" id="star3" name="rating" value="3"/>
+            <label for="star3">&#9733;</label>
+            <input type="radio" id="star2" name="rating" value="2"/>
+            <label for="star2">&#9733;</label>
+            <input type="radio" id="star1" name="rating" value="1"/>
+            <label for="star1">&#9733;</label>
+        </div>
+        <input type="hidden" name="reviewId" th:value="${review.id}"/>
+        <input type="text" name="comment" placeholder="Comment"/>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -7,9 +7,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>ProductInstance Info</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <head th:replace="fragments/header :: header-css">
+    </head>
     <script>
-        const ManSizeOver = {
+        const ManSize = {
             XS: {
                 chest: [86, 91],
                 waist: [71, 76],
@@ -54,7 +55,7 @@
             },
         };
 
-        const WomenSizeOver = {
+        const WomenSize = {
             XS: {
                 chest: [76, 81],
                 waist: [56, 61],
@@ -103,9 +104,9 @@
             console.log(gender + "over");
             let arraySize;
             if (gender === "MALE") {
-                arraySize = ManSizeOver;
+                arraySize = ManSize;
             } else {
-                arraySize = WomenSizeOver;
+                arraySize = WomenSize;
             }
 
             let closestSize;
@@ -150,9 +151,9 @@
             console.log(gender + "under");
             let arraySize;
             if (gender === "MALE") {
-                arraySize = ManSizeOver;
+                arraySize = ManSize;
             } else {
-                arraySize = WomenSizeOver;
+                arraySize = WomenSize;
             }
 
             let closestSize;
@@ -218,25 +219,7 @@
 
 <body>
 <!-- Header -->
-<header
-        class="w-full h-[80px] bg-neutral-200 grid justify-items-stretch grid-cols-3"
->
-    <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-2xl">
-        Hello, <span sec:authentication="principal.username">Billi</span>
-    </div>
-    <div
-            class="justify-self-center text-4xl my-auto text-red-500 font-mono font-bold"
-    >
-        SanGo
-    </div>
-    <div
-            sec:authorize="isAuthenticated()"
-            class="justify-self-end mx-2 my-auto text-2xl"
-    >
-        <a th:href="@{/logout}" class="mx-2">logout</a>
-        <a th:href="@{/shop-cart}" class="basket mx-2 no-underline"> 🛒 </a>
-    </div>
-</header>
+<div th:replace="fragments/header :: header"></div>
 <!-- End Header -->
 
 <!-- Tovar card -->
@@ -287,7 +270,7 @@
                     th:text="${productInstance.product.title}"
                     class="text-xl font-bold"
             >
-                Штани бля
+                Штани
             </div>
             <div class="flex items-center">
                 <svg
@@ -355,7 +338,7 @@
 
         <!--Price-->
         <div class="flex mt-10">
-            <div th:text="${productInstance.product.price} + '$'" class="mr-1">40</div>
+            <div th:text="${productInstance.product.price} + '₴'" class="mr-1">40</div>
         </div>
         <!--End Price-->
 
@@ -380,7 +363,7 @@
                 th:action="@{/product/{id}/add-to-cart(id=${productInstance.id})}"
         >
             <select name="size" class="p-3">
-                <option hidden>Select size</option>
+                <option hidden>Вибрати розмір</option>
                 <option
                         class="p-3"
                         th:each="size : ${productInstance.sizes}"
@@ -393,7 +376,7 @@
                     type="submit"
                     class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50"
             >
-                <div class="mr-1">Add</div>
+                <div class="mr-1">Добавити в кошик</div>
                 <div class="w-6 h-6">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                         <title />
@@ -413,7 +396,7 @@
 
         <!--Choose size-->
         <div class="mt-5 w-full bg-neutral-200 bg-opacity-90 p-5">
-            <div class="text-xl text-center font-bold m-1s">Size Calculator</div>
+            <div class="text-xl text-center font-bold m-1s">Калькулятор Розміру</div>
             <form class="flex flex-col gap-[10px]">
                 <input
                         type="hidden"
@@ -425,7 +408,7 @@
                     <label
                             for="chest"
                             th:if="${productInstance.product.isUnderwear == false }"
-                            class="tracking-wide p-1 hover:underline">Chest measurement (in cm):</label
+                            class="tracking-wide p-1 hover:underline">Розмір грудей (в см):</label
                     >
                     <input
                             type="number"
@@ -438,29 +421,29 @@
                     />
                 </div>
                 <div class="flex flex-col mx-1 mt-1 ">
-                    <label for="waist" class="tracking-wide p-1 hover:underline">Waist measurement (in cm):</label>
+                    <label for="waist" class="tracking-wide p-1 hover:underline">Обхват талії (в см):</label>
                     <input type="number" id="waist" name="waist" required min="0" class="p-1 text-center outline-0"/>
                 </div>
                 <div class="flex flex-col mx-1 mt-1 ">
-                    <label for="hips" class="tracking-wide p-1 hover:underline">Hips measurement (in cm):</label>
+                    <label for="hips" class="tracking-wide p-1 hover:underline">Розмір стегон (в см):</label>
                     <input type="number" id="hips" name="hips" required min="0" class="p-1 text-center outline-0"/>
                 </div>
                 <div class="flex flex-col mx-1 mt-1 ">
-                    <label for="height" class="tracking-wide p-1 hover:underline">Height measurement (in cm):</label>
+                    <label for="height" class="tracking-wide p-1 hover:underline">Вимірювання висоти (в см):</label>
                     <input type="number" id="height" name="height" required min="0" class="p-1 text-center outline-0"/>
                 </div>
                  <input
                   th:if="${productInstance.product.isUnderwear == false }"
                   type="button"
                   onclick="calculateSizeOver()"
-                  value="Calculate Size"
+                  value="Розрахувати розмір"
                   class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
                 />
                 <input
                         th:if="${productInstance.product.isUnderwear == true }"
                         type="button"
                         onclick="calculateSizeUnder()"
-                        value="Calculate Size"
+                        value="Розрахувати розмір"
                         class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
                 />
             </form>

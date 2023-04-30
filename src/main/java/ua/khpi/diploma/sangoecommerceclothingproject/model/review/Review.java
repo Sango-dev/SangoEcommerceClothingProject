@@ -27,6 +27,12 @@ public class Review {
     )
     private String id;
 
+    @Column(name = "title", nullable = false)
+    private String titleOfReviewProduct;
+
+    @Column(name = "picture", nullable = false, columnDefinition = "TEXT")
+    private String picture;
+
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "product_id")
     private ProductCloth product;
@@ -38,7 +44,7 @@ public class Review {
     @JoinColumn(name = "rate")
     private Integer rate;
 
-    @JoinColumn(name = "comment")
+    @JoinColumn(name = "comment", nullable = false, columnDefinition = "TEXT")
     private String comment;
 
     public Review(ProductCloth product, User user, Integer rate, String comment) {

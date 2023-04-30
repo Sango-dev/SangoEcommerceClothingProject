@@ -7,4 +7,5 @@ import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
 
 public interface ReviewRepository extends JpaRepository<Review, String> {
     Review findByProductAndUser(ProductCloth product, User user);
+    Review findReviewById(String id);
 }

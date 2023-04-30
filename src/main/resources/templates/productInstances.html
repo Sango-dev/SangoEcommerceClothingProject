@@ -2,7 +2,6 @@
 <html
         lang="en"
         xmlns:th="http://www.w3.org/1999/xhtml"
-        xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
     <meta charset="UTF-8"/>
@@ -92,7 +91,7 @@
                             "M",
                             "L",
                             "XL",
-                            "XLL",
+                            "XXL",
                             "3XL",
                         ];
                         sizes.forEach((size) => {
@@ -106,28 +105,29 @@
                 <label for="colors">Кольори: </label>
                 <select id="colors" name="colors" class="mx-10" multiple size="7">
                     <script>
-                        const colors = [
-                            "BLACK",
-                            "BLUE",
-                            "BROWN",
-                            "GOLDCOLORED",
-                            "GREY",
-                            "GREEN",
-                            "MULTI",
-                            "ORANGE",
-                            "PINK",
-                            "PURPLE",
-                            "RED",
-                            "SILVERCOLORED",
-                            "TURQUOISE",
-                            "WHITE",
-                            "YELLOW",
-                        ];
-                        colors.forEach((color) => {
+                        const colors = {
+                            "BLACK": "Чорний",
+                            "BLUE": "Синій",
+                            "BROWN": "Коричневий",
+                            "GOLDCOLORED": "Золотистий",
+                            "GREY": "Сірий",
+                            "GREEN": "Зелений",
+                            "MULTI": "Багатокольоровий",
+                            "ORANGE": "Помаранчевий",
+                            "PINK": "Рожевий",
+                            "PURPLE": "Фіолетовий",
+                            "RED": "Червоний",
+                            "SILVERCOLORED": "Срібний",
+                            "TURQUOISE": "Бірюзовий",
+                            "WHITE": "Білий",
+                            "YELLOW": "Жовтий",
+                        };
+
+                        for (const [key, value] of Object.entries(colors)) {
                             document.write(
-                                `<option value="${color}" title="${color}">${color}</option>`
+                                `<option value="${key}" title="${value}">${value}</option>`
                             );
-                        });
+                        }
                     </script>
                 </select>
             </div>
@@ -145,7 +145,7 @@
                 <input
                         class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
                         type="search"
-                        placeholder="Search"
+                        placeholder="Пошук"
                         name="str"
                 />
             </div>
@@ -183,11 +183,11 @@
                         th:text="${productInstance.product.title}"
                         class="text-xl break-normal"
                 >
-                    Tie-belt wrap blouse Tie-belt
+                    Довгі джинси
                 </div>
 
                 <div class="flex">
-                    <div class="mr-1">Sizes:</div>
+                    <div class="mr-1">Розміри:</div>
 
                     <div th:each="size : ${productInstance.sizes}" class="flex">
                         <div th:text="${size.size}" class="mr-1">M</div>
@@ -195,11 +195,10 @@
                 </div>
 
                 <div
-                        th:text="${productInstance.product.price}"
+                        th:utext="${productInstance.product.price + ' ' + '₴'}"
                         class="flex text-sm font-bold mt-2"
                 >
-                    Member price: 100
-                    <div>$</div>
+                    Ціна 100 грн
                 </div>
             </div>
         </div>
@@ -220,7 +219,7 @@
                     th:href="@{${'/product/list?page=' + (currentPage - 1)}}"
                     aria-label="Previous"
             >
-                <span aria-hidden="true">back</span>
+                <span aria-hidden="true">назад</span>
                 <!-- back page -->
             </a>
         </div>
@@ -241,7 +240,7 @@
                     th:href="@{${'/product/list?page=' + (currentPage + 1)}}"
                     aria-label="Next"
             >
-                <span aria-hidden="true">next</span>
+                <span aria-hidden="true">далі</span>
                 <!-- next page -->
             </a>
         </div>

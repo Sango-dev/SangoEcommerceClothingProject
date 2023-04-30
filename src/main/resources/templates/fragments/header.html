@@ -15,8 +15,14 @@
     <header
             class="w-full h-[80px] bg-neutral-200 grid justify-items-stretch grid-cols-3"
     >
+        <div sec:authorize="!isAuthenticated()" class="my-auto px-2 text-2xl">
+            <div>
+                Будь ласка, <a th:href="@{/login}">увійдіть</a>
+                або <a th:href="@{/users/new}">зареєструйтесь</a>
+            </div>
+        </div>
         <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-2xl">
-            Hello, <span sec:authentication="principal.username">Billi</span>
+            Добрий день, <a href="#"> <span sec:authentication="principal.username">Олександр</span> </a>
         </div>
         <div
                 class="justify-self-center text-4xl my-auto text-red-500 font-mono font-bold"
@@ -27,7 +33,7 @@
                 sec:authorize="isAuthenticated()"
                 class="justify-self-end mx-2 my-auto text-2xl"
         >
-            <a th:href="@{/logout}" class="mx-2">logout</a>
+            <a th:href="@{/logout}" class="mx-2">Вийти</a>
             <a th:href="@{/shop-cart}" class="basket mx-2 no-underline"> 🛒 </a>
         </div>
     </header>
