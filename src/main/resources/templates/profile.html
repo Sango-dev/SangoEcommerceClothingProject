@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Профіль</title>
+    <head th:replace="fragments/header :: header-css">
+    </head>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="product_form">
+        <form th:object="${user}" method="post">
+            <input type="text" th:field="*{id}" hidden/>
+            <input type="text" th:field="*{nickName}" required="true" placeholder="Нікнейм" autofocus/>
+            <input type="text" th:field="*{firstName}" required="true" placeholder="Ім'я"/>
+            <input type="text" th:field="*{lastName}" required="true" placeholder="Прізвище"/>
+            <input type="email" th:field="*{email}" placeholder="Пошта" required/>
+            <input type="tel" th:field="*{phone}" placeholder="Телефон" required/>
+            <input type="password" name="password" placeholder="Пароль"/>
+            <input type="password" name="matchPassword" placeholder="повторити пароль"/>
+            <input
+                    type="submit"
+                    name="submit"
+                    th:action="@{/users/profile}"
+                    th:value="Змінити"
+            />
+        </form>
+    </div>
+</div>
+<a th:href="@{/review}" class="2mx">Залишити відгуки</a>
+</body>
+</html>

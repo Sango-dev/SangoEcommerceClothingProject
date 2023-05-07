@@ -11,4 +11,6 @@ public interface UserService extends UserDetailsService {
 	boolean save(UserDto userDTO);
 
 	void save(User user);
+
+	UserDto getUserDtoByNickName(String name);
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/editproductstyle.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="product_form">
+        <form th:object="${product}" method="post">
+            <input type="text" th:field="*{productCode}" required="true" placeholder="Код продукту" autofocus/>
+            <input type="text" th:field="*{title}" required="true" placeholder="Найменування" autofocus/>
+            <input
+                    type="text"
+                    th:field="*{description}"
+                    required="true"
+                    placeholder="Description"
+            />
+            <input
+                    type="text"
+                    th:field="*{composition}"
+                    required="true"
+                    placeholder="Склад"
+            />
+            <select th:field="*{gender}" required="true">
+                <option  th:selected="${product.gender == 'MALE'}" th:value="MALE">Чоловік</option>
+                <option th:selected="${product.gender == 'FEMALE'}" th:value="FEMALE">Жінка</option>
+            </select>
+            <select th:field="*{isUnderwear}" required="true">
+                <option selected th:value="true">Нижній</option>
+                <option th:value="false">Верхній</option>
+            </select>
+            <input type="text" th:field="*{price}" required="true" placeholder="Ціна"/>
+            <select th:field="*{category.id}">
+                <option
+                        th:each="cat : ${categories}"
+                        th:value="${cat.id}"
+                        th:text="${cat.title}"
+                ></option>
+            </select>
+            <select th:field="*{brand.id}">
+                <option
+                        th:each="br : ${brands}"
+                        th:value="${br.id}"
+                        th:text="${br.title}"
+                ></option>
+            </select>
+
+            <input
+                    type="submit"
+                    name="submit"
+                    th:action="@{/product/add-product}"
+                    th:value="Додати"
+            />
+        </form>
+    </div>
+</div>
+</body>
+</html>

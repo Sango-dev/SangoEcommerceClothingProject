@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/editproductstyle.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="product_form">
+        <form th:object="${product}" method="post">
+            <input type="text" th:field="*{linkOfMainPicture}" required="true" placeholder="Посилання на головне фото" autofocus/>
+            <input type="text" th:field="*{linkOfFrontPicture}" required="true" placeholder="Посилання на фото" autofocus/>
+            <input type="text" th:field="*{linkOfBackPicture}" required="true" placeholder="Посилання на фото" autofocus/>
+            <select th:field="*{available}" required="true">
+                <option  th:value="false">Недоступний</option>
+                <option  th:value="true">Доступний</option>
+            </select>
+            <select th:field="*{color}" required="true">
+                <option  th:value="BLACK">Чорний</option>
+                <option  th:value="BLUE">Синій</option>
+                <option  th:value="BROWN">Коричневий</option>
+                <option  th:value="GOLDCOLORED">Золотистий</option>
+                <option  th:value="GREY">Сірий</option>
+                <option  th:value="GREEN">Зелений</option>
+                <option  th:value="MULTI">Багатокольоровий</option>
+                <option  th:value="ORANGE">Помаранчевий</option>
+                <option  th:value="PINK">Рожевий</option>
+                <option  th:value="PURPLE">Фіолетовий</option>
+                <option  th:value="RED">Червоний</option>
+                <option  th:value="SILVERCOLORED">Срібний</option>
+                <option  th:value="TURQUOISE">Бірюзовий</option>
+                <option  th:value="WHITE">Білий</option>
+                <option  th:value="YELLOW">Жовтий</option>
+            </select>
+
+            <input type="text" th:field="*{colorDefinition}" required="true" placeholder="Опис кольору" autofocus/>
+
+            <input
+                    type="submit"
+                    name="submit"
+                    th:action="@{/product/{id}/add-product-instance}"
+                    th:value="Додати"
+            />
+        </form>
+    </div>
+</div>
+</body>
+</html>

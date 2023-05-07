@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/editproductstyle.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="product_form">
+        <form th:object="${product}" method="post">
+            <input type="text" th:field="*{linkOfMainPicture}" required="true" placeholder="Посилання на головне фото" autofocus/>
+            <input type="text" th:field="*{linkOfFrontPicture}" required="true" placeholder="Посилання на фото" autofocus/>
+            <input type="text" th:field="*{linkOfBackPicture}" required="true" placeholder="Посилання на фото" autofocus/>
+            <select th:field="*{available}" required="true">
+                <option  th:selected="${product.available == 'true'}" th:value="true">Доступний</option>
+                <option th:selected="${product.available == 'false'}" th:value="false">Недоступний</option>
+            </select>
+            <select th:field="*{color}" required="true">
+                <option th:selected="${product.color == 'BLACK'}" th:value="BLACK">Чорний</option>
+                <option th:selected="${product.color == 'BLUE'}" th:value="BLUE">Синій</option>
+                <option th:selected="${product.color == 'BROWN'}" th:value="BROWN">Коричневий</option>
+                <option th:selected="${product.color == 'GOLDCOLORED'}" th:value="GOLDCOLORED">Золотистий</option>
+                <option th:selected="${product.color == 'GREY'}" th:value="GREY">Сірий</option>
+                <option th:selected="${product.color == 'GREEN'}" th:value="GREEN">Зелений</option>
+                <option th:selected="${product.color == 'MULTI'}" th:value="MULTI">Багатокольоровий</option>
+                <option th:selected="${product.color == 'ORANGE'}" th:value="ORANGE">Помаранчевий</option>
+                <option th:selected="${product.color == 'PINK'}" th:value="PINK">Рожевий</option>
+                <option th:selected="${product.color == 'PURPLE'}" th:value="PURPLE">Фіолетовий</option>
+                <option th:selected="${product.color == 'RED'}" th:value="RED">Червоний</option>
+                <option th:selected="${product.color == 'SILVERCOLORED'}" th:value="SILVERCOLORED">Срібний</option>
+                <option th:selected="${product.color == 'TURQUOISE'}" th:value="TURQUOISE">Бірюзовий</option>
+                <option th:selected="${product.color == 'WHITE'}" th:value="WHITE">Білий</option>
+                <option th:selected="${product.color == 'YELLOW'}" th:value="YELLOW">Жовтий</option>
+            </select>
+
+            <input type="text" th:field="*{colorDefinition}" required="true" placeholder="Опис кольору" autofocus/>
+
+            <input
+                    type="submit"
+                    name="submit"
+                    th:action="@{/product/{id}/edit-product-instance}"
+                    th:value="Змінити"
+            />
+        </form>
+    </div>
+</div>
+</body>
+</html>

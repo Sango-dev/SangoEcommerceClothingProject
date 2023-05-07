@@ -6,11 +6,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.ProductInstanceRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.ProductRepository;
+import ua.khpi.diploma.sangoecommerceclothingproject.dto.ProdInstanceIdPic;
+import ua.khpi.diploma.sangoecommerceclothingproject.dto.ProductDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.ProductInstanceDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.mapper.ProductInstanceMapper;
+import ua.khpi.diploma.sangoecommerceclothingproject.mapper.ProductMapper;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.*;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.*;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,6 +24,7 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
     private final ProductInstanceRepository productInstanceRepository;
     private final ProductRepository productRepository;
     private final ProductInstanceMapper mapper = ProductInstanceMapper.MAPPER;
+    private final ProductMapper productMapper = ProductMapper.MAPPER;
 
     @Override
     public ProductInstancePage findAllProductInstances(Pageable pageable) {
@@ -86,5 +91,52 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
                 );
 
         return dtos;
+    }
+
+    @Override
+    public List<ProductDto> findAllProductsWithInstances() {
+        List<ProductCloth> productList = productRepository.findAll();
+        List<ProductDto> dtos = productMapper.fromProductList(productList);
+        int sz = productList.size();
+        for (int i = 0; i < sz; i++ ) {
+            List<ProductInstanceCloth> listProdInst = productList.get(i).getProductInstances();
+            List<ProdInstanceIdPic> listProdIdPic = new ArrayList<>();
+            listProdInst.stream().forEach(pi ->
+                    listProdIdPic.add(new ProdInstanceIdPic(pi.getId(), pi.getLinkOfMainPicture()))
+            );
+            dtos.get(i).setProdInstIdPic(listProdIdPic);
+        }
+
+        return dtos;
+    }
+
+    @Override
+    public ProductInstanceDto findProductInsClothById(String id) {
+        return mapper.fromProductInstance(productInstanceRepository.findProductInstanceById(id));
+    }
+
+    @Override
+    public void updateProductInstance(String id, ProductInstanceDto productInstanceDto) {
+        ProductInstanceCloth productInstance = productInstanceRepository.findProductInstanceById(id);
+        if (productInstance == null) {
+            throw new RuntimeException("Product is not found with ID : " + id);
+        }
+        productInstance.setLinkOfMainPicture(productInstanceDto.getLinkOfMainPicture());
+        productInstance.setLinkOfFrontPicture(productInstanceDto.getLinkOfFrontPicture());
+        productInstance.setLinkOfBackPicture(productInstanceDto.getLinkOfBackPicture());
+        productInstance.setAvailable(productInstanceDto.getAvailable());
+        productInstance.setColor(productInstanceDto.getColor());
+        productInstance.setColorDefinition(productInstanceDto.getColorDefinition());
+        productInstanceRepository.save(productInstance);
+    }
+
+    @Override
+    public void addProductInstance(String id, ProductInstanceDto productInstanceDto) {
+        ProductCloth productCloth = productRepository.findProductClothById(id);
+        ProductInstanceCloth productInstanceCloth = mapper.toProductInstance(productInstanceDto);
+        productInstanceCloth.setId(UUID.randomUUID().toString());
+        productInstanceCloth.setProduct(productCloth);
+        productInstanceCloth.setDateCreated(LocalDate.now());
+        productCloth.getProductInstances().add(productInstanceRepository.save(productInstanceCloth));
     }
 }

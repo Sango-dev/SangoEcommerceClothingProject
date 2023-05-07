@@ -1,54 +1,50 @@
 -- H&M
-INSERT INTO products(id, product_code, title, description,composition, gender, available, price, underwear, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description,composition, gender,  price, underwear, brand_id, category_id)
  VALUES('b822a8e8-bc4c-11ed-afa1-0242ac120002',
          'HD-2023-06-0001',
          'Худі вільного крою',
          'H&M. Толстовка з капюшоном вільного крою зі суміші бавовни з м’якою начісованою внутрішньою стороною. Капюшон на підкладці, кишеня-кенгуру, спущені плечі та довгі рукави. Резинка на манжетах і подолу.',
          'Основа: бавовна 60%, поліестер 40%, підкладка капюшона: бавовна 60%, поліестер 40%',
          'MALE',
-         'true',
          '39.99',
          'false',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
          '70953c9c-4c95-11ed-bdc3-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender,  price, underwear, brand_id, category_id)
  VALUES('f8467e02-c176-11ed-afa1-0242ac120002',
          'CT-2023-03-0001',
          'Essentials No 14: Пальто',
          'Пальто довжиною до коліна з м’якої бавовняної тканини. Комір, потайні ґудзики спереду для чистого вигляду та довгі рукави реглан. Всесезонний продукт із діагональними бічними кишенями, двома внутрішніми кишенями та характерним отвором ззаду',
          'Основа: 100% бавовна, підкладка: 100% поліестер',
          'MALE',
-         'true',
          '84.15',
          'false',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
          '70953b34-4c95-11ed-bdc3-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender,  price, underwear, brand_id, category_id)
  VALUES('2e300bf8-c188-11ed-afa1-0242ac120002',
          'JA-2023-03-0001',
          'Бейсбольна куртка Oversized',
          'Бейсбольна куртка з легкою підкладкою з м’якого драпірованого атласу з вишитим мотивом. Комір-стійка в рубчик, застібки спереду, м’яко спущені плечі, довгі рукави. Діагональні прорізні передні кишені із застібкою та внутрішня кишеня із застібкою. Стьобана підкладка.',
          'Основа: 100% поліестер, підкладка: 100% поліестер, підкладка: 100% поліестер',
          'MALE',
-         'true',
          '72.25',
          'false',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
          '5420f03a-bc46-11ed-afa1-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender,  price, underwear, brand_id, category_id)
  VALUES('aebbd71a-c1c0-11ed-afa1-0242ac120002',
          'JE-2023-03-0001',
          'Вільні джинси',
          'Джинси з 5 кишенями з нерозтяжного бавовняного деніму. Заокруглені штанини та вільний крій від сидіння до низу для додаткового простору навколо ніг. Звичайна талія, блискавка та занижена ластовица. Ідеально підходить для повного джинсового образу.',
          'Основа: бавовна 100%, підкладка кишень: поліестер 65%, бавовна 35%',
          'MALE',
-         'true',
          '39.99',
          'true',
          '3cf540d6-4c94-11ed-bdc3-0242ac120002',
@@ -56,28 +52,26 @@ INSERT INTO products(id, product_code, title, description, composition, gender, 
         );
 -- --------------------------------------------------------
 -- Pull&Bear
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender,  price, underwear, brand_id, category_id)
  VALUES('13c31526-c23c-11ed-afa1-0242ac120002',
          'JEPB-2023-03-0001',
          'Мішкуваті джинси',
          'Джинси з 5 кишенями з жорсткого бавовняного деніму. Заокруглена ніжка та мішкувата посадка від сидіння до подолу з достатньою кількістю місця навколо всієї ноги. Звичайна талія та блискавка. Доповнений образ великою толстовкою.',
          'Основа: бавовна 100%, підкладка кишень: поліестер 65%, бавовна 35%',
          'MALE',
-         'true',
          '64.95',
          'true',
          '3cf53abe-4c94-11ed-bdc3-0242ac120002',
          'afbda09c-bc45-11ed-afa1-0242ac120002'
         );
 
-INSERT INTO products(id, product_code, title, description, composition, gender, available, price, underwear, brand_id, category_id)
+INSERT INTO products(id, product_code, title, description, composition, gender, price, underwear, brand_id, category_id)
  VALUES('85f46668-c24b-11ed-afa1-0242ac120002',
          'JEPB-2023-03-0002',
          'Мішкуваті джинси карго 90s',
          'Джинси вільного крою з міцного бавовняного деніму із завищеною талією, заниженою промежиною, блискавкою та ґудзиком і прямими наддовгими штанинами. Передні та задні кишені та кишені на штанинах з клапаном.',
          'Основа: перероблена бавовна 20%, підкладка: перероблений поліестер 65%',
          'FEMALE',
-         'true',
          '49.95',
          'true',
          '3cf53abe-4c94-11ed-bdc3-0242ac120002',

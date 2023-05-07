@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/editproductstyle.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="product_form">
+        <div th:if="${add == true}">
+            <form method="get"
+                  action="http://localhost:8080/product/adding-size">
+                <select name="size" required="true">
+                    <div th:each="size : ${sizes}">
+                        <option th:value="${size}" th:text="${size}"></option>
+                    </div>
+                </select>
+                <input type="text" hidden name="prodId" th:value="${prodId}">
+                <input
+                        type="submit"
+                        name="submit"
+                        th:value="Додати"
+                />
+            </form>
+        </div>
+        <div th:if="${add == false}">
+            <form method="get"
+                  action="http://localhost:8080/product/removing-size">
+                <select name="size" required="true">
+                    <div th:each="size : ${sizes}">
+                        <option th:value="${size}" th:text="${size}"></option>
+                    </div>
+                </select>
+                <input type="text" hidden name="prodId" th:value="${prodId}">
+                <input
+                        type="submit"
+                        name="submit"
+                        th:value="Видалити"
+                />
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

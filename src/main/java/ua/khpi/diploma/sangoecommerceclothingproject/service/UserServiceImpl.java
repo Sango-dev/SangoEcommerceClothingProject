@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getUserDtoByNickName(String name) {
+        return mapper.fromUser(userRepository.findFirstByNickName(name));
+    }
+
+    @Override
     @Transactional
     public boolean save(UserDto userDto) {
         if (!Objects.equals(userDto.getPassword(), userDto.getMatchingPassword())) {

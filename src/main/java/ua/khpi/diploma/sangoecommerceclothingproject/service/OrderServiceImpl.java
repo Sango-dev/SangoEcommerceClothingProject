@@ -10,11 +10,9 @@ import ua.khpi.diploma.sangoecommerceclothingproject.mapper.OrderMapper;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.order.Order;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.order.OrderPage;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.order.OrderStatus;
-import ua.khpi.diploma.sangoecommerceclothingproject.model.product.ProductCloth;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,11 +44,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderPage getOrdersByUsernameAndStatus(String username, String status, Pageable pageable) {
-
-        /*if (nickname.isBlank()) {
-            throw new RuntimeException("Nickname must not be empty or blank!!!");
-        }*/
-
         OrderStatus orderStatus = OrderStatus.valueOf(status);
         User user = userService.findFirstByNickName(username);
 
@@ -58,8 +51,6 @@ public class OrderServiceImpl implements OrderService {
         List<OrderDto> list = orderMapper.fromOrderList(byUserAndStatus.getContent());
         int totalPages = byUserAndStatus.getTotalPages();
         return new OrderPage(list, totalPages);
-
-        //return orderMapper.fromOrderList(userService.findFirstByNickName(username).getOrders().stream().filter(order -> order.getStatus().equals(orderStatus)).collect(Collectors.toList()));
     }
 
     @Override

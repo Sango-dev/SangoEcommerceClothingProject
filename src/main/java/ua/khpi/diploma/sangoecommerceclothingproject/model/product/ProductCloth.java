@@ -40,9 +40,6 @@ public class ProductCloth {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "available", nullable = false)
-    private Boolean available;
-
     @Column(name = "underwear", nullable = false)
     private Boolean isUnderwear;
 
