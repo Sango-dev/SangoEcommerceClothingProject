@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Leave Reviews</title>
+    <meta charset="UTF-8"/>
+    <title>Відгук</title>
+    <head th:replace="fragments/header :: header-css">
+    </head>
     <style>
         .rating {
             float: left;
@@ -54,26 +56,69 @@
     </style>
 </head>
 <body>
-<h1>Leave Reviews</h1>
-<p th:text="${review.titleOfReviewProduct}"></p>
-<p><img th:src="${review.picture}" alt="" width="100"/></p>
+<div th:replace="fragments/header :: header"></div>
+<div class="flex justify-center my-16">
+    <div class="flex bg-neutral-100 flex flex-col">
+        <div class="text-xl font-bold mx-auto">Відгук</div>
 
-    <form th:action="@{/review/leave-review}" method="post">
-        <div class="rating">
-            <input type="radio" id="star5" name="rating" value="5"/>
-            <label for="star5">&#9733;</label>
-            <input type="radio" id="star4" name="rating" value="4"/>
-            <label for="star4">&#9733;</label>
-            <input type="radio" id="star3" name="rating" value="3"/>
-            <label for="star3">&#9733;</label>
-            <input type="radio" id="star2" name="rating" value="2"/>
-            <label for="star2">&#9733;</label>
-            <input type="radio" id="star1" name="rating" value="1"/>
-            <label for="star1">&#9733;</label>
+        <div class="flex bg-neutral-200">
+            <div class="mx-auto">
+                <img
+                        src="https://picsum.photos/200/300"
+                        th:src="${review.picture}"
+                        alt=""
+                        width="200"
+                />
+            </div>
+
+            <form
+                    th:action="@{/review/leave-review}"
+                    method="post"
+                    class="mx-auto flex flex-col px-2"
+            >
+                <div class="flex justify-between mt-1">
+                    <div th:text="${review.titleOfReviewProduct}">title</div>
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5"/>
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4"/>
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3"/>
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2"/>
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1"/>
+                        <label for="star1">&#9733;</label>
+                    </div>
+                </div>
+
+                <input type="hidden" name="reviewId" th:value="${review.id}"/>
+                <div class="flex flex-col mt-16">
+              <textarea
+                      name="comment"
+                      placeholder="Comment"
+                      class="resize-none w-[500px] h-32 p-2 border outline-0"
+              ></textarea>
+                    <button type="submit"
+                            class="w-full mt-1 flex justify-center bg-neutral-800 py-2 text-white text-xl font-bold hover:opacity-30">
+                        <svg
+                                width="25px"
+                                height="25px"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                    d="M20.33 3.66996C20.1408 3.48213 19.9035 3.35008 19.6442 3.28833C19.3849 3.22659 19.1135 3.23753 18.86 3.31996L4.23 8.19996C3.95867 8.28593 3.71891 8.45039 3.54099 8.67255C3.36307 8.89471 3.25498 9.16462 3.23037 9.44818C3.20576 9.73174 3.26573 10.0162 3.40271 10.2657C3.5397 10.5152 3.74754 10.7185 4 10.85L10.07 13.85L13.07 19.94C13.1906 20.1783 13.3751 20.3785 13.6029 20.518C13.8307 20.6575 14.0929 20.7309 14.36 20.73H14.46C14.7461 20.7089 15.0192 20.6023 15.2439 20.4239C15.4686 20.2456 15.6345 20.0038 15.72 19.73L20.67 5.13996C20.7584 4.88789 20.7734 4.6159 20.7132 4.35565C20.653 4.09541 20.5201 3.85762 20.33 3.66996ZM4.85 9.57996L17.62 5.31996L10.53 12.41L4.85 9.57996ZM14.43 19.15L11.59 13.47L18.68 6.37996L14.43 19.15Z"
+                                    fill="#F7F8F8"
+                            />
+                        </svg>
+                        Надіслати
+                    </button>
+                </div>
+            </form>
         </div>
-        <input type="hidden" name="reviewId" th:value="${review.id}"/>
-        <input type="text" name="comment" placeholder="Comment"/>
-        <button type="submit">Submit</button>
-    </form>
+    </div>
+</div>
 </body>
 </html>

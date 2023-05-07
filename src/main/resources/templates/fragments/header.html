@@ -1,12 +1,16 @@
-<!DOCTYPE HTML SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      lang="en">
-
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+        lang="en"
+>
 <head th:fragment="header-css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -15,31 +19,53 @@
     <header
             class="w-full h-[80px] bg-neutral-200 grid justify-items-stretch grid-cols-3"
     >
-        <div sec:authorize="!isAuthenticated()" class="my-auto px-2 text-2xl">
+        <div sec:authorize="!isAuthenticated()" class="my-auto px-2 text-xl">
             <div>
-                Будь ласка, <a th:href="@{/login}">увійдіть</a>
-                або <a th:href="@{/users/new}">зареєструйтесь</a>
+                Будь ласка,
+                <a
+                        th:href="@{/login}"
+                        class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+                >увійдіть</a
+                >
+                або
+                <a
+                        th:href="@{/users/new}"
+                        class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+                >зареєструйтесь</a
+                >
             </div>
         </div>
-        <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-2xl">
-            Добрий день, <a href="#"> <span sec:authentication="principal.username">Олександр</span> </a>
+
+        <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-xl">
+            Вітаємо,
+            <a href="#" class="underline text-indigo-700 cursor-pointer hover:text-indigo-800">
+                <span sec:authentication="principal.username">Олександр</span>
+            </a>
         </div>
+
         <div
-                class="justify-self-center text-4xl my-auto text-red-500 font-mono font-bold"
+                class="justify-self-center text-5xl my-auto text-red-500 font-mono font-bold"
         >
             SanGo
         </div>
+
         <div
                 sec:authorize="isAuthenticated()"
-                class="justify-self-end mx-2 my-auto text-2xl"
+                class="justify-self-end mx-2 my-auto text-xl"
         >
-            <a th:href="@{/logout}" class="mx-2">Вийти</a>
-            <a th:href="@{/shop-cart}" class="basket mx-2 no-underline"> 🛒 </a>
+            <a
+                    th:href="@{/logout}"
+                    class="mx-2 border-r border-black px-3 cursor-pointer hover:opacity-40"
+            >Вийти</a
+            >
+            <a
+                    th:href="@{/shop-cart}"
+                    class="basket px-2 no-underline cursor-pointer hover:opacity-40"
+            >
+                🛒
+            </a>
         </div>
     </header>
 </div>
 </body>
-
 </html>
-
-

@@ -1,43 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/loginstyle.css}"/>
+    <meta charset="UTF-8" />
+    <title>Вхід</title>
+    <head th:replace="fragments/header :: header-css"></head>
 </head>
-
-<body>
-<header>
-  <!--  <div class="logo">Clothes👘</div>
-    <nav>
-        <a href="/products" class="nav_item">Products</a>
-    </nav>
--->
-</header>
-
-<div class="form_box">
-    <form action="/auth" method="post" class="login_form">
-        <h2 style="background-color: whitesmoke">Login</h2>
-        <input type="text" name="username" placeholder="Nickname" autofocus="true" required="true">
-        <input type="password" name="password" placeholder="Password" required="true">
-        <div th:if="${loginError}" style="background-color: whitesmoke">
-            <p th:text="${errorMessage}"
-               style="color: red; font-weight: bold; font-size: 20px; background-color: whitesmoke"></p>
+<div th:replace="fragments/header :: header"></div>
+<body class="bg-neutral-100">
+<div class="h-screen flex justify-center">
+    <form action="/auth" method="post" class="w-86 m-auto flex flex-col border p-2 bg-white">
+        <h2 class="mt-2 text-2xl font-bold text-center">Логін</h2>
+        <input
+                type="text"
+                name="username"
+                placeholder="Nickname"
+                autofocus
+                required
+                class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+        />
+        <div class="w-full flex">
+            <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    id="password"
+                    required
+                    class="w-full px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            />
+            <button type="button" id="wiev-password" class="text-xl">👁</button>
         </div>
-        <button type="submit">Login</button>
-        <div style="background-color: whitesmoke">
-            <a style="background-color: whitesmoke" href="/users/new">Register</a>
+        <div th:if="${loginError}">
+            <p th:text="${errorMessage}" class="text-red-600 text-sm">
+            </p>
         </div>
-
+        <button
+                type="submit"
+                class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
+        >
+            Login
+        </button>
+        <div class="my-5 flex mx-auto">
+            У вас немає акаунту?
+            <a href="/users/new"
+               class="underline text-indigo-700 cursor-pointer hover:text-indigo-900 mx-1"
+            >Зареєструйтесь</a>
+        </div>
     </form>
 </div>
+<script>
+    const pswBtn = document.querySelector("#wiev-password");
+    const psw = document.querySelector("#password");
 
-<footer>
-    <div style="background-color: blue">Made by Klymenchuk Oleksandrⓒ</div>
-    <a href="https://github.com/Sango-dev/InternetClothingStore"
-       style="color: white; margin: 0 10px; background-color: blue;">Git</a>
-</footer>
+    const types = {
+        text: "text",
+        password: "password",
+    };
 
+    pswBtn.addEventListener("click", () => {
+        if (psw.type === types.password) {
+            psw.type = types.text;
+            pswBtn.innerHTML = "🫣";
+        } else {
+            psw.type = types.password;
+            pswBtn.innerHTML = "👁";
+        }
+    });
+</script>
 </body>
 </html>

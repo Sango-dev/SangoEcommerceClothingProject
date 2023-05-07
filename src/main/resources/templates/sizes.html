@@ -2,46 +2,71 @@
 <html
         lang="en"
         xmlns:th="http://www.w3.org/1999/xhtml"
-        xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
-    <meta charset="UTF-8"/>
-    <title>Edit product</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/editproductstyle.css}"/>
+    <meta charset="UTF-8" />
+    <title>Розміри</title>
+    <head th:replace="fragments/header :: header-css"> </head>
 </head>
 <body>
-<div class="container">
+<div th:replace="fragments/header :: header"></div>
+<div class="w-full flex justify-left mx-2 mt-1">
+    <div class="mx-2">
+        <a th:href="@{/product/admin-list}" class="underline text-indigo-700 hover:text-indigo-800"
+        >Повернутися назад</a
+        >
+    </div>
+</div>
+<div class="flex justify-center my-16">
     <div class="product_form">
         <div th:if="${add == true}">
-            <form method="get"
-                  action="http://localhost:8080/product/adding-size">
-                <select name="size" required="true">
+            <form
+                    method="get"
+                    action="http://localhost:8080/product/adding-size"
+                    class="flex m-3"
+            >
+                <select
+                        name="size"
+                        required="true"
+                        class="w-36 py-1 outline-0 border-b focus:border-blue-400"
+                >
                     <div th:each="size : ${sizes}">
                         <option th:value="${size}" th:text="${size}"></option>
                     </div>
                 </select>
-                <input type="text" hidden name="prodId" th:value="${prodId}">
-                <input
+                <input type="text" hidden name="prodId" th:value="${prodId}" />
+                <button
                         type="submit"
                         name="submit"
-                        th:value="Додати"
-                />
+                        class="flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
+                >
+                    Додати
+                </button>
             </form>
         </div>
         <div th:if="${add == false}">
-            <form method="get"
-                  action="http://localhost:8080/product/removing-size">
-                <select name="size" required="true">
+            <form
+                    method="get"
+                    action="http://localhost:8080/product/removing-size"
+                    class="flex m-3"
+            >
+                <select
+                        name="size"
+                        required
+                        class="w-36 py-1 outline-0 border-b focus:border-blue-400"
+                >
                     <div th:each="size : ${sizes}">
                         <option th:value="${size}" th:text="${size}"></option>
                     </div>
                 </select>
-                <input type="text" hidden name="prodId" th:value="${prodId}">
-                <input
+                <input type="text" hidden name="prodId" th:value="${prodId}" />
+                <button
                         type="submit"
                         name="submit"
-                        th:value="Видалити"
-                />
+                        class="flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
+                >
+                    Видалити
+                </button>
             </form>
         </div>
     </div>

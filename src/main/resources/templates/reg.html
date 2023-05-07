@@ -1,51 +1,141 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
 <head>
-    <meta charset="UTF-8">
-    <title>Registration</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/regstyle.css}"/>
+    <meta charset="UTF-8"/>
+    <title>Реєстрація</title>
+    <head th:replace="fragments/header :: header-css"></head>
 </head>
+<div th:replace="fragments/header :: header"></div>
+<body class="bg-neutral-100">
+<div class="h-screen flex justify-center">
+    <form
+            th:action="@{/users/new}"
+            method="post"
+            th:object="${user}"
+            class="w-86 m-auto flex flex-col border p-2 bg-white"
+    >
+        <h2 class="mt-2 text-2xl font-bold text-center">Реєстрація</h2>
+        <input
+                type="text"
+                id="nickName"
+                th:field="*{nickName}"
+                th:value="${nickName}"
+                required
+                placeholder="Nickname"
+                class="w-full px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+        />
+        <input
+                type="text"
+                id="firstName"
+                th:field="*{firstName}"
+                th:value="${firstName}"
+                required="true"
+                autofocus="true"
+                placeholder="First Name"
+                class="w-full px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+        />
+        <input
+                type="text"
+                id="lastName"
+                th:field="*{lastName}"
+                th:value="${lastName}"
+                required="true"
+                placeholder="Last Name"
+                class="w-full px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+        />
+        <input
+                type="email"
+                id="email"
+                th:field="*{email}"
+                th:value="${email}"
+                required="true"
+                placeholder="Email"
+                class="w-full px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+        />
+        <input
+                type="tel"
+                id="phone"
+                th:field="*{phone}"
+                th:value="${phone}"
+                required="true"
+                placeholder="Phone number"
+                class="w-full px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+        />
 
-<body>
-<header>
-    <div class="logo">Clothes👘</div>
-    <nav>
-        <a href="/products" class="nav_item">Products</a>
-    </nav>
-
-</header>
-<div class="form_box">
-    <form th:action="@{/users/new}" method="post" class="register_form" th:object="${user}">
-
-        <h2 style="background-color: whitesmoke">Registration</h2>
-        <input type="text" id="nickName" th:field="*{nickName}" th:value="${nickName}" required="true"
-               placeholder="Nickname">
-        <input type="text" id="firstName" th:field="*{firstName}" th:value="${firstName}" required="true"
-               autofocus="true" placeholder="First Name">
-        <input type="text" id="lastName" th:field="*{lastName}" th:value="${lastName}" required="true"
-               placeholder="Last Name">
-        <input type="email" id="email" th:field="*{email}" th:value="${email}" required="true" placeholder="Email">
-        <input type="tel" id="phone" th:field="*{phone}" th:value="${phone}" required="true" placeholder="Phone number">
-        <input type="password" id="password" th:field="*{password}" th:value="${password}" required="true"
-               placeholder="Password">
-        <input type="password" id="matchingPassword" th:field="*{matchingPassword}" th:value="${matchingPassword}"
-               required="true" placeholder="Matching password">
-        <div th:if="${errorFlag}" style="background-color: whitesmoke">
-            <p th:text="${errorMessage}"
-               style="color: red; font-weight: bold; font-size: 25px; background-color: whitesmoke"></p>
+        <div>
+            <input
+                    type="password"
+                    id="password"
+                    th:field="*{password}"
+                    th:value="${password}"
+                    required
+                    placeholder="Password"
+                    class="password w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            />
+            <button type="button" class="wiev-password text-xl">👁</button>
         </div>
-        <button type="submit">Registration</button>
+        <div>
+            <input
+                    type="password"
+                    id="matchingPassword"
+                    th:field="*{matchingPassword}"
+                    th:value="${matchingPassword}"
+                    required
+                    placeholder="Matching password"
+                    class="password w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            />
+            <button type="button" class="wiev-password text-xl">👁</button>
+        </div>
 
-        <div style="background-color: whitesmoke" sec:authorize="!hasAnyAuthority('ADMIN')">
-            <a href="/login" style="background-color: whitesmoke">Login</a>
+        <div th:if="${errorFlag}">
+            <p th:text="${errorMessage}" class="text-red-600 text-sm"></p>
+        </div>
+        <button
+                type="submit"
+                class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
+        >
+            Зареєструватися
+        </button>
+
+        <div
+                sec:authorize="!hasAnyAuthority('ADMIN')"
+                class="my-5 flex mx-auto"
+        >
+            У вас вже є аккаунт
+            <a
+                    href="/login"
+                    class="underline text-indigo-700 cursor-pointer hover:text-indigo-900 mx-1"
+            >ввійдіть</a
+            >
         </div>
     </form>
 </div>
-<footer>
-    <div style="background-color: blue">Made by Klymenchuk Oleksandrⓒ</div>
-    <a href="https://github.com/Sango-dev/InternetClothingStore"
-       style="color: white; margin: 0 10px; background-color: blue;">Git</a>
-</footer>
+
+<script>
+    const pswBtn = document.querySelectorAll(".wiev-password");
+    const psw = document.querySelectorAll(".password");
+
+    const types = {
+        text: "text",
+        password: "password",
+    };
+
+    [...pswBtn].forEach((btn, index) =>
+        btn.addEventListener("click", () => {
+            if (psw[index].type === types.password) {
+                btn.innerHTML = "🫣";
+                psw[index].type = types.text;
+            } else {
+                btn.innerHTML = "👁";
+                psw[index].type = types.password;
+            }
+        })
+    );
+</script>
 </body>
 </html>
+

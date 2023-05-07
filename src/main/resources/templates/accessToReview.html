@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Reviews</title>
+    <meta charset="UTF-8" />
+    <title>Залишити відгук</title>
+    <head th:replace="fragments/header :: header-css">
+    </head>
 </head>
 <body>
-<h1>Leave Reviews</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Product</th>
-        <th>Picture</th>
-        <th>Leave Review</th>
-<!--
-        <th>comment rate</th>
--->
+<!-- Header -->
+<div th:replace="fragments/header :: header"></div>
+
+<table align="center" width="1000px" class="mt-10">
+    <thead class="text-xl bg-neutral-100">
+    <tr class="bg-neutral-200">
+        <th>Зображення</th>
+        <th>Найменування</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="review : ${reviews}">
-        <td th:text="${review.titleOfReviewProduct}"></td>
-        <td><img th:src="${review.picture}" alt="" width="100"/></td>
-        <td th:if="${review.rate == 0}">
-            <a th:href="@{/review/{id}(id=${review.id})}">Залишити відгук</a>
+    <tr th:each="review : ${reviews}" class="border-b">
+        <td align="center">
+            <img
+                    src="https://picsum.photos/200/300"
+                    th:src="${review.picture}"
+                    alt=""
+                    width="100"
+                    class="p-1"
+            />
         </td>
-        <td th:if="${review.rate > 0}">
-        <a th:href="@{/review/{id}(id=${review.id})}">Змінити відгук</a>
+        <td align="center" th:text="${review.titleOfReviewProduct}">Title</td>
+
+        <td align="center" th:if="${review.rate == 0}">
+            <a th:href="@{/review/{id}(id=${review.id})}" class="text-indigo-700 underline cursor-pointer hover:text-blue-900">Залишити відгук</a>
         </td>
-<!--
-        <td th:text="${review.rate + ' ' + review.comment}"></td>
--->
+        <td align="center" th:if="${review.rate > 0}">
+            <a th:href="@{/review/{id}(id=${review.id})}" class="text-indigo-700 underline cursor-pointer hover:text-blue-900">Змінити відгук</a>
+        </td>
     </tr>
+
     </tbody>
 </table>
 </body>

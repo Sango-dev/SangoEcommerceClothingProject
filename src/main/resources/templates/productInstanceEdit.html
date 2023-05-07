@@ -5,49 +5,187 @@
         xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
-    <meta charset="UTF-8"/>
-    <title>Edit product</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/editproductstyle.css}"/>
+    <meta charset="UTF-8" />
+    <title>Редагування екземпляру</title>
+    <head th:replace="fragments/header :: header-css"></head>
 </head>
 <body>
-<div class="container">
-    <div class="product_form">
-        <form th:object="${product}" method="post">
-            <input type="text" th:field="*{linkOfMainPicture}" required="true" placeholder="Посилання на головне фото" autofocus/>
-            <input type="text" th:field="*{linkOfFrontPicture}" required="true" placeholder="Посилання на фото" autofocus/>
-            <input type="text" th:field="*{linkOfBackPicture}" required="true" placeholder="Посилання на фото" autofocus/>
-            <select th:field="*{available}" required="true">
-                <option  th:selected="${product.available == 'true'}" th:value="true">Доступний</option>
-                <option th:selected="${product.available == 'false'}" th:value="false">Недоступний</option>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-16 ml-16">
+    <div class="product_form flex">
+        <form th:object="${product}" method="post" class="flex flex-col">
+            <div class="text-xl font-bold">Редагування екземпляру</div>
+            <input
+                    type="text"
+                    th:field="*{linkOfMainPicture}"
+                    required
+                    placeholder="Посилання на головне фото"
+                    autofocus
+                    id="photo"
+                    class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            />
+            <input
+                    type="text"
+                    th:field="*{linkOfFrontPicture}"
+                    required
+                    id="photo"
+                    placeholder="Посилання на фото"
+                    autofocus
+                    class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            />
+            <input
+                    type="text"
+                    th:field="*{linkOfBackPicture}"
+                    required
+                    placeholder="Посилання на фото"
+                    autofocus
+                    id="photo"
+                    class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            />
+            <select th:field="*{available}" required
+                    class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+
+            >
+                <option
+                        th:selected="${product.available == 'true'}"
+                        th:value="true"
+                >
+                    Доступний
+                </option>
+                <option
+                        th:selected="${product.available == 'false'}"
+                        th:value="false"
+                >
+                    Недоступний
+                </option>
             </select>
-            <select th:field="*{color}" required="true">
-                <option th:selected="${product.color == 'BLACK'}" th:value="BLACK">Чорний</option>
-                <option th:selected="${product.color == 'BLUE'}" th:value="BLUE">Синій</option>
-                <option th:selected="${product.color == 'BROWN'}" th:value="BROWN">Коричневий</option>
-                <option th:selected="${product.color == 'GOLDCOLORED'}" th:value="GOLDCOLORED">Золотистий</option>
-                <option th:selected="${product.color == 'GREY'}" th:value="GREY">Сірий</option>
-                <option th:selected="${product.color == 'GREEN'}" th:value="GREEN">Зелений</option>
-                <option th:selected="${product.color == 'MULTI'}" th:value="MULTI">Багатокольоровий</option>
-                <option th:selected="${product.color == 'ORANGE'}" th:value="ORANGE">Помаранчевий</option>
-                <option th:selected="${product.color == 'PINK'}" th:value="PINK">Рожевий</option>
-                <option th:selected="${product.color == 'PURPLE'}" th:value="PURPLE">Фіолетовий</option>
-                <option th:selected="${product.color == 'RED'}" th:value="RED">Червоний</option>
-                <option th:selected="${product.color == 'SILVERCOLORED'}" th:value="SILVERCOLORED">Срібний</option>
-                <option th:selected="${product.color == 'TURQUOISE'}" th:value="TURQUOISE">Бірюзовий</option>
-                <option th:selected="${product.color == 'WHITE'}" th:value="WHITE">Білий</option>
-                <option th:selected="${product.color == 'YELLOW'}" th:value="YELLOW">Жовтий</option>
+            <select th:field="*{color}" required
+                    class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            >
+                <option th:selected="${product.color == 'BLACK'}" th:value="BLACK">
+                    Чорний
+                </option>
+                <option th:selected="${product.color == 'BLUE'}" th:value="BLUE">
+                    Синій
+                </option>
+                <option th:selected="${product.color == 'BROWN'}" th:value="BROWN">
+                    Коричневий
+                </option>
+                <option
+                        th:selected="${product.color == 'GOLDCOLORED'}"
+                        th:value="GOLDCOLORED"
+                >
+                    Золотистий
+                </option>
+                <option th:selected="${product.color == 'GREY'}" th:value="GREY">
+                    Сірий
+                </option>
+                <option th:selected="${product.color == 'GREEN'}" th:value="GREEN">
+                    Зелений
+                </option>
+                <option th:selected="${product.color == 'MULTI'}" th:value="MULTI">
+                    Багатокольоровий
+                </option>
+                <option
+                        th:selected="${product.color == 'ORANGE'}"
+                        th:value="ORANGE"
+                >
+                    Помаранчевий
+                </option>
+                <option th:selected="${product.color == 'PINK'}" th:value="PINK">
+                    Рожевий
+                </option>
+                <option
+                        th:selected="${product.color == 'PURPLE'}"
+                        th:value="PURPLE"
+                >
+                    Фіолетовий
+                </option>
+                <option th:selected="${product.color == 'RED'}" th:value="RED">
+                    Червоний
+                </option>
+                <option
+                        th:selected="${product.color == 'SILVERCOLORED'}"
+                        th:value="SILVERCOLORED"
+                >
+                    Срібний
+                </option>
+                <option
+                        th:selected="${product.color == 'TURQUOISE'}"
+                        th:value="TURQUOISE"
+                >
+                    Бірюзовий
+                </option>
+                <option th:selected="${product.color == 'WHITE'}" th:value="WHITE">
+                    Білий
+                </option>
+                <option
+                        th:selected="${product.color == 'YELLOW'}"
+                        th:value="YELLOW"
+                >
+                    Жовтий
+                </option>
             </select>
 
-            <input type="text" th:field="*{colorDefinition}" required="true" placeholder="Опис кольору" autofocus/>
+            <input
+                    type="text"
+                    th:field="*{colorDefinition}"
+                    required
+                    placeholder="Опис кольору"
+                    autofocus
+                    class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
+            />
 
             <input
                     type="submit"
                     name="submit"
                     th:action="@{/product/{id}/edit-product-instance}"
                     th:value="Змінити"
+                    class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
             />
         </form>
+        <div class="flex gap-3 mx-10">
+            <div id="added-photo" class="bg-neutral-400 w-[300px] h-[500px] flex">
+                <div class="m-auto font-bold text-2xl text-white">Фото 1</div>
+            </div>
+            <div id="added-photo" class="bg-neutral-400 w-[300px] h-[500px] flex">
+                <div class="m-auto font-bold text-2xl text-white">Фото 2</div>
+            </div>
+            <div id="added-photo" class="bg-neutral-400 w-[300px] h-[500px] flex">
+                <div class="m-auto font-bold text-2xl text-white">Фото 3</div>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    const photos = document.querySelectorAll("#photo");
+    const showPhotos = document.querySelectorAll("#added-photo");
+
+    const checkURL = (url) => {
+        try {
+            new URL(url);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
+
+    [...photos].forEach((item, index) => {
+        item.addEventListener("input", (e) => {
+            const url = e.target.value;
+            if (checkURL(url)) {
+                showPhotos[
+                    index
+                    ].innerHTML = `<img class="w-[300px] h-[500px]" src="${e.target.value}"/>`;
+            } else {
+                showPhotos[
+                    index
+                    ].innerHTML = ` <div class="m-auto font-bold text-2xl text-white">Фото ${
+                    index + 1
+                }</div>`;
+            }
+        });
+    });
+</script>
 </body>
 </html>

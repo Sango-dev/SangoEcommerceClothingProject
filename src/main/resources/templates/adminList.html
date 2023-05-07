@@ -2,30 +2,32 @@
 <html
         lang="en"
         xmlns:th="http://www.w3.org/1999/xhtml"
-        xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
     <meta charset="UTF-8" />
-    <title>Order History</title>
-    <head th:replace="fragments/header :: header-css">
-    </head>
+    <title>Список товарів</title>
+    <head th:replace="fragments/header :: header-css"> </head>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<a th:href="@{/product/add-product}">Добавити продукт</a>
-
+<div class="w-full flex justify-left mx-2 mt-2">
+    <div class="mx-2">
+        <a
+                th:href="@{/product/add-product}"
+                class="underline text-indigo-700 cursor-pointer hover:text-indigo-900"
+        >Додати товар</a
+        >
+    </div>
+</div>
 
 <div th:each="product : ${products}" class="my-10">
     <table align="center" width="1500px">
         <thead class="text-xl bg-neutral-100">
         <tr>
-            <th>Product Code</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Composition</th>
-            <th>Gender</th>
-            <th>Price</th>
-            <th>IsUnderwear</th>
+            <th>Код товару</th>
+            <th>Найменування</th>
+            <th>Стать</th>
+            <th>Ціна</th>
             <th>Бренд</th>
             <th>Категорія</th>
             <th></th>
@@ -33,27 +35,30 @@
         </thead>
         <tbody class="border-b">
         <tr>
-            <td align="center" th:text="${product.productCode}">Код</td>
+            <td align="center" th:text="${product.productCode}">Код товару</td>
             <td align="center" th:text="${product.title}">Найменування</td>
-            <td align="center" th:text="${product.description}">Опис</td>
-            <td align="center" th:text="${product.composition}">Склад</td>
             <td align="center" th:text="${product.gender}">Стать</td>
             <td align="center" th:text="${product.price + ' ' + '₴'}">Ціна</td>
-            <td align="center" th:text="${product.isUnderwear}">Нижня Білизна</td>
             <td align="center" th:text="${product.brand.title}">Бренд</td>
-            <td align="center" th:text="${product.category.title}">Категорія</td>
-            <td><a th:href="@{/product/{id}/edit-product(id=${product.id})}">Змінити продукт</a></td>
+            <td align="center" th:text="${product.category.title}">
+                Категорія
+            </td>
+            <td>
+                <a th:href="@{/product/{id}/edit-product(id=${product.id})}"
+                >Змінити товар</a
+                >
+            </td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
             <td
-                    colspan="8"
+                    colspan="10"
                     align="center"
                     id="show-details"
                     class="underline py-3 cursor-pointer hover:no-underline"
             >
-                Show datails
+                Показати екземпляри
             </td>
         </tr>
         </tfoot>
@@ -62,7 +67,7 @@
         <table align="center" width="800px" class="border">
             <thead class="text-xl bg-neutral-200">
             <tr>
-                <th>Pic</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -78,26 +83,47 @@
                             src="https://picsum.photos/200/300"
                     />
                 </td>
-                <td><a th:href="@{/product/{id}/edit-product-instance(id=${val.id})}">Змінити продукт інстанс</a></td>
-                <td><a th:href="@{/product/{id}/add-size(id=${val.id})}">Добавити розмір</a></td>
-                <td><a th:href="@{/product/{id}/remove-size(id=${val.id})}">Видалити розмір</a></td>
+                <td align="center">
+                    <a
+                            th:href="@{/product/{id}/edit-product-instance(id=${val.id})}"
+                            class="underline text-indigo-700 cursor-pointer hover:text-indigo-900"
+                    >Змінити екземпляр</a
+                    >
+                </td>
+                <td align="center">
+                    <a
+                            th:href="@{/product/{id}/add-size(id=${val.id})}"
+                            class="underline text-indigo-700 cursor-pointer hover:text-indigo-900"
+                    >Додати розмір</a
+                    >
+                </td>
+                <td align="center">
+                    <a
+                            th:href="@{/product/{id}/remove-size(id=${val.id})}"
+                            class="underline text-indigo-700 cursor-pointer hover:text-indigo-900"
+                    >Видалити розмір</a
+                    >
+                </td>
             </tr>
             </tbody>
         </table>
+        <div class="w-full flex justify-center mx-2">
+            <a
+                    th:href="@{/product/{id}/add-product-instance(id=${product.id})}"
+                    class="underline text-indigo-700 cursor-pointer hover:text-indigo-900"
+            >Додати екземпляр</a
+            >
+        </div>
     </div>
-    <a th:href="@{/product/{id}/add-product-instance(id=${product.id})}">Додати продукт інстанс</a>
 </div>
-
-
 </body>
 <script>
-
     const showDetails = document.querySelectorAll("#show-details");
     const orderList = document.querySelectorAll("#order-list");
 
     const textShowDetails = {
-        show: "Show details",
-        hide: "Hide",
+        show: "Показати екземпляри",
+        hide: "Приховати",
     };
     const display = {
         flex: "inline",
