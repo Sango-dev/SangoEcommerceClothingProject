@@ -73,21 +73,6 @@ public class UserController {
         return page;
     }
 
-  /*  @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping
-    public String listOfUsers(Model model) {
-        model.addAttribute("users", userService.getAll());
-        return "userList";
-    }*/
-
-   /* @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/{id}/delete")
-    public String deleteUser(@PathVariable String id) {
-        userService.deleteUserById(id);
-        LOGGER.info("There is an attempt to delete user with id {}", id);
-        return "redirect:/users";
-    }
-*/
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public String visitProfile(Model model, Principal principal) {
@@ -98,7 +83,10 @@ public class UserController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/profile")
-    public String updateProfile(@ModelAttribute("user") UserDto user, Principal principal, Model model, @RequestParam("password") String password) {
+    public String updateProfile(@RequestParam("password") String password,
+                                @RequestParam("matchPassword") String matchPassword,
+                                @ModelAttribute("user") UserDto user,
+                                Principal principal, Model model) {
         int sz = 3;
         return "null";
        /* String page = "profile";

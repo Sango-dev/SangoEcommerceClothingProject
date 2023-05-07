@@ -2,116 +2,97 @@
 <html
         lang="en"
         xmlns:th="http://www.w3.org/1999/xhtml"
-        xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
     <meta charset="UTF-8" />
-    <title>Handle Orders</title>
-    <!-- <link rel="stylesheet" type="text/css" th:href="@{/css/orderhistorystyle.css}"/> -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Оброблення замовлень</title>
+    <head th:replace="fragments/header :: header-css"></head>
 </head>
 <body>
-<header
-        class="w-full h-[80px] bg-neutral-200 grid justify-items-stretch grid-cols-3"
->
-    <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-2xl">
-        Hello, <span sec:authentication="principal.username">Billi</span>
-    </div>
-    <div
-            class="justify-self-center text-4xl my-auto text-red-500 font-mono font-bold"
-    >
-        SanGo
-    </div>
-    <div
-            sec:authorize="isAuthenticated()"
-            class="justify-self-end mx-2 my-auto text-2xl"
-    >
-        <a th:href="@{/logout}" class="mx-2">logout</a>
-        <a th:href="@{/shop-cart}" class="basket mx-2 no-underline"> 🛒 </a>
-    </div>
-</header>
-
+<div th:replace="fragments/header :: header"></div>
 <div class="w-full flex mb-10 text-xl">
     <a
             id="status-new"
             th:href="@{~/order/update-status?status=NEW}"
             class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
-        New
+        Нові
     </a>
     <a
             id="status-processing"
             th:href="@{~/order/update-status?status=PROCESSING}"
             class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
-        Processing
+        В обробці
     </a>
     <a
             id="status-delivering"
             th:href="@{~/order/update-status?status=DELIVERING}"
             class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
-        Delivering
+        Доставка
     </a>
     <a
             id="status-canceled"
             th:href="@{~/order/update-status?status=CANCELED}"
             class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
-        Canceled
+        Скасовані
     </a>
     <a
             id="status-completed"
             th:href="@{~/order/update-status?status=COMPLETED}"
             class="m-1 px-3 cursor-pointer underline hover:no-underline"
     >
-        Completed
+        Завершені
     </a>
 </div>
 
 <div id="sort-by" class="absolute left-[30px] top-[130px]">
-    <div class="cursor-pointer" id="sort-text">Sort by 👇</div>
+    <div class="cursor-pointer" id="sort-text">Сортувати за 👇</div>
     <ul
             id="sort-params"
             class="flex flex-col list-disc"
             style="display: none"
     >
-        <li><a id="sort-price-up"> Sort price up</a></li>
-        <li><a id="sort-price-down"> Sort price down</a></li>
-        <li><a id="sort-date-down"> Date newest</a></li>
-        <li><a id="sort-date-up"> Date oldest</a></li>
+        <li><a id="sort-price-up">  Ціна (від низької до високої)</a></li>
+        <li><a id="sort-price-down"> Ціна (від високої до низької)</a></li>
+        <li><a id="sort-date-down"> Дата оновлення (спочатку оновлені нещодавно)</a></li>
+        <li><a id="sort-date-up"> Дата оновлення (оновлені давно)</a></li>
     </ul>
 </div>
 
 <p id="hide-current-page" th:text="${currentPage}" style="display: none">
-    kek
+    #
 </p>
 <div th:each="order : ${orders}" class="my-10">
     <table align="center" width="1500px">
         <thead class="text-xl bg-neutral-100">
         <tr>
-            <th>CREATED</th>
-            <th>RECIPIENT</th>
-            <th>PHONE</th>
-            <th>ADDRESS</th>
-            <th>Email</th>
-            <th>SUM</th>
-            <th>STATUS</th>
-            <th>UPDATED</th>
-            <th>Update Status</th>
+            <th>Одержувач</th>
+            <th>Номер телефона</th>
+            <th>Адреса</th>
+            <th>Пошта</th>
+            <th>Сума</th>
+            <th>Спосіб доставки</th>
+            <th>Спосіб оплати</th>
+            <th>Оновити статус</th>
         </tr>
         </thead>
 
         <tbody class="border-b">
         <tr>
-            <td align="center" th:text="${order.created}">created</td>
-            <td align="center" th:text="${order.recipient}">recipient</td>
-            <td align="center" th:text="${order.phone}">phone</td>
-            <td align="center" th:text="${order.address}">address</td>
-            <td align="center" th:text="${order.email}">email</td>
-            <td align="center" th:text="${order.sum   + ' ' + '$'}">sum</td>
-            <td align="center" th:text="${order.status}">status</td>
-            <td align="center" th:text="${order.updated}">updated</td>
+            <td align="center" th:text="${order.recipient}">одержувач</td>
+            <td align="center" th:text="${order.phone}">номер телефона</td>
+            <td align="center" th:text="${order.address}">адреса</td>
+            <td align="center" th:text="${order.email}">пошта</td>
+            <td align="center" th:text="${order.sum   + ' ' + '$'}">сума</td>
+            <td align="center" th:if="${order.delivery.toString() == 'SELF_DELIVERY'}">Самовивіз</td>
+            <td align="center" th:if="${order.delivery.toString() == 'DELIVERY_COMPANY'}">Компанія доставки</td>
+            <td align="center" th:if="${order.delivery.toString() == 'COURIER'}">Кур'єр</td>
+            <td align="center" th:if="${order.payment.toString() == 'CASH'}">Готівка</td>
+            <td align="center" th:if="${order.payment.toString() == 'CREDIT_CARD'}">Карта</td>
+
             <td align="center">
                 <form action="/order/update-status" method="post">
                     <input
@@ -122,32 +103,35 @@
                     />
                     <select name="status">
                         <div th:if="${order.status.toString() != 'NEW'}">
-                            <option>New</option>
+                            <option th:value="NEW">Нові</option>
                         </div>
                         <div th:if="${order.status.toString() != 'PROCESSING'}">
-                            <option th:selected="${order.status.toString() == 'NEW'}">
-                                Processing
+                            <option th:selected="${order.status.toString() == 'NEW'}"
+                                    th:value="PROCESSING">
+                                В обробці
                             </option>
                         </div>
                         <div th:if="${order.status.toString() != 'DELIVERING'}">
                             <option
                                     th:selected="${order.status.toString() == 'PROCESSING'}"
+                                    th:value="DELIVERING"
                             >
-                                Delivering
+                                Доставка
                             </option>
                         </div>
                         <div th:if="${order.status.toString() != 'CANCELED'}">
-                            <option>Canceled</option>
+                            <option th:value="CANCELED">Скасовані</option>
                         </div>
                         <div th:if="${order.status.toString() != 'COMPLETED'}">
                             <option
                                     th:selected="${order.status.toString() == 'DELIVERING'}"
+                                    th:value="COMPLETED"
                             >
-                                Completed
+                                Завершені
                             </option>
                         </div>
                     </select>
-                    <input type="submit" value="Update" />
+                    <input type="submit" value="Змінити" />
                 </form>
             </td>
         </tr>
@@ -160,7 +144,7 @@
                     id="show-details"
                     class="underline py-3 cursor-pointer hover:no-underline"
             >
-                Show datails
+                Показати деталі замовлення
             </td>
         </tr>
         </tfoot>
@@ -170,11 +154,11 @@
         <table align="center" width="800px" class="border">
             <thead class="text-xl bg-neutral-200">
             <tr>
-                <th>Pic</th>
-                <th>Title</th>
-                <th>Size</th>
-                <th>Amount</th>
-                <th>Price</th>
+                <th>Зображення</th>
+                <th>Найменування</th>
+                <th>Розмір</th>
+                <th>Кількість</th>
+                <th>Сума</th>
             </tr>
             </thead>
 
@@ -187,39 +171,16 @@
                     />
                 </td>
                 <td align="center" th:text="${detail.productInstanceTitle}">
-                    title
+                    найменування
                 </td>
-                <td align="center" th:text="${detail.size}">size</td>
-                <td align="center" th:text="${detail.amount}">amount</td>
-                <td align="center" th:text="${detail.price}">price</td>
+                <td align="center" th:text="${detail.size}">розмір</td>
+                <td align="center" th:text="${detail.amount}">кількість</td>
+                <td align="center" th:text="${detail.price * detail.amount}">сума</td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-<!--&lt;!&ndash; Pagination &ndash;&gt;-->
-<!-- <div
-  class="pagination flex justify-center mt-10 text-xl"
-  th:if="${totalPages > 0}"
->
-  <div class="w-fit flex">
-    <div th:if="${currentPage > 0}">
-      <a aria-label="Previous" id="prev">
-        <span aria-hidden="true">back</span>
-      </a>
-    </div>
-    <div>
-      <p th:text="${currentPage + 1 + ' - ' + totalPages}"></p>
-    </div>
-
-    <div th:if="${currentPage < totalPages - 1}">
-      <a aria-label="Next" id="next">
-        <span aria-hidden="true">next</span>
-      </a>
-    </div>
-  </div>
-</div> -->
 
 <div
         class="pagination flex justify-center my-5 text-xl"
@@ -228,7 +189,7 @@
     <div class="w-fit flex">
         <div th:if="${currentPage > 0}">
             <a aria-label="Previous" id="prev" class="mx-1 hover:underline">
-                <span aria-hidden="true">back</span>
+                <span aria-hidden="true">назад</span>
                 <!--back page-->
             </a>
         </div>
@@ -237,13 +198,12 @@
         </div>
         <div th:if="${currentPage < totalPages - 1}">
             <a aria-label="Next" id="next" class="mx-1 hover:underline">
-                <span aria-hidden="true">next</span>
+                <span aria-hidden="true">далі</span>
                 <!-- next page-->
             </a>
         </div>
     </div>
 </div>
-<!--&lt;!&ndash; End pagination &ndash;&gt;-->
 </body>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -278,7 +238,6 @@
     const statusCanceled = document.getElementById("status-canceled");
     const statusCompleted = document.getElementById("status-completed");
 
-    // Добавить обработчик событий на клик каждой ссылки
     statusNew.addEventListener("click", function (event) {
         event.preventDefault();
         localStorage.setItem("selectedStatus", "NEW");
@@ -354,8 +313,8 @@
     const sortText = document.querySelector("#sort-text");
 
     const textShowDetails = {
-        show: "Show details",
-        hide: "Hide",
+        show: "Показати деталі",
+        hide: "Приховати",
     };
     const display = {
         flex: "inline",
@@ -376,10 +335,10 @@
     sortBy.addEventListener("click", () => {
         if (sortParams.style.display === display.none) {
             sortParams.style.display = display.flex;
-            sortText.innerText = "Sort by👆";
+            sortText.innerText = "Сортувати за👆";
         } else {
             sortParams.style.display = display.none;
-            sortText.innerText = "Sort by👇";
+            sortText.innerText = "Сортувати за👇";
         }
     });
 </script>

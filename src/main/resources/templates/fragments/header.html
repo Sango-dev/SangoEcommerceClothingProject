@@ -38,7 +38,7 @@
 
         <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-xl">
             Вітаємо,
-            <a href="#" class="underline text-indigo-700 cursor-pointer hover:text-indigo-800">
+            <a href="/users/profile" class="underline text-indigo-700 cursor-pointer hover:text-indigo-800">
                 <span sec:authentication="principal.username">Олександр</span>
             </a>
         </div>

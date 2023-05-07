@@ -112,11 +112,11 @@ public class OrderController {
         Order order = orderService.getOrderById(id);
         String username = order.getUser().getNickName();
         if (order != null) {
-            order.setStatus(OrderStatus.valueOf(status.toUpperCase()));
+            order.setStatus(OrderStatus.valueOf(status));
             orderService.saveOrder(order);
         }
 
-        if (status.equals("Completed")) {
+        if (status.equals("COMPLETED")) {
             orderService.createReviewIfNotExist(username, id);
         }
 

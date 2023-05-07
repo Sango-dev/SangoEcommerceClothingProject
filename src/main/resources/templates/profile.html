@@ -2,6 +2,7 @@
 <html
         lang="en"
         xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 >
 <head>
     <meta charset="UTF-8"/>
@@ -14,22 +15,35 @@
     <div class="product_form">
         <form th:object="${user}" method="post">
             <input type="text" th:field="*{id}" hidden/>
-            <input type="text" th:field="*{nickName}" required="true" placeholder="Нікнейм" autofocus/>
+            <input type="text" th:field="*{role}" hidden/>
+            <input type="text" th:field="*{nickName}" required="true" placeholder="Нік" autofocus/>
             <input type="text" th:field="*{firstName}" required="true" placeholder="Ім'я"/>
             <input type="text" th:field="*{lastName}" required="true" placeholder="Прізвище"/>
             <input type="email" th:field="*{email}" placeholder="Пошта" required/>
             <input type="tel" th:field="*{phone}" placeholder="Телефон" required/>
             <input type="password" name="password" placeholder="Пароль"/>
-            <input type="password" name="matchPassword" placeholder="повторити пароль"/>
-            <input
+            <input type="password" name="matchPassword" placeholder="Підтвердити пароль"/>
+           <input
                     type="submit"
-                    name="submit"
                     th:action="@{/users/profile}"
-                    th:value="Редагувати профіль"
+                    th:value="Редагувати"
             />
         </form>
     </div>
 </div>
 <a th:href="@{/review}" class="2mx">Залишити відгуки</a>
+<br>
+<a th:href="@{/order/order-history?status=NEW}" class="2mx">Переглянути статус замовлень</a>
+<br>
+<!--Адмінські штучки-->
+<div sec:authorize="hasAnyAuthority('ADMIN')">
+<a th:href="@{/order/update-status?status=NEW}" class="2mx">Змінити статус замовлень</a>
+<br>
+<a th:href="@{/product/admin-list}" class="2mx">Перейти до списку товарів</a>
+<br>
+<a th:href="@{/product/add-brand}" class="2mx">Додати бренд</a>
+<br>
+<a th:href="@{/product/add-category}" class="2mx">Додати категорію</a>
+</div>
 </body>
 </html>
