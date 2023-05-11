@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
     private final ProductInstanceService productInstanceService;
     private final SizeClothService sizeClothService;
     private final ShopCartService cartService;
@@ -166,13 +165,11 @@ public class ProductController {
     @PostMapping(value = "/{id}/edit-product", params = "submit")
     public String editProd(@PathVariable("id") String prodId, @ModelAttribute("product") ProductDto productDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            LOGGER.error("There is some problem during editing product with id {} : {}", prodId, bindingResult.getFieldError());
             model.addAttribute("categories", categoryService.findAll());
             model.addAttribute("brands", brandService.findAll());
             return "productEdit";
         }
         productService.updateProduct(prodId, productDto);
-        LOGGER.info("Product with id {} has been successfully updated", prodId);
         return "redirect:/product/admin-list";
     }
 
@@ -192,7 +189,6 @@ public class ProductController {
     @PostMapping(value = "/{id}/add-product-instance", params = "submit")
     public String addProdInstance(@PathVariable("id") String prodId, @ModelAttribute("product") ProductInstanceDto productInstanceDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            LOGGER.error("There is some problem during editing product with id {} : {}", prodId, bindingResult.getFieldError());
             return "productInstanceAdd";
         }
         productInstanceService.addProductInstance(prodId, productInstanceDto);
@@ -214,11 +210,9 @@ public class ProductController {
     @PostMapping(value = "/{id}/edit-product-instance", params = "submit")
     public String editProdInstance(@PathVariable("id") String prodId, @ModelAttribute("product") ProductInstanceDto productDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            LOGGER.error("There is some problem during editing product with id {} : {}", prodId, bindingResult.getFieldError());
             return "productEdit";
         }
         productInstanceService.updateProductInstance(prodId, productDto);
-        LOGGER.info("Product with id {} has been successfully updated", prodId);
         return "redirect:/product/admin-list";
     }
 

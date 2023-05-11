@@ -8,6 +8,10 @@ import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
 public interface UserService extends UserDetailsService {
 	User findFirstByNickName(String name);
 
+	User findFirstByEmail(String email);
+
+	User findFirstByPhone(String number);
+
 	boolean save(UserDto userDTO);
 
 	void save(User user);

@@ -6,44 +6,24 @@
 >
 <head>
     <meta charset="UTF-8"/>
-    <title>Order Details</title>
-    <!-- <link rel="stylesheet" type="text/css" th:href="@{/css/orderdetailstyle.css}"/> -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Деталі замовлення</title>
+    <head th:replace="fragments/header :: header-css"> </head>
 </head>
 
 <body>
-<header
-        class="w-full h-[80px] bg-neutral-200 grid justify-items-stretch grid-cols-3"
->
-    <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-2xl">
-        Hello, <span sec:authentication="principal.username">Billi</span>
-    </div>
-    <div
-            class="justify-self-center text-4xl my-auto text-red-500 font-mono font-bold"
-    >
-        SanGo
-    </div>
-    <div
-            sec:authorize="isAuthenticated()"
-            class="justify-self-end mx-2 my-auto text-2xl"
-    >
-        <a th:href="@{/logout}" class="mx-2">logout</a>
-        <a th:href="@{/shop-cart}" class="basket mx-2 no-underline"> 🛒 </a>
-    </div>
-</header>
-
+<div th:replace="fragments/header :: header"></div>
 <div class="w-screen">
     <table class="order absolute left-[300px] my-[100px]" width="1000px">
         <thead class="bg-neutral-100">
         <tr class="border-b bg-neutral-200">
-            <th class="py-3" colspan="5">Order details</th>
+            <th class="py-3" colspan="5">Деталі замовлення</th>
         </tr>
         <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Size</th>
-            <th>Amount</th>
-            <th>Price</th>
+            <th>Зображення</th>
+            <th>Найменування</th>
+            <th>Розмір</th>
+            <th>Кількість</th>
+            <th>Вартість</th>
         </tr>
         </thead>
         <tbody class="">
@@ -58,10 +38,10 @@
                 />
             </td>
             <td th:text="${detail.productInstanceTitle}" align="center">Cap</td>
-            <td th:text="${detail.size}" align="center">good cap</td>
+            <td th:text="${detail.size}" align="center">XS</td>
             <td th:text="${detail.amount}" align="center">2</td>
             <td
-                    th:text="${(detail.price * detail.amount) + ' ' + '$'}"
+                    th:text="${(detail.price * detail.amount) + ' ' + '₴'}"
                     align="center"
             >
                 11.0
@@ -70,9 +50,9 @@
         </tbody>
         <tfoot class="text-xl">
         <tr class="">
-            <td colspan="4">All sum:</td>
+            <td colspan="4">Усього:</td>
             <td align="center">
-                <b th:text="${order.sum  + ' ' + '$'}">1000</b>
+                <b th:text="${order.sum  + ' ' + '₴'}">1000</b>
             </td>
         </tr>
         </tfoot>
@@ -121,29 +101,29 @@
             </th:block>
         </div>
         <label class="flex flex-col border-b-[2px] mb-3">
-            Recipient:
+            Одержувач:
             <input
                     type="text"
                     th:field="*{recipient}"
-                    placeholder="Brad pitt"
+                    placeholder="Овчаренко Іван"
                     required="true"
                     class="outline-0 bg-inherit px-2 pt-2 focus:placeholder:text-neutral-300"
             />
         </label>
 
         <label class="flex flex-col border-b-[2px] mb-3">
-            Address:
+            Адреса:
             <input
                     type="text"
                     th:field="*{address}"
-                    placeholder="Florida, 4289 Chestnut Street"
+                    placeholder="Львів, вул. Бандерівська 32"
                     required="true"
                     class="outline-0 bg-inherit px-2 pt-2 focus:placeholder:text-neutral-300"
             />
         </label>
 
         <label class="flex flex-col border-b-[2px] mb-3">
-            Email:
+            Пошта:
             <input
                     type="text"
                     th:field="*{email}"
@@ -154,7 +134,7 @@
         </label>
 
         <label class="flex flex-col border-b-[2px] mb-3">
-            Phone:
+            Номер телефона:
             <input
                     type="tel"
                     th:field="*{phone}"
@@ -166,21 +146,21 @@
         </label>
 
         <div class="flex justify-between mb-3">
-            <label for="payment-option">Payment Option:</label>
+            <label for="payment-option">Спосіб оплати:</label>
             <select th:field="*{payment}" id="payment-option" required>
-                <option value="">Select an option</option>
-                <option value="CASH">Cash</option>
-                <option value="CREDIT_CARD">Credit Card</option>
+                <option value="">Виберіть опцію</option>
+                <option value="CASH">Готівка</option>
+                <option value="CREDIT_CARD">Картка</option>
             </select>
         </div>
 
         <div class="flex justify-between mb-1">
-            <label for="delivery-option">Delivery Option:</label>
+            <label for="delivery-option">Спосіб доставки:</label>
             <select th:field="*{delivery}" id="delivery-option" required>
-                <option value="">Select an option</option>
-                <option value="SELF_DELIVERY">Self Delivery</option>
-                <option value="DELIVERY_COMPANY">Delivery Company</option>
-                <option value="COURIER">Courier</option>
+                <option value="">Виберіть опцію</option>
+                <option value="SELF_DELIVERY">Самовивіз</option>
+                <option value="DELIVERY_COMPANY">Компанія доставки</option>
+                <option value="COURIER">Кур'єр</option>
             </select>
         </div>
         <button

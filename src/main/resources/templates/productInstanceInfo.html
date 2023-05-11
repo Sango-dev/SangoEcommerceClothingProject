@@ -6,7 +6,7 @@
 >
 <head>
     <meta charset="UTF-8" />
-    <title>ProductInstance Info</title>
+    <title>Про товар</title>
     <head th:replace="fragments/header :: header-css">
     </head>
     <script>
@@ -362,8 +362,8 @@
                 method="post"
                 th:action="@{/product/{id}/add-to-cart(id=${productInstance.id})}"
         >
-            <select name="size" class="p-3">
-                <option hidden>Вибрати розмір</option>
+            <select name="size" class="p-3" required>
+                <option value="">Виберіть розмір</option>
                 <option
                         class="p-3"
                         th:each="size : ${productInstance.sizes}"
@@ -376,7 +376,7 @@
                     type="submit"
                     class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50"
             >
-                <div class="mr-1">Додати до кошику</div>
+                <div class="mr-1">Додати</div>
                 <div class="w-6 h-6">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                         <title />
@@ -436,14 +436,14 @@
                   th:if="${productInstance.product.isUnderwear == false }"
                   type="button"
                   onclick="calculateSizeOver()"
-                  value="Розрахувати розмір"
+                  value="Розрахувати"
                   class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
                 />
                 <input
                         th:if="${productInstance.product.isUnderwear == true }"
                         type="button"
                         onclick="calculateSizeUnder()"
-                        value="Розрахувати розмір"
+                        value="Розрахувати"
                         class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
                 />
             </form>

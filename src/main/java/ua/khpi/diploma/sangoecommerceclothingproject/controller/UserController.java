@@ -16,7 +16,6 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -26,36 +25,44 @@ public class UserController {
     @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("user", new UserDto());
-        return "reg";
+        return "registration";
     }
 
     @PostMapping("/new")
     public String addNewUser(UserDto user, Model model) {
-        String page = "reg";
+        String page = "registration";
         if (user.getFirstName().isBlank()) {
-            return incorrectInputData(user, model, "First name is blank!!!", page);
+            return incorrectInputData(user, model, "Ім'я відсутнє!", page);
         }
         if (user.getLastName().isBlank()) {
-            return incorrectInputData(user, model, "Last name is blank!!!", page);
+            return incorrectInputData(user, model, "Прізвище відсутнє!", page);
         }
         if (user.getNickName().isBlank()) {
-            return incorrectInputData(user, model, "Nickname is blank!!!", page);
+            return incorrectInputData(user, model, "Нік відсутній!", page);
         }
         if (user.getEmail().isBlank()) {
-            return incorrectInputData(user, model, "Email is blank!!!", page);
+            return incorrectInputData(user, model, "Пошта відсутня!", page);
+        }
+        if (user.getPhone().isBlank()) {
+            return incorrectInputData(user, model, "Номер телефона відсутній!", page);
         }
         if (user.getPassword().isBlank() || user.getMatchingPassword().isBlank()) {
-            return incorrectInputData(user, model, "Password is blank!!!", page);
+            return incorrectInputData(user, model, "Пароль відсутній!", page);
         }
         if (!user.getPassword().equals(user.getMatchingPassword())) {
-            return incorrectInputData(user, model, "Passwords are not matching!!!", page);
+            return incorrectInputData(user, model, "Паролі не співпадають!!!", page);
         }
         if (userService.findFirstByNickName(user.getNickName()) != null) {
-            return incorrectInputData(user, model, "User with login '" + user.getNickName() + "' is already exist", page);
+            return incorrectInputData(user, model, "Цей логін вже використовується!", page);
+        }
+        if (userService.findFirstByEmail(user.getEmail()) != null) {
+            return incorrectInputData(user, model, "Ця пошта вже використовується!", page);
+        }
+        if (userService.findFirstByPhone(user.getPhone()) != null) {
+            return incorrectInputData(user, model, "Цей номер телефона вже використовується!", page);
         }
 
         userService.save(user);
-        LOGGER.info("User {} has been successfully saved", user.getNickName());
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {

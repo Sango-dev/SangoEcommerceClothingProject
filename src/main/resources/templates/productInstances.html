@@ -5,7 +5,7 @@
 >
 <head>
     <meta charset="UTF-8"/>
-    <title>Products</title>
+    <title>Товарна сторінка</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <head th:replace="fragments/header :: header-css">
     </head>
@@ -135,7 +135,7 @@
 
         <button type="submit" class="mx-5 hover:underline">Фільтрація</button>
     </form>
-    <button type="reset" class="mx-5 hover:underline"><a th:href="@{~/product/list}">Зкинути фільтри</a></button>
+    <button type="reset" class="mx-5 hover:underline"><a th:href="@{~/product/list}">Скинути фільтри</a></button>
     <div class="flex ml-auto mr-10 text-xl">
         <form th:action="@{/product/search-by-param(str)}" method="get">
             <div class="flex items-center border-b border-black">

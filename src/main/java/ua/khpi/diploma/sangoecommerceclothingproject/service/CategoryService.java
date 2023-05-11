@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoryService {
     List<CategoryDto> findAll();
+    void saveCategoryDto(CategoryDto categoryDto);
 }

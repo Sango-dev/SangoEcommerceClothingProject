@@ -43,8 +43,7 @@
                                     Vendor Code
                                 </div>
                                 <div class="flex text-xl">
-                                    <div th:text="${detail.price}">123</div>
-                                    <div>$</div>
+                                    <div th:text="${detail.price + ' ₴'}">123</div>
                                 </div>
                             </div>
                             <form th:action="@{shop-cart/removeItem}" method="post">

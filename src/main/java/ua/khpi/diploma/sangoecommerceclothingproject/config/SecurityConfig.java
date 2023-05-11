@@ -22,7 +22,7 @@ import javax.persistence.Basic;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserService userService; 
+    private UserService userService;
 
     @Autowired
     public void setUserService(UserService userService) {

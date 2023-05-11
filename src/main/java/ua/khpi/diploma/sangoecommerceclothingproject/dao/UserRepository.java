@@ -5,4 +5,6 @@ import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findFirstByNickName(String name);
+    User findFirstByEmail(String email);
+    User findFirstByPhone(String number);
 }

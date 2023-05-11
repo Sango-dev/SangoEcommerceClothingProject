@@ -33,14 +33,6 @@ public class User {
     private String email;
     private String phone;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(
-            name = "birth_date",
-           /* nullable = false,*/
-            columnDefinition = "DATE"
-    )
-    private LocalDate birthDate;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 

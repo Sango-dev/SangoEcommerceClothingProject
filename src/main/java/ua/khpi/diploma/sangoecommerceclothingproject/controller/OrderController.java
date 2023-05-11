@@ -28,7 +28,7 @@ public class OrderController {
     public String saveOrder(OrderDto orderDto, Principal principal) {
         String username = principal.getName();
         orderService.saveOrderFromDto(orderDto, username);
-        return "redirect:/";
+        return "redirect:/order/order-history?status=NEW";
     }
 
     @GetMapping("/order-history")

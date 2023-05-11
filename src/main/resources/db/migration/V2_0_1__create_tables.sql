@@ -6,7 +6,6 @@ create table users (
     nick_name varchar(255) unique not null,
     password varchar(255) not null,
     phone varchar(255) unique not null,
-    birth_date DATE /*NOT NULL*/,
     role varchar(255),
     primary key (id)
 );

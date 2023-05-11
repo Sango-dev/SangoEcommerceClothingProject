@@ -35,6 +35,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findFirstByEmail(String email) {
+        return userRepository.findFirstByEmail(email);
+    }
+
+    @Override
+    public User findFirstByPhone(String number) {
+        return userRepository.findFirstByPhone(number);
+    }
+
+    @Override
     public UserDto getUserDtoByNickName(String name) {
         return mapper.fromUser(userRepository.findFirstByNickName(name));
     }
