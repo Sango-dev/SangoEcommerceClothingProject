@@ -8,4 +8,5 @@ public interface ProductClothService {
     ProductDto getProductDtoById(String id);
     void updateProduct(String prodId, ProductDto productDto);
     void addProduct(ProductDto productDto);
+    ProductCloth findFirstByProductCode(String productCode);
 }

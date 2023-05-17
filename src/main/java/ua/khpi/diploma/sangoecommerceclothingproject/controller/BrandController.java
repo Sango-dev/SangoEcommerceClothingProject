@@ -27,9 +27,25 @@ public class BrandController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value="/add-brand", params="submit")
-    public String addBrand(@ModelAttribute("brand") BrandDto brandDto) {
+    public String addBrand(@ModelAttribute("brand") BrandDto brandDto, Model model) {
+        String pageReturn = "addBrand";
+        String title = brandDto.getTitle().trim();
+        brandDto.setTitle(title);
+        if (title.isBlank()) {
+            return incorrectInputDataBrand(brandDto, model, "Назва бренду не заповнена!", pageReturn);
+        }
+        if (brandService.findBrandByTitle(title) != null) {
+            return incorrectInputDataBrand(brandDto, model, "Ця назва бренду вже використовується!", pageReturn);
+        }
         brandService.saveBrandDto(brandDto);
         return "redirect:/users/profile";
+    }
+
+    private String incorrectInputDataBrand(BrandDto brandDto, Model model, String errorMessage, String page) {
+        model.addAttribute("brand", brandDto);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorFlag", true);
+        return page;
     }
 
 }

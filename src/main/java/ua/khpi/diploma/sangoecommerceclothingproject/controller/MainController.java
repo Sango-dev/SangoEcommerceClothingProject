@@ -19,7 +19,7 @@ public class MainController {
     @RequestMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        model.addAttribute("errorMessage", "Wrong nickname or password!!!");
+        model.addAttribute("errorMessage", "Неправильний нік або пароль!");
         return "login";
     }
 }

@@ -13,4 +13,5 @@ public interface ReviewService {
    List<ReviewDto> getReviewsByUser(String username);
    ReviewDto findReviewById(String reviewId);
    void saveReview(String reviewId, Integer rate, String comment);
+   List<ReviewDto> findAllReviewsByProductInstanceId(String id);
 }

@@ -10,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ua.khpi.diploma.sangoecommerceclothingproject.dto.BrandDto;
-import ua.khpi.diploma.sangoecommerceclothingproject.dto.CategoryDto;
-import ua.khpi.diploma.sangoecommerceclothingproject.dto.ProductDto;
-import ua.khpi.diploma.sangoecommerceclothingproject.dto.ProductInstanceDto;
+import ua.khpi.diploma.sangoecommerceclothingproject.dto.*;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.ProductInstancePage;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.Color;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.Gender;
@@ -34,6 +31,7 @@ public class ProductController {
     private final ShopCartService cartService;
     private final CategoryService categoryService;
     private final BrandService brandService;
+    private final ReviewService reviewService;
     private final ProductClothService productService;
 
     @GetMapping("/list")
@@ -76,16 +74,15 @@ public class ProductController {
         }
 
         if (colors == null) {
-           colors = Arrays.asList(Color.BLACK, Color.BLUE, Color.BROWN, Color.GOLDCOLORED, Color.GREY, Color.GREEN, Color.MULTI, Color.ORANGE, Color.PINK, Color.PURPLE, Color.RED, Color.SILVERCOLORED, Color.TURQUOISE, Color.WHITE, Color.YELLOW);
+            colors = Arrays.asList(Color.BLACK, Color.BLUE, Color.BROWN, Color.GOLDCOLORED, Color.GREY, Color.GREEN, Color.MULTI, Color.ORANGE, Color.PINK, Color.PURPLE, Color.RED, Color.SILVERCOLORED, Color.TURQUOISE, Color.WHITE, Color.YELLOW);
         }
 
         if (genders == null) {
             genders = Arrays.asList(Gender.FEMALE, Gender.MALE);
         }
 
-            List<ProductInstanceDto> list = productInstanceService.findAllProductInstancesWithFilters(
-                    colors, brands, categories, genders, sizes, sort);
-
+        List<ProductInstanceDto> list = productInstanceService.findAllProductInstancesWithFilters(
+                colors, brands, categories, genders, sizes, sort);
 
 
         model.addAttribute("productInstances", list);
@@ -112,6 +109,14 @@ public class ProductController {
     @GetMapping("/{id}/info")
     public String productInstanceInfo(@PathVariable String id, Model model) throws Exception {
         ProductInstanceDto productInstanceDto = productInstanceService.findProductInstanceById(id);
+        List<ReviewDto> reviews = reviewService.findAllReviewsByProductInstanceId(id);
+        if (reviews.isEmpty()) {
+            model.addAttribute("rate", 0);
+        } else {
+            int avgRate = reviews.stream().mapToInt(reviewDto -> reviewDto.getRate()).sum() / reviews.size();
+            model.addAttribute("reviews", reviews);
+            model.addAttribute("rate", avgRate);
+        }
         model.addAttribute("productInstance", productInstanceDto);
         return "productInstanceInfo";
     }
@@ -127,31 +132,73 @@ public class ProductController {
     @GetMapping("/add-product")
     public String addProd(Model model) {
         ProductDto productDto = new ProductDto();
-        if (productDto != null) {
-            model.addAttribute("product", productDto);
-            model.addAttribute("categories", categoryService.findAll());
-            model.addAttribute("brands", brandService.findAll());
-            return "addProduct";
-        }
-        return "redirect:/product/admin-list";
+        model.addAttribute("product", productDto);
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("brands", brandService.findAll());
+        return "addProduct";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/add-product", params = "submit")
-    public String addProd(@ModelAttribute("product") ProductDto productDto, BindingResult bindingResult, Model model) {
+    public String addProd(
+            @ModelAttribute("product") ProductDto productDto,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        String pageReturn = "addProduct";
         if (bindingResult.hasErrors()) {
+            String errorMessage = "Необхідно правильно заповнити поля!";
             model.addAttribute("categories", categoryService.findAll());
             model.addAttribute("brands", brandService.findAll());
+            model.addAttribute("errorMessage", errorMessage);
+            model.addAttribute("errorFlag", true);
             return "addProduct";
+        }
+        if (productDto.getProductCode().isBlank()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Код товару не заповнений!", pageReturn);
+        }
+        if (productDto.getTitle().isBlank()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Назва товару не заповнена!", pageReturn);
+        }
+        if (productDto.getDescription().isBlank()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Опис товару не заповнений!", pageReturn);
+        }
+        if (productDto.getComposition().isBlank()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Склад товару не заповнений!", pageReturn);
+        }
+        if (productDto.getPrice() == null) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Необхідно правильно записати ціну!", pageReturn);
+        }
+        if (productService.findFirstByProductCode(productDto.getProductCode()) != null) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Цей код товару вже використовується!", pageReturn);
         }
         productService.addProduct(productDto);
         return "redirect:/product/admin-list";
     }
 
+    private String incorrectInputData(ProductDto productDto, Model model, String errorMessage, String page) {
+        model.addAttribute("product", productDto);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorFlag", true);
+        return page;
+    }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/edit-product")
     public String editProd(Model model, @PathVariable("id") String prodId) {
-         ProductDto productDto = productService.getProductDtoById(prodId);
+        ProductDto productDto = productService.getProductDtoById(prodId);
         if (productDto != null) {
             model.addAttribute("product", productDto);
             model.addAttribute("categories", categoryService.findAll());
@@ -173,27 +220,47 @@ public class ProductController {
         return "redirect:/product/admin-list";
     }
 
-
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/add-product-instance")
     public String addProdInstance(Model model) {
         ProductInstanceDto productInstanceDto = new ProductInstanceDto();
-        if (productInstanceDto != null) {
-            model.addAttribute("product", productInstanceDto);
-            return "productInstanceAdd";
-        }
-        return "redirect:/product/admin-list";
+        model.addAttribute("product", productInstanceDto);
+        return "productInstanceAdd";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/{id}/add-product-instance", params = "submit")
-    public String addProdInstance(@PathVariable("id") String prodId, @ModelAttribute("product") ProductInstanceDto productInstanceDto, BindingResult bindingResult, Model model) {
+    public String addProdInstance(
+            Model model,
+            @PathVariable("id") String prodId,
+            @ModelAttribute("product") ProductInstanceDto productInstanceDto,
+            BindingResult bindingResult) {
+
+        String pageReturn = "productInstanceAdd";
+
         if (bindingResult.hasErrors()) {
-            return "productInstanceAdd";
+            return pageReturn;
+        }
+
+        if (productInstanceDto.getLinkOfMainPicture().isBlank() ||
+                productInstanceDto.getLinkOfBackPicture().isBlank() ||
+                productInstanceDto.getLinkOfFrontPicture().isBlank()) {
+            return incorrectInputDataProductInstance(productInstanceDto, model, "Посилання на зображення не заповнено!", pageReturn);
+        }
+        if (productInstanceDto.getColorDefinition().isBlank()) {
+            return incorrectInputDataProductInstance(productInstanceDto, model, "Опис кольору не заповнено!", pageReturn);
         }
         productInstanceService.addProductInstance(prodId, productInstanceDto);
         return "redirect:/product/admin-list";
     }
+
+    private String incorrectInputDataProductInstance(ProductInstanceDto productInstanceDto, Model model, String errorMessage, String page) {
+        model.addAttribute("product", productInstanceDto);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorFlag", true);
+        return page;
+    }
+
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/edit-product-instance")
@@ -268,6 +335,8 @@ public class ProductController {
         cartService.attachToShopCart(id, size, principal.getName());
         return "redirect:" + link;
     }
+
+
 
 
 }

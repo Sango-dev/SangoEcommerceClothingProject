@@ -163,6 +163,9 @@
                 <option value="COURIER">Кур'єр</option>
             </select>
         </div>
+        <div th:if="${errorFlag}">
+            <p th:text="${errorMessage}" class="text-red-600 text-md"></p>
+        </div>
         <button
                 type="submit"
                 class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50"

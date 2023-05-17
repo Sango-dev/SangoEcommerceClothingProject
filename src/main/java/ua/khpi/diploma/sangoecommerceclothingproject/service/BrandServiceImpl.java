@@ -26,4 +26,9 @@ public class BrandServiceImpl implements BrandService{
         brand.setTitle(brandDto.getTitle());
         brandRepository.save(brand);
     }
+
+    @Override
+    public Brand findBrandByTitle(String title) {
+        return brandRepository.findBrandByTitle(title.toLowerCase());
+    }
 }

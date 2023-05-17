@@ -54,4 +54,9 @@ public class ProductClothServiceImpl implements ProductClothService{
         productCloth.setCategory(categoryRepository.findById(productDto.getCategory().getId()).get());
         productRepository.save(productCloth);
     }
+
+    @Override
+    public ProductCloth findFirstByProductCode(String productCode) {
+        return productRepository.findProductClothByProductCode(productCode);
+    }
 }

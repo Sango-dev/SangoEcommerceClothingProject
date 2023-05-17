@@ -12,6 +12,13 @@
 <!--Header-->
 <div th:replace="fragments/header :: header"></div>
 <!---->
+<div class="w-full flex justify-left mx-2 mt-1">
+    <div class="mx-2">
+        <a th:href="@{/users/profile}" class="underline text-indigo-700 hover:text-indigo-800"
+        >Повернутися назад</a
+        >
+    </div>
+</div>
 <div class="flex justify-center">
     <div class="product_form mt-20">
         <form th:object="${brand}" method="post" class="flex flex-col">
@@ -23,6 +30,9 @@
                     autofocus
                     class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
             />
+            <div th:if="${errorFlag}">
+                <p th:text="${errorMessage}" class="text-red-600 text-md"></p>
+            </div>
             <input
                     type="submit"
                     name="submit"

@@ -27,9 +27,25 @@ public class CategoryController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value="/add-category", params="submit")
-    public String addCategory(@ModelAttribute("category") CategoryDto categoryDto) {
+    public String addCategory(@ModelAttribute("category") CategoryDto categoryDto, Model model) {
+        String pageReturn = "addCategory";
+        String title = categoryDto.getTitle().trim();
+        categoryDto.setTitle(title);
+        if (title.isBlank()) {
+            return incorrectInputDataCategory(categoryDto, model, "Назва категорії не заповнена!", pageReturn);
+        }
+        if (categoryService.findCategoryByTitle(title) != null) {
+            return incorrectInputDataCategory(categoryDto, model, "Ця назва категорії вже використовується!", pageReturn);
+        }
         categoryService.saveCategoryDto(categoryDto);
         return "redirect:/users/profile";
+    }
+
+    private String incorrectInputDataCategory(CategoryDto categoryDto, Model model, String errorMessage, String page) {
+        model.addAttribute("category", categoryDto);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorFlag", true);
+        return page;
     }
 
 }

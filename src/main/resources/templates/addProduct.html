@@ -5,7 +5,7 @@
 >
 <head>
     <meta charset="UTF-8" />
-    <title>Додати товар</title>
+    <title>Додання товар</title>
     <head th:replace="fragments/header :: header-css"> </head>
 </head>
 <body>
@@ -95,6 +95,10 @@
                         th:text="${br.title}"
                 ></option>
             </select>
+
+            <div th:if="${errorFlag}">
+                <p th:text="${errorMessage}" class="text-red-600 text-md"></p>
+            </div>
 
             <input
                     type="submit"

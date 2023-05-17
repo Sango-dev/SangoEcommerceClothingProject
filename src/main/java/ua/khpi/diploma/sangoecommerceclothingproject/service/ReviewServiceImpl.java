@@ -2,6 +2,7 @@ package ua.khpi.diploma.sangoecommerceclothingproject.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ua.khpi.diploma.sangoecommerceclothingproject.dao.ProductInstanceRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.ProductRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.ReviewRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.UserRepository;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final ProductRepository productRepository;
+    private final ProductInstanceRepository productInstanceRepository;
     private final UserRepository userRepository;
     private final ReviewMapper reviewMapper = ReviewMapper.MAPPER;
 
@@ -62,5 +64,11 @@ public class ReviewServiceImpl implements ReviewService {
         review.setRate(rate);
         review.setComment(comment);
         reviewRepository.save(review);
+    }
+
+    @Override
+    public List<ReviewDto> findAllReviewsByProductInstanceId(String productInstanceId) {
+        ProductCloth productCloth = productInstanceRepository.findProductInstanceById(productInstanceId).getProduct();
+        return reviewMapper.fromReviewList(reviewRepository.findReviewsByProduct(productCloth));
     }
 }

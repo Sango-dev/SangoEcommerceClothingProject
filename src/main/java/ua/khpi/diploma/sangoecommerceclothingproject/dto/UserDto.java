@@ -19,6 +19,5 @@ public class UserDto {
     private String matchingPassword;
     private String email;
     private String phone;
-   // private LocalDate birthDate;
     private Role role;
 }

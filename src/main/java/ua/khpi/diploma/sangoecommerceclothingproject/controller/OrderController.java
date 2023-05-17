@@ -25,10 +25,30 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/save-order")
-    public String saveOrder(OrderDto orderDto, Principal principal) {
+    public String saveOrder(Principal principal, Model model, OrderDto orderDto) {
+        String pageReturn = "orderDetails";
+        if (orderDto.getRecipient().isBlank()) {
+            return incorrectInputData(orderDto, model, "Дані одержувача не заповнено!", pageReturn);
+        }
+        if (orderDto.getAddress().isBlank()) {
+            return incorrectInputData(orderDto, model, "Адресу не заповнено!", pageReturn);
+        }
+        if (orderDto.getEmail().isBlank()) {
+            return incorrectInputData(orderDto, model, "Пошту не заповнено!", pageReturn);
+        }
+        if (orderDto.getPhone().isBlank()) {
+            return incorrectInputData(orderDto, model, "Номер телефона не заповнено!", pageReturn);
+        }
         String username = principal.getName();
         orderService.saveOrderFromDto(orderDto, username);
         return "redirect:/order/order-history?status=NEW";
+    }
+
+    private String incorrectInputData(OrderDto orderDto, Model model, String errorMessage, String page) {
+        model.addAttribute("order", orderDto);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorFlag", true);
+        return page;
     }
 
     @GetMapping("/order-history")
@@ -39,7 +59,7 @@ public class OrderController {
             Principal principal,
             Model model
     ) {
-        int size = 5;
+        final int amountOfOrders = 5;
         OrderPage orderPage;
         if (sort != null) {
             Sort sortBy = null;
@@ -56,9 +76,9 @@ public class OrderController {
                 sortBy = Sort.by(Sort.Direction.DESC, "updated");
             }
 
-            orderPage = orderService.getOrdersByUsernameAndStatus(principal.getName(), status, PageRequest.of(page, size, sortBy));
+            orderPage = orderService.getOrdersByUsernameAndStatus(principal.getName(), status, PageRequest.of(page, amountOfOrders, sortBy));
         } else {
-            orderPage = orderService.getOrdersByUsernameAndStatus(principal.getName(), status, PageRequest.of(page, size));
+            orderPage = orderService.getOrdersByUsernameAndStatus(principal.getName(), status, PageRequest.of(page, amountOfOrders));
         }
         model.addAttribute("orders", orderPage.getOrderDtos());
         model.addAttribute("totalPages", orderPage.getTotalPages());
@@ -75,7 +95,7 @@ public class OrderController {
             Model model
     ) {
 
-        int size = 5;
+        final int amountOfOrders = 5;
         OrderPage orderPage;
         if (sort != null) {
             Sort sortBy = null;
@@ -92,9 +112,9 @@ public class OrderController {
                 sortBy = Sort.by(Sort.Direction.DESC, "updated");
             }
 
-            orderPage = orderService.getOrdersByStatus(status, PageRequest.of(page, size, sortBy));
+            orderPage = orderService.getOrdersByStatus(status, PageRequest.of(page, amountOfOrders, sortBy));
         } else {
-            orderPage = orderService.getOrdersByStatus(status, PageRequest.of(page, size));
+            orderPage = orderService.getOrdersByStatus(status, PageRequest.of(page, amountOfOrders));
         }
         model.addAttribute("orders", orderPage.getOrderDtos());
         model.addAttribute("totalPages", orderPage.getTotalPages());

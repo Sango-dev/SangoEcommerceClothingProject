@@ -26,4 +26,9 @@ public class CategoryServiceImpl implements CategoryService {
         category.setTitle(categoryDto.getTitle());
         categoryRepository.save(category);
     }
+
+    @Override
+    public Category findCategoryByTitle(String title) {
+        return categoryRepository.findCategoryByTitle(title.toLowerCase());
+    }
 }

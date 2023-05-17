@@ -16,5 +16,7 @@ public interface UserService extends UserDetailsService {
 
 	void save(User user);
 
+	void updatePassword(UserDto user);
+
 	UserDto getUserDtoByNickName(String name);
 }

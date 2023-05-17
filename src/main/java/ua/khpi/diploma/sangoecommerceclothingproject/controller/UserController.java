@@ -30,36 +30,36 @@ public class UserController {
 
     @PostMapping("/new")
     public String addNewUser(UserDto user, Model model) {
-        String page = "registration";
+        String pageReturn = "registration";
         if (user.getFirstName().isBlank()) {
-            return incorrectInputData(user, model, "Ім'я відсутнє!", page);
+            return incorrectInputData(user, model, "Ім'я не заповнено!", pageReturn);
         }
         if (user.getLastName().isBlank()) {
-            return incorrectInputData(user, model, "Прізвище відсутнє!", page);
+            return incorrectInputData(user, model, "Прізвище не заповнено!", pageReturn);
         }
         if (user.getNickName().isBlank()) {
-            return incorrectInputData(user, model, "Нік відсутній!", page);
+            return incorrectInputData(user, model, "Нік не заповнено!", pageReturn);
         }
         if (user.getEmail().isBlank()) {
-            return incorrectInputData(user, model, "Пошта відсутня!", page);
+            return incorrectInputData(user, model, "Пошта не заповнено!", pageReturn);
         }
         if (user.getPhone().isBlank()) {
-            return incorrectInputData(user, model, "Номер телефона відсутній!", page);
+            return incorrectInputData(user, model, "Номер телефона не заповнено!", pageReturn);
         }
         if (user.getPassword().isBlank() || user.getMatchingPassword().isBlank()) {
-            return incorrectInputData(user, model, "Пароль відсутній!", page);
+            return incorrectInputData(user, model, "Пароль не заповнено!", pageReturn);
         }
         if (!user.getPassword().equals(user.getMatchingPassword())) {
-            return incorrectInputData(user, model, "Паролі не співпадають!!!", page);
+            return incorrectInputData(user, model, "Паролі не співпадають!!!", pageReturn);
         }
         if (userService.findFirstByNickName(user.getNickName()) != null) {
-            return incorrectInputData(user, model, "Цей логін вже використовується!", page);
+            return incorrectInputData(user, model, "Цей логін вже використовується!", pageReturn);
         }
         if (userService.findFirstByEmail(user.getEmail()) != null) {
-            return incorrectInputData(user, model, "Ця пошта вже використовується!", page);
+            return incorrectInputData(user, model, "Ця пошта вже використовується!", pageReturn);
         }
         if (userService.findFirstByPhone(user.getPhone()) != null) {
-            return incorrectInputData(user, model, "Цей номер телефона вже використовується!", page);
+            return incorrectInputData(user, model, "Цей номер телефона вже використовується!", pageReturn);
         }
 
         userService.save(user);
@@ -90,36 +90,27 @@ public class UserController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/profile")
-    public String updateProfile(@RequestParam("password") String password,
-                                @RequestParam("matchPassword") String matchPassword,
-                                @ModelAttribute("user") UserDto user,
-                                Principal principal, Model model) {
-        int sz = 3;
-        return "null";
-       /* String page = "profile";
-        if (userDTO.getPassword().isBlank() || userDTO.getMatchingPassword().isBlank()) {
-            return incorrectInputData(userDTO, model, "Password is blank!!!", page);
-        }
-        if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
-            return incorrectInputData(userDTO, model, "Passwords are not matching!!!", page);
-        }
-        userService.updatePassword(userDTO);
-        LOGGER.info("Password updation has been successfully done, User {}", userDTO.getNickName());
-        return "redirect:/users/profile";*/
-    }
+    public String updatePassword(
+            Principal principal,
+            Model model,
+            @ModelAttribute("user") UserDto user,
+            @RequestParam("password") String password,
+            @RequestParam("matchPassword") String matchPassword
+            ) {
 
-   /* @PreAuthorize("isAuthenticated()")
-    @PostMapping("/profile")
-    public String updatePassword(@ModelAttribute("user") UserDTO userDTO, Principal principal, Model model) {
-        String page = "profile";
-        if (userDTO.getPassword().isBlank() || userDTO.getMatchingPassword().isBlank()) {
-            return incorrectInputData(userDTO, model, "Password is blank!!!", page);
+        String pageReturn = "profile";
+        if (password != null && matchPassword != null) {
+            if (password.isBlank() || matchPassword.isBlank()) {
+                return incorrectInputData(user, model, "Необхідно правильно записати пароль!", pageReturn);
+            }
+            if (!password.equals(matchPassword)) {
+                return incorrectInputData(user, model,  "Паролі не співпадають!", pageReturn);
+            }
+
+            user.setPassword(password);
         }
-        if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
-            return incorrectInputData(userDTO, model, "Passwords are not matching!!!", page);
-        }
-        userService.updatePassword(userDTO);
-        LOGGER.info("Password updation has been successfully done, User {}", userDTO.getNickName());
+
+        userService.updatePassword(user);
         return "redirect:/users/profile";
-    }*/
+    }
 }

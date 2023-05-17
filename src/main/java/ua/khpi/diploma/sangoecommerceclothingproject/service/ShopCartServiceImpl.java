@@ -117,7 +117,7 @@ public class ShopCartServiceImpl implements ShopCartService {
 
         order.setDetails(orderDetails);
         order.setSum(total);
-        order.setAddress("none");
+        order.setAddress("");
         order.setEmail(user.getEmail());
         order.setPhone(user.getPhone());
         order.setRecipient(user.getFirstName() + " " + user.getLastName());

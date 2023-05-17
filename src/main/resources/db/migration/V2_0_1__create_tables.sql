@@ -19,7 +19,9 @@ create table baskets (
 -- LINK BETWEEN BASKET AND USER
 alter table if exists baskets
     add constraint baskets_fk_user
-        foreign key (user_id) references users;
+        foreign key (user_id) references users(id)
+        ON DELETE CASCADE;
+
 
 create table brands (
     id varchar(255) not null,
@@ -75,6 +77,7 @@ create table products (
     title varchar(255) not null,
     picture TEXT not null,
     comment TEXT not null,
+    updated DATE not null,
     primary key (id)
 );
 

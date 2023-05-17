@@ -7,10 +7,15 @@
 <head>
     <meta charset="UTF-8" />
     <title>Про товар</title>
-    <head th:replace="fragments/header :: header-css">
-    </head>
+    <head th:replace="fragments/header :: header-css"></head>
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
-        const ManSize = {
+        const ManSizeOver = {
             XS: {
                 chest: [86, 91],
                 waist: [71, 76],
@@ -48,14 +53,14 @@
                 height: [188, 193],
             },
             "3XL": {
-                chest: [127, 132],
-                waist: [112, 117],
-                hips: [127, 132],
-                height: [193, Infinity],
+                chest: [127, 150],
+                waist: [112, 150],
+                hips: [127, 150],
+                height: [193, 220],
             },
         };
 
-        const WomenSize = {
+        const WomenSizeOver = {
             XS: {
                 chest: [76, 81],
                 waist: [56, 61],
@@ -93,10 +98,10 @@
                 height: [180, 185],
             },
             "3XL": {
-                chest: [106, Infinity],
-                waist: [86, Infinity],
-                hips: [111, Infinity],
-                height: [185, Infinity],
+                chest: [106, 150],
+                waist: [86, 150],
+                hips: [111, 150],
+                height: [185, 220],
             },
         };
 
@@ -104,9 +109,9 @@
             console.log(gender + "over");
             let arraySize;
             if (gender === "MALE") {
-                arraySize = ManSize;
+                arraySize = ManSizeOver;
             } else {
-                arraySize = WomenSize;
+                arraySize = WomenSizeOver;
             }
 
             let closestSize;
@@ -151,9 +156,9 @@
             console.log(gender + "under");
             let arraySize;
             if (gender === "MALE") {
-                arraySize = ManSize;
+                arraySize = ManSizeOver;
             } else {
-                arraySize = WomenSize;
+                arraySize = WomenSizeOver;
             }
 
             let closestSize;
@@ -189,31 +194,57 @@
         }
 
         function calculateSizeOver() {
-            const chest = Number(document.getElementById("chest").value);
-            const waist = Number(document.getElementById("waist").value);
-            const hips = Number(document.getElementById("hips").value);
-            const height = Number(document.getElementById("height").value);
-            const gender = document.getElementById("gender").value;
+            try {
+                const chest = Number(document.getElementById("chest").value);
+                const waist = Number(document.getElementById("waist").value);
+                const hips = Number(document.getElementById("hips").value);
+                const height = Number(document.getElementById("height").value);
+                const gender = document.getElementById("gender").value;
 
-            const sizeOver = getSizeOver(chest, waist, hips, height, gender);
-
-            document.getElementById(
-                "result"
-            ).innerHTML = `${sizeOver}`;
+                if (
+                    checkData(chest, "Розмір грудей", 0, 150) &&
+                    checkData(waist, "Обхват талії", 0, 150) &&
+                    checkData(hips, "Розмір стегон", 0, 150) &&
+                    checkData(height, "Зріст", 0, 220)
+                ) {
+                    const sizeOver = getSizeOver(chest, waist, hips, height, gender);
+                    document.getElementById("result").innerHTML = `${sizeOver}`;
+                }
+            } catch (error) {
+                alert(error.message);
+            }
         }
 
         function calculateSizeUnder() {
-            const waist = Number(document.getElementById("waist").value);
-            const hips = Number(document.getElementById("hips").value);
-            const height = Number(document.getElementById("height").value);
-            const gender = document.getElementById("gender").value;
+            try {
+                const waist = Number(document.getElementById("waist").value);
+                const hips = Number(document.getElementById("hips").value);
+                const height = Number(document.getElementById("height").value);
+                const gender = document.getElementById("gender").value;
 
-            const sizeOver = getSizeUnder(waist, hips, height, gender);
-
-            document.getElementById(
-                "result"
-            ).innerHTML = `${sizeOver}`;
+                if (
+                    checkData(waist, "Обхват талії", 0, 150) &&
+                    checkData(hips, "Розмір стегон", 0, 150) &&
+                    checkData(height, "Зріст", 0, 220)
+                ) {
+                    const sizeOver = getSizeUnder(waist, hips, height, gender);
+                    document.getElementById("result").innerHTML = `${sizeOver}`;
+                }
+            } catch (error) {
+                alert(error.message);
+            }
         }
+
+        const checkData = (value, name, min, max) => {
+            if (isNaN(value)) {
+                throw new Error(`Значення "${name}" має бути числом`);
+            } else if (!(value >= min && value <= max)) {
+                throw new Error(
+                    `Значення "${name}" має бути більше ${min} та менше ${max}`
+                );
+            }
+            return true;
+        };
     </script>
 </head>
 
@@ -221,7 +252,6 @@
 <!-- Header -->
 <div th:replace="fragments/header :: header"></div>
 <!-- End Header -->
-
 <!-- Tovar card -->
 <div class="m-10 flex justify-between">
     <!--Info block-->
@@ -264,7 +294,7 @@
     <!--End info block-->
 
     <!--Tovar info-->
-    <div class="fixed right-10 bg-neutral-50 p-10 w-[600px]">
+    <div class="right-10 h-fit bg-neutral-50 p-10 w-[600px]">
         <div class="flex justify-between">
             <div
                     th:text="${productInstance.product.title}"
@@ -272,73 +302,23 @@
             >
                 Штани
             </div>
-            <div class="flex items-center">
-                <svg
-                        aria-hidden="true"
-                        class="w-5 h-5 text-black"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                >
-                    <title>20</title>
-                    <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                </svg>
-                <svg
-                        aria-hidden="true"
-                        class="w-5 h-5 text-black"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                >
-                    <title>40</title>
-                    <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                </svg>
-                <svg
-                        aria-hidden="true"
-                        class="w-5 h-5 text-black"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                >
-                    <title>60</title>
-                    <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                </svg>
-                <svg
-                        aria-hidden="true"
-                        class="w-5 h-5 text-black"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                >
-                    <title>80</title>
-                    <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                </svg>
-                <svg
-                        aria-hidden="true"
-                        class="w-5 h-5 text-gray-300"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                >
-                    <title>100</title>
-                    <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                </svg>
+            <div class="text-2xl">
+            <span th:each="i : ${#numbers.sequence(1, 5)}">
+              <span th:if="${i &lt;= rate}" class="text-black-500"
+              >&#9733;</span
+              >
+              <span th:unless="${i &lt;= rate}" class="text-gray-300"
+              >&#9734;</span
+              >
+            </span>
             </div>
         </div>
 
         <!--Price-->
         <div class="flex mt-10">
-            <div th:text="${productInstance.product.price} + '₴'" class="mr-1">40</div>
+            <div th:text="${productInstance.product.price} + '₴'" class="mr-1">
+                40
+            </div>
         </div>
         <!--End Price-->
 
@@ -396,7 +376,9 @@
 
         <!--Choose size-->
         <div class="mt-5 w-full bg-neutral-200 bg-opacity-90 p-5">
-            <div class="text-xl text-center font-bold m-1s">Калькулятор Розміру</div>
+            <div class="text-xl text-center font-bold m-1s">
+                Калькулятор Розміру
+            </div>
             <form class="flex flex-col gap-[10px]">
                 <input
                         type="hidden"
@@ -404,11 +386,12 @@
                         id="gender"
                         name="gender"
                 />
-                <div class="flex flex-col mx-1 mt-1 ">
+                <div class="flex flex-col mx-1 mt-1">
                     <label
                             for="chest"
                             th:if="${productInstance.product.isUnderwear == false }"
-                            class="tracking-wide p-1 hover:underline">Розмір грудей (в см):</label
+                            class="tracking-wide p-1 hover:underline"
+                    >Розмір грудей (в см):</label
                     >
                     <input
                             type="number"
@@ -420,24 +403,51 @@
                             min="0"
                     />
                 </div>
-                <div class="flex flex-col mx-1 mt-1 ">
-                    <label for="waist" class="tracking-wide p-1 hover:underline">Обхват талії (в см):</label>
-                    <input type="number" id="waist" name="waist" required min="0" class="p-1 text-center outline-0"/>
+                <div class="flex flex-col mx-1 mt-1">
+                    <label for="waist" class="tracking-wide p-1 hover:underline"
+                    >Обхват талії (в см):</label
+                    >
+                    <input
+                            type="number"
+                            id="waist"
+                            name="waist"
+                            required
+                            min="0"
+                            class="p-1 text-center outline-0"
+                    />
                 </div>
-                <div class="flex flex-col mx-1 mt-1 ">
-                    <label for="hips" class="tracking-wide p-1 hover:underline">Розмір стегон (в см):</label>
-                    <input type="number" id="hips" name="hips" required min="0" class="p-1 text-center outline-0"/>
+                <div class="flex flex-col mx-1 mt-1">
+                    <label for="hips" class="tracking-wide p-1 hover:underline"
+                    >Розмір стегон (в см):</label
+                    >
+                    <input
+                            type="number"
+                            id="hips"
+                            name="hips"
+                            required
+                            min="0"
+                            class="p-1 text-center outline-0"
+                    />
                 </div>
-                <div class="flex flex-col mx-1 mt-1 ">
-                    <label for="height" class="tracking-wide p-1 hover:underline">Вимірювання висоти (в см):</label>
-                    <input type="number" id="height" name="height" required min="0" class="p-1 text-center outline-0"/>
+                <div class="flex flex-col mx-1 mt-1">
+                    <label for="height" class="tracking-wide p-1 hover:underline"
+                    >Зріст (в см):</label
+                    >
+                    <input
+                            type="number"
+                            id="height"
+                            name="height"
+                            required
+                            min="0"
+                            class="p-1 text-center outline-0"
+                    />
                 </div>
-                 <input
-                  th:if="${productInstance.product.isUnderwear == false }"
-                  type="button"
-                  onclick="calculateSizeOver()"
-                  value="Розрахувати"
-                  class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
+                <input
+                        th:if="${productInstance.product.isUnderwear == false }"
+                        type="button"
+                        onclick="calculateSizeOver()"
+                        value="Розрахувати"
+                        class="bg-neutral-800 text-white py-2 mx-1 font-bold hover:opacity-50"
                 />
                 <input
                         th:if="${productInstance.product.isUnderwear == true }"
@@ -454,5 +464,91 @@
     <!--End tovar info-->
 </div>
 <!-- End tovar card-->
+
+<div th:if="${rate != 0}" class="w-[1200px] mx-10 mb-24">
+    <h2 class="text-xl font-bold">Відгуки:</h2>
+    <div>
+        <div
+                th:each="review : ${reviews}"
+                class="my-4 p-3 flex flex-col-reverse bg-neutral-100 hover:bg-neutral-200"
+        >
+            <div class="flex justify-end text-sm" th:text="${review.updated}">04.13.1023</div>
+            <span th:text="${review.comment}" class="ml-4 text-gray-800"
+            >Гарно</span
+            >
+            <div class="flex justify-between">
+                <p class="text-gray-600">
+                    Автор:
+                    <span th:text="${review.user.nickName}" class="font-semibold"
+                    >Олександр</span
+                    >
+                </p>
+                <div class="flex items-center text-xl">
+              <span th:each="i : ${#numbers.sequence(1, 5)}">
+                <span th:if="${i &lt;= review.rate}" class="text-yellow-500"
+                >&#9733;</span
+                >
+                <span th:unless="${i &lt;= review.rate}" class="text-gray-300"
+                >&#9734;</span
+                >
+              </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<footer class="h-32 flex justify-between bg-neutral-100">
+    <div sec:authorize="!isAuthenticated()" class="my-auto px-2 text-xl">
+        <div>
+            Будь ласка,
+            <a
+                    th:href="@{/login}"
+                    class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+            >увійдіть</a
+            >
+            або
+            <a
+                    th:href="@{/users/new}"
+                    class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+            >зареєструйтесь</a
+            >
+        </div>
+    </div>
+
+    <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-xl">
+        Добрий день,
+        <a
+                href="#"
+                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+        >
+            <span sec:authentication="principal.username">Олександр</span>
+        </a>
+    </div>
+
+    <div
+            class="justify-self-center text-5xl my-auto text-red-500 font-mono font-bold"
+    >
+        SanGo
+    </div>
+
+    <div class="mx-4 w-fit my-auto">
+        <div>Підтримка:</div>
+        <div>
+            Email:<a
+                href="mailto:test@mail.com"
+                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+        >test@mail.com</a
+        >
+        </div>
+        <div>
+            Phone:<a
+                href="tel:09929328437"
+                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+        >09929328437</a
+        >
+        </div>
+    </div>
+</footer>-->
 </body>
 </html>
+

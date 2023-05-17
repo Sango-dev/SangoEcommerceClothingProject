@@ -81,4 +81,11 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 roles);
     }
+
+    @Override
+    public void updatePassword(UserDto userDto) {
+        User user = userRepository.findFirstByNickName(userDto.getNickName());
+        user.setPassword(PASSWORD_ENCODER.encode(userDto.getPassword()));
+        userRepository.save(user);
+    }
 }
