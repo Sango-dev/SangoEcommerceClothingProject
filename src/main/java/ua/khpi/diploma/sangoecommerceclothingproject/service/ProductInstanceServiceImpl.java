@@ -111,6 +111,19 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
     }
 
     @Override
+    public ProductDto findProductWithInstancesByProductCode(String productCode) {
+        ProductCloth productCloth = productRepository.findProductByProductCode(productCode);
+        ProductDto dto = productMapper.fromProduct(productCloth);
+        List<ProductInstanceCloth> listProdInst = productCloth.getProductInstances();
+        List<ProdInstanceIdPic> listProdIdPic = new ArrayList<>();
+        listProdInst.stream().forEach(pi ->
+                listProdIdPic.add(new ProdInstanceIdPic(pi.getId(), pi.getLinkOfMainPicture()))
+        );
+        dto.setProdInstIdPic(listProdIdPic);
+        return dto;
+    }
+
+    @Override
     public ProductInstanceDto findProductInsClothById(String id) {
         return mapper.fromProductInstance(productInstanceRepository.findProductInstanceById(id));
     }

@@ -22,6 +22,8 @@ public interface ProductInstanceService {
 
     List<ProductDto> findAllProductsWithInstances();
 
+    ProductDto findProductWithInstancesByProductCode(String productCode);
+
     ProductInstanceDto findProductInsClothById(String id);
 
     void updateProductInstance(String id, ProductInstanceDto productInstanceDto);

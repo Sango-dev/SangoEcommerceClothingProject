@@ -137,7 +137,7 @@
     </form>
     <button type="reset" class="mx-5 hover:underline"><a th:href="@{~/product/list}">Скинути фільтри</a></button>
     <div class="flex ml-auto mr-10 text-xl">
-        <form th:action="@{/product/search-by-param(str)}" method="get">
+        <form th:action="@{/product/search-by-param(code)}" method="get">
             <div class="flex items-center border-b border-black">
                 <button class="flex-shrink-0 text-xl py-1 px-2" type="submit">
                     🔎
@@ -146,7 +146,7 @@
                         class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
                         type="search"
                         placeholder="Пошук"
-                        name="str"
+                        name="code"
                 />
             </div>
         </form>

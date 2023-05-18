@@ -19,7 +19,22 @@
         >
     </div>
 </div>
-
+<div class="flex justify-end mr-10 text-xl">
+    <form th:action="@{/product/admin-list/search-by-code(code)}" method="get">
+        <div class="flex items-center border-b border-black">
+            <button class="flex-shrink-0 text-xl py-1 px-2" type="submit">
+                🔎
+            </button>
+            <input
+                    class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    type="search"
+                    placeholder="Пошук за кодом"
+                    name="code"
+                    style="font-size: 14px;"
+            />
+        </div>
+    </form>
+</div>
 <div th:each="product : ${products}" class="my-10">
     <table align="center" width="1500px">
         <thead class="text-xl bg-neutral-100">
@@ -115,6 +130,15 @@
             >
         </div>
     </div>
+</div>
+<div th:if="${isSearch}" class="text-center">
+    <a
+            align="center"
+            class="underline py-3 cursor-pointer hover:no-underline"
+            th:href="@{/product/admin-list}"
+    >
+        Повернутися до повного списку товарів
+    </a>
 </div>
 </body>
 <script>

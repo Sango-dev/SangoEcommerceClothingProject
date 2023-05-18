@@ -1,8 +1,6 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +17,7 @@ import ua.khpi.diploma.sangoecommerceclothingproject.service.*;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -125,6 +124,14 @@ public class ProductController {
     public String listForAdmin(Model model) {
         List<ProductDto> list = productInstanceService.findAllProductsWithInstances();
         model.addAttribute("products", list);
+        return "adminList";
+    }
+
+    @GetMapping("/admin-list/search-by-code")
+    public String searchByCode(Model model, @RequestParam("code") String productCode) {
+        ProductDto product = productInstanceService.findProductWithInstancesByProductCode(productCode.trim().toLowerCase());
+        model.addAttribute("products", Collections.singletonList(product));
+        model.addAttribute("isSearch", true);
         return "adminList";
     }
 
@@ -275,11 +282,25 @@ public class ProductController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/{id}/edit-product-instance", params = "submit")
-    public String editProdInstance(@PathVariable("id") String prodId, @ModelAttribute("product") ProductInstanceDto productDto, BindingResult bindingResult, Model model) {
+    public String editProdInstance(@PathVariable("id") String prodId, @ModelAttribute("product") ProductInstanceDto productInstanceDto, BindingResult bindingResult, Model model) {
+
+        String pageReturn = "productInstanceEdit";
+
         if (bindingResult.hasErrors()) {
-            return "productEdit";
+            return pageReturn;
         }
-        productInstanceService.updateProductInstance(prodId, productDto);
+
+        if (productInstanceDto.getLinkOfMainPicture().isBlank() ||
+                productInstanceDto.getLinkOfBackPicture().isBlank() ||
+                productInstanceDto.getLinkOfFrontPicture().isBlank()) {
+            return incorrectInputDataProductInstance(productInstanceDto, model, "Посилання на зображення не заповнено!", pageReturn);
+        }
+
+        if (productInstanceDto.getColorDefinition().isBlank()) {
+            return incorrectInputDataProductInstance(productInstanceDto, model, "Опис кольору не заповнено!", pageReturn);
+        }
+
+        productInstanceService.updateProductInstance(prodId, productInstanceDto);
         return "redirect:/product/admin-list";
     }
 
@@ -335,8 +356,6 @@ public class ProductController {
         cartService.attachToShopCart(id, size, principal.getName());
         return "redirect:" + link;
     }
-
-
 
 
 }

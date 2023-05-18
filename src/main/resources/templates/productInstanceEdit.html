@@ -2,7 +2,6 @@
 <html
         lang="en"
         xmlns:th="http://www.w3.org/1999/xhtml"
-        xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
     <meta charset="UTF-8" />
@@ -11,6 +10,13 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+<div class="w-full flex justify-left mx-2 mt-1">
+    <div class="mx-2">
+        <a th:href="@{/product/admin-list}" class="underline text-indigo-700 hover:text-indigo-800"
+        >Повернутися назад</a
+        >
+    </div>
+</div>
 <div class="container mt-16 ml-16">
     <div class="product_form flex">
         <form th:object="${product}" method="post" class="flex flex-col">
@@ -135,6 +141,10 @@
                     autofocus
                     class="w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
             />
+
+            <div th:if="${errorFlag}">
+                <p th:text="${errorMessage}" class="text-red-600 text-md"></p>
+            </div>
 
             <input
                     type="submit"

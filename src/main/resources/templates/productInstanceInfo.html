@@ -497,39 +497,14 @@
         </div>
     </div>
 </div>
-<!--<footer class="h-32 flex justify-between bg-neutral-100">
-    <div sec:authorize="!isAuthenticated()" class="my-auto px-2 text-xl">
-        <div>
-            Будь ласка,
-            <a
-                    th:href="@{/login}"
-                    class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
-            >увійдіть</a
-            >
-            або
-            <a
-                    th:href="@{/users/new}"
-                    class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
-            >зареєструйтесь</a
-            >
-        </div>
-    </div>
-
-    <div sec:authorize="isAuthenticated()" class="my-auto px-2 text-xl">
-        Добрий день,
-        <a
-                href="#"
-                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
-        >
-            <span sec:authentication="principal.username">Олександр</span>
-        </a>
-    </div>
-
+<footer class="h-32 flex justify-between bg-neutral-100 px-10">
     <div
-            class="justify-self-center text-5xl my-auto text-red-500 font-mono font-bold"
+            class="justify-self-center text-5xl my-auto text-black-500 font-mono font-bold"
     >
-        SanGo
+        <i style='font-size:48px' class='fas'>&#xf553;</i>
     </div>
+
+    <div class="my-auto text-xl">Автор: Клименчук Олександр©</div>
 
     <div class="mx-4 w-fit my-auto">
         <div>Підтримка:</div>
@@ -540,6 +515,7 @@
         >test@mail.com</a
         >
         </div>
+        <div></div>
         <div>
             Phone:<a
                 href="tel:09929328437"
@@ -548,7 +524,7 @@
         >
         </div>
     </div>
-</footer>-->
+</footer>
 </body>
 </html>
 

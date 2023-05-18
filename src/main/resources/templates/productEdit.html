@@ -10,6 +10,13 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+<div class="w-full flex justify-left mx-2 mt-1">
+    <div class="mx-2">
+        <a th:href="@{/product/admin-list}" class="underline text-indigo-700 hover:text-indigo-800"
+        >Повернутися назад</a
+        >
+    </div>
+</div>
 <div class="flex justify-center mt-16">
     <div class="product_form">
         <form th:object="${product}" method="post" class="flex flex-col">

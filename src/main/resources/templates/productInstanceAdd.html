@@ -10,6 +10,13 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+<div class="w-full flex justify-left mx-2 mt-1">
+    <div class="mx-2">
+        <a th:href="@{/product/admin-list}" class="underline text-indigo-700 hover:text-indigo-800"
+        >Повернутися назад</a
+        >
+    </div>
+</div>
 <div class="flex justify-left mt-16 ml-16">
     <div class="product_form flex">
         <form th:object="${product}" method="post" class="flex flex-col">
@@ -91,12 +98,6 @@
                     th:value="Додати"
                     class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
             />
-            <button
-                    type="reset"
-                    class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
-            >
-                Видалити все
-            </button>
         </form>
         <div class="flex gap-3 mx-10">
             <div id="added-photo" class="bg-neutral-400 w-[300px] h-[500px] flex">
