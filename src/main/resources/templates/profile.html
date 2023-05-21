@@ -106,7 +106,6 @@
                 class="underline text-blue-600 hover:text-blue-900 cursor-pointer"
         >Переглянути статус замовлень</a
         >
-        <!--Адмінські штучки-->
         <div
                 sec:authorize="hasAnyAuthority('ADMIN')"
                 class="flex flex-col gap-2 border border-red-600"
@@ -114,9 +113,14 @@
             <div class="bg-red-500 font-bold text-white p-2 w-full">ADMIN</div>
 
             <a
+                    th:href="@{/users/list}"
+                    class="px-3 underline text-blue-600 hover:text-blue-900 cursor-pointer"
+            >Перейти до списку користувачів</a
+            >
+            <a
                     th:href="@{/order/update-status?status=NEW}"
                     class="px-3 underline text-blue-600 hover:text-blue-900 cursor-pointer"
-            >Змінити статус замовлень</a
+            >Перейти до списку замовлень</a
             >
             <a
                     th:href="@{/product/admin-list}"
@@ -124,14 +128,14 @@
             >Перейти до списку товарів</a
             >
             <a
-                    th:href="@{/brand/add-brand}"
+                    th:href="@{/brand/list}"
                     class="px-3 underline text-blue-600 hover:text-blue-900 cursor-pointer"
-            >Додати бренд</a
+            >Перейти до списку брендів</a
             >
             <a
-                    th:href="@{/category/add-category}"
+                    th:href="@{/category/list}"
                     class="px-3 pb-2 underline text-blue-600 hover:text-blue-900 cursor-pointer"
-            >Додати категорію</a
+            >Перейти до списку категорій</a
             >
         </div>
     </div>

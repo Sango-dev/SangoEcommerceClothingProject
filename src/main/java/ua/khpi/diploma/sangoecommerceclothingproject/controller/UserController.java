@@ -96,7 +96,7 @@ public class UserController {
             @ModelAttribute("user") UserDto user,
             @RequestParam("password") String password,
             @RequestParam("matchPassword") String matchPassword
-            ) {
+    ) {
 
         String pageReturn = "profile";
         if (password != null && matchPassword != null) {
@@ -104,7 +104,7 @@ public class UserController {
                 return incorrectInputData(user, model, "Необхідно правильно записати пароль!", pageReturn);
             }
             if (!password.equals(matchPassword)) {
-                return incorrectInputData(user, model,  "Паролі не співпадають!", pageReturn);
+                return incorrectInputData(user, model, "Паролі не співпадають!", pageReturn);
             }
 
             user.setPassword(password);
@@ -113,4 +113,47 @@ public class UserController {
         userService.updatePassword(user);
         return "redirect:/users/profile";
     }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/list")
+    public String showUsers(Model model) {
+        model.addAttribute("users", userService.getClients());
+        return "adminUserList";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/{nickname}/update-password")
+    public String updatePassword(
+            Model model) {
+        return "updatePassword";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping(value = "/{nickname}/update-password", params = "submit")
+    public String updatePassword(
+            Model model,
+            @PathVariable("nickname") String nickName,
+            @RequestParam("password") String password,
+            @RequestParam("matchPassword") String matchPassword
+            ) {
+
+        UserDto user = userService.getUserDtoByNickName(nickName);
+        String pageReturn = "updatePassword";
+
+        if (password != null && matchPassword != null) {
+            if (password.isBlank() || matchPassword.isBlank()) {
+                return incorrectInputData(user, model, "Необхідно правильно записати пароль!", pageReturn);
+            }
+            if (!password.equals(matchPassword)) {
+                return incorrectInputData(user, model, "Паролі не співпадають!", pageReturn);
+            }
+
+            user.setPassword(password);
+        }
+
+        userService.updatePassword(user);
+        return "redirect:/users/list";
+    }
+
+
 }

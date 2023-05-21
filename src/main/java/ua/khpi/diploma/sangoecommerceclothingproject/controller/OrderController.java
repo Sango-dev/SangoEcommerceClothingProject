@@ -143,4 +143,15 @@ public class OrderController {
         return "redirect:/order/update-status?status=" + status.toUpperCase() + "&sort=date-desc";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("delete-order")
+    public String deleteOrder(
+            @RequestParam String id,
+            @RequestParam String status,
+            @RequestParam String nickname
+    ) {
+        orderService.deleteOrderById(id, nickname);
+        return "redirect:/order/update-status?status=" + status.toUpperCase() + "&sort=date-desc";
+    }
+
 }

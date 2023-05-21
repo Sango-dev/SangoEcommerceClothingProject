@@ -5,7 +5,7 @@
 >
 <head>
     <meta charset="UTF-8" />
-    <title>Додання категорії</title>
+    <title>Категорія</title>
     <head th:replace="fragments/header :: header-css"> </head>
 </head>
 <body>
@@ -14,7 +14,7 @@
 <!---->
 <div class="w-full flex justify-left mx-2 mt-1">
     <div class="mx-2">
-        <a th:href="@{/users/profile}" class="underline text-indigo-700 hover:text-indigo-800"
+        <a th:href="@{/category/list}" class="underline text-indigo-700 hover:text-indigo-800"
         >Повернутися назад</a
         >
     </div>
@@ -33,12 +33,20 @@
             <div th:if="${errorFlag}">
                 <p th:text="${errorMessage}" class="text-red-600 text-md"></p>
             </div>
-            <input
+
+            <input th:if="${add}"
                     type="submit"
                     name="submit"
                     th:action="@{/category/add-category}"
                     th:value="Додати"
                     class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
+            />
+            <input th:if="${update}"
+                type="submit"
+                name="submit"
+                th:action="@{/category/update-category}"
+                th:value="Змінити"
+                class="mt-4 flex justify-center p-3 text-white bg-neutral-800 font-bold hover:opacity-50 cursor-pointer"
             />
         </form>
     </div>

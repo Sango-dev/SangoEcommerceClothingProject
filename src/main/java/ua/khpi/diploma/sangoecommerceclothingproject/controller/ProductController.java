@@ -108,6 +108,7 @@ public class ProductController {
     @GetMapping("/{id}/info")
     public String productInstanceInfo(@PathVariable String id, Model model) throws Exception {
         ProductInstanceDto productInstanceDto = productInstanceService.findProductInstanceById(id);
+        //TODO If availble false
         List<ReviewDto> reviews = reviewService.findAllReviewsByProductInstanceId(id);
         if (reviews.isEmpty()) {
             model.addAttribute("rate", 0);
@@ -159,7 +160,7 @@ public class ProductController {
             model.addAttribute("brands", brandService.findAll());
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("errorFlag", true);
-            return "addProduct";
+            return pageReturn;
         }
         if (productDto.getProductCode().isBlank()) {
             model.addAttribute("categories", categoryService.findAll());
@@ -192,38 +193,6 @@ public class ProductController {
             return incorrectInputData(productDto, model, "Цей код товару вже використовується!", pageReturn);
         }
         productService.addProduct(productDto);
-        return "redirect:/product/admin-list";
-    }
-
-    private String incorrectInputData(ProductDto productDto, Model model, String errorMessage, String page) {
-        model.addAttribute("product", productDto);
-        model.addAttribute("errorMessage", errorMessage);
-        model.addAttribute("errorFlag", true);
-        return page;
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/{id}/edit-product")
-    public String editProd(Model model, @PathVariable("id") String prodId) {
-        ProductDto productDto = productService.getProductDtoById(prodId);
-        if (productDto != null) {
-            model.addAttribute("product", productDto);
-            model.addAttribute("categories", categoryService.findAll());
-            model.addAttribute("brands", brandService.findAll());
-            return "productEdit";
-        }
-        return "redirect:/product/admin-list";
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping(value = "/{id}/edit-product", params = "submit")
-    public String editProd(@PathVariable("id") String prodId, @ModelAttribute("product") ProductDto productDto, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("categories", categoryService.findAll());
-            model.addAttribute("brands", brandService.findAll());
-            return "productEdit";
-        }
-        productService.updateProduct(prodId, productDto);
         return "redirect:/product/admin-list";
     }
 
@@ -261,13 +230,54 @@ public class ProductController {
         return "redirect:/product/admin-list";
     }
 
-    private String incorrectInputDataProductInstance(ProductInstanceDto productInstanceDto, Model model, String errorMessage, String page) {
-        model.addAttribute("product", productInstanceDto);
-        model.addAttribute("errorMessage", errorMessage);
-        model.addAttribute("errorFlag", true);
-        return page;
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/{id}/edit-product")
+    public String editProd(Model model, @PathVariable("id") String prodId) {
+        ProductDto productDto = productService.getProductDtoById(prodId);
+        if (productDto != null) {
+            model.addAttribute("product", productDto);
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return "productEdit";
+        }
+        return "redirect:/product/admin-list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping(value = "/{id}/edit-product", params = "submit")
+    public String editProd(@PathVariable("id") String prodId, @ModelAttribute("product") ProductDto productDto, BindingResult bindingResult, Model model) {
+        String pageReturn = "productEdit";
+        if (bindingResult.hasErrors()) {
+            String errorMessage = "Необхідно правильно заповнити поля!";
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            model.addAttribute("errorMessage", errorMessage);
+            model.addAttribute("errorFlag", true);
+            return pageReturn;
+        }
+        if (productDto.getTitle().isBlank()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Назва товару не заповнена!", pageReturn);
+        }
+        if (productDto.getDescription().isBlank()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Опис товару не заповнений!", pageReturn);
+        }
+        if (productDto.getComposition().isBlank()) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Склад товару не заповнений!", pageReturn);
+        }
+        if (productDto.getPrice() == null) {
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("brands", brandService.findAll());
+            return incorrectInputData(productDto, model, "Необхідно правильно записати ціну!", pageReturn);
+        }
+        productService.updateProduct(prodId, productDto);
+        return "redirect:/product/admin-list";
+    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/edit-product-instance")
@@ -346,16 +356,28 @@ public class ProductController {
         return "redirect:/product/admin-list";
     }
 
-
     @PostMapping("/{id}/add-to-cart")
     public String attachToCart(@PathVariable String id,
                                @RequestParam(required = true) String size,
                                Principal principal,
                                HttpServletRequest request) {
+        //TODO if prodInstance not available
         String link = request.getHeader("Referer");
         cartService.attachToShopCart(id, size, principal.getName());
         return "redirect:" + link;
     }
 
+    private String incorrectInputData(ProductDto productDto, Model model, String errorMessage, String page) {
+        model.addAttribute("product", productDto);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorFlag", true);
+        return page;
+    }
 
+    private String incorrectInputDataProductInstance(ProductInstanceDto productInstanceDto, Model model, String errorMessage, String page) {
+        model.addAttribute("product", productInstanceDto);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorFlag", true);
+        return page;
+    }
 }

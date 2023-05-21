@@ -9,5 +9,8 @@ import java.util.List;
 public interface CategoryService {
     List<CategoryDto> findAll();
     void saveCategoryDto(CategoryDto categoryDto);
+    void updateCategoryDto(CategoryDto categoryDto);
     Category findCategoryByTitle(String title);
+    CategoryDto findCategoryById(String id);
+    void deleteCategoryById(String id);
 }

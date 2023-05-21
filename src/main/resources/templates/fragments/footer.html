@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet"
+    />
+</head>
+
+<body>
+<footer class="h-[80px] flex justify-between bg-neutral-100 px-10" th:fragment="footer">
+    <div class="my-auto text-xl">Автор: Клименчук Олександр©</div>
+
+    <div class="mx-4 w-fit my-auto">
+        <div>Підтримка:</div>
+        <div>
+            ✉: <a
+                href="mailto:test@mail.com"
+                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+        >test@mail.com</a
+        >
+        </div>
+        <div></div>
+        <div>
+            ☏: <a
+                href="tel:09929328437"
+                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
+        >09929328437</a
+        >
+        </div>
+    </div>
+</footer>
+</body>
+</html>

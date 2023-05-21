@@ -6,9 +6,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Товарна сторінка</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <head th:replace="fragments/header :: header-css">
-    </head>
+    <head th:replace="fragments/header :: header-css"></head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div
@@ -137,7 +135,7 @@
     </form>
     <button type="reset" class="mx-5 hover:underline"><a th:href="@{~/product/list}">Скинути фільтри</a></button>
     <div class="flex ml-auto mr-10 text-xl">
-        <form th:action="@{/product/search-by-param(code)}" method="get">
+        <form th:action="@{/product/search-by-param(str)}" method="get">
             <div class="flex items-center border-b border-black">
                 <button class="flex-shrink-0 text-xl py-1 px-2" type="submit">
                     🔎
@@ -146,7 +144,7 @@
                         class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
                         type="search"
                         placeholder="Пошук"
-                        name="code"
+                        name="str"
                 />
             </div>
         </form>
@@ -247,6 +245,8 @@
     </div>
 </div>
 <!-- End pagination -->
+<br>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 <script>
     const urlParams = new URLSearchParams(window.location.search);

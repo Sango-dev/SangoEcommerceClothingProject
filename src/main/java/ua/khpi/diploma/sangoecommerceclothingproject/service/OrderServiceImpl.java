@@ -12,6 +12,7 @@ import ua.khpi.diploma.sangoecommerceclothingproject.model.order.OrderPage;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.order.OrderStatus;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -75,10 +76,20 @@ public class OrderServiceImpl implements OrderService {
 
         order.getDetails()
                 .stream()
-                .map(orderDetails -> productInstanceService.getIdOfProductCloth(orderDetails.getProductInstanceId()))
+                .filter(detail -> productInstanceService.isExistProductInstance(detail.getProductInstanceId()) == true)
+                .map(detail -> productInstanceService.getIdOfProductCloth(detail.getProductInstanceId()))
                 .distinct()
                 .map(id -> productClothService.getProductClothById(id))
                 .filter(productCloth -> reviewService.getReviewByProductAndUser(productCloth, user) == null)
                 .forEach(productCloth -> reviewService.saveReviewByProductAndUser(productCloth, user));
+    }
+
+    @Override
+    @Transactional
+    public void deleteOrderById(String orderId, String nickname) {
+        User user = userService.findFirstByNickName(nickname);
+        user.getOrders().removeIf(order -> order.getId().equals(orderId));
+        userService.save(user);
+        orderRepository.deleteById(orderId);
     }
 }

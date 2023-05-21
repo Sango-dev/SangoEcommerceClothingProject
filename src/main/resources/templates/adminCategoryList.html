@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Категорії</title>
+    <head th:replace="fragments/header :: header-css"></head>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="w-full flex justify-left mx-2 mt-1">
+    <div class="mx-2">
+        <a th:href="@{/users/profile}" class="underline text-indigo-700 hover:text-indigo-800"
+        >Повернутися назад</a
+        >
+    </div>
+</div>
+<div class="my-10">
+    <table align="center" width="400px">
+        <thead class="text-xl bg-neutral-100">
+        <tr>
+            <th>№</th>
+            <th>Найменування</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody class="border-b" th:each="category, iterStat: ${categories}">
+        <tr>
+            <td th:text="${iterStat.index + 1}" align="center"></td>
+            <td align="center" th:text="${category.title}">Джинси</td>
+            <td>
+                <a
+                        align="center"
+                        style="font-size: 30px; cursor: pointer; margin: 0; padding: 10px;"
+                        th:href="@{/category/{id}/update-category(id=${category.id})}">⭯</a>
+                <a
+                        align="center"
+                        style="font-size: 30px; cursor: pointer; margin: 0; padding: 10px;"
+                        th:href="@{/category/{id}/delete-category(id=${category.id})}"
+                >❌
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a
+        th:href="@{/category/add-category}"
+        class="px-3 pb-2 underline text-blue-600 hover:text-blue-900 cursor-pointer"
+>Додати категорію</a
+>
+</body>
+</html>

@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProductInstanceService {
     ProductInstancePage findAllProductInstances(Pageable pageable);
 
-    ProductInstanceDto findProductInstanceById(String id) throws Exception;
+    ProductInstanceDto findProductInstanceById(String id);
 
     String getIdOfProductCloth(String id);
 
@@ -29,4 +29,6 @@ public interface ProductInstanceService {
     void updateProductInstance(String id, ProductInstanceDto productInstanceDto);
 
     void addProductInstance(String id, ProductInstanceDto productInstance);
+
+    boolean isExistProductInstance(String productInstanceId);
 }

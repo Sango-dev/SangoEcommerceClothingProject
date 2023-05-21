@@ -17,4 +17,6 @@ public interface OrderService {
     Order getOrderById(String id);
 
     void createReviewIfNotExist(String username, String orderId);
+
+    void deleteOrderById(String orderId, String nickname);
 }

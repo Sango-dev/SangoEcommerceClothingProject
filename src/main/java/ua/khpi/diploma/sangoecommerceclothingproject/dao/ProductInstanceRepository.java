@@ -12,8 +12,8 @@ import java.util.List;
 
 @Repository
 public interface ProductInstanceRepository extends JpaRepository<ProductInstanceCloth, String> {
-  Page<ProductInstanceCloth> findAll(Pageable pageable);
-  List<ProductInstanceCloth> findDistinctByColorInAndProduct_Brand_TitleInAndProduct_Category_TitleInAndProduct_GenderInAndSizes_SizeIn(
+  Page<ProductInstanceCloth> findAllByAvailableTrue(Pageable pageable);
+  List<ProductInstanceCloth> findDistinctByAvailableTrueAndColorInAndProduct_Brand_TitleInAndProduct_Category_TitleInAndProduct_GenderInAndSizes_SizeIn(
           List<Color> colors, List<String> brands, List<String> categories, List<Gender> genders, List<String> sizes);
 
   ProductInstanceCloth findProductInstanceById(String id);

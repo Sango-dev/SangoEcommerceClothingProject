@@ -1,6 +1,7 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
 
     @Override
     public ProductInstancePage findAllProductInstances(Pageable pageable) {
-        Page<ProductInstanceCloth> pageOfProductInstances = productInstanceRepository.findAll(pageable);
+        Page<ProductInstanceCloth> pageOfProductInstances = productInstanceRepository.findAllByAvailableTrue(pageable);
         List<ProductInstanceDto> productInstancesDtos = mapper.fromProductInstancesList(pageOfProductInstances.getContent());
         return new ProductInstancePage(productInstancesDtos, pageOfProductInstances.getTotalPages());
     }
@@ -41,7 +42,7 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
                                                                        List<String> sizes,
                                                                        String sort) {
 
-        List<ProductInstanceCloth> list = productInstanceRepository.findDistinctByColorInAndProduct_Brand_TitleInAndProduct_Category_TitleInAndProduct_GenderInAndSizes_SizeIn(colors, brands, categories, genders, sizes);
+        List<ProductInstanceCloth> list = productInstanceRepository.findDistinctByAvailableTrueAndColorInAndProduct_Brand_TitleInAndProduct_Category_TitleInAndProduct_GenderInAndSizes_SizeIn(colors, brands, categories, genders, sizes);
         List<ProductInstanceDto> productInstancesDtos = mapper.fromProductInstancesList(list);
         if (!Objects.isNull(sort)) {
             if (sort.equals("price_asc")) {
@@ -58,7 +59,8 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
     }
 
     @Override
-    public ProductInstanceDto findProductInstanceById(String id) throws Exception {
+    @SneakyThrows
+    public ProductInstanceDto findProductInstanceById(String id) {
         ProductInstanceCloth productInstance = productInstanceRepository.findProductInstanceById(id);
         if (productInstance == null) {
             throw new Exception("ProductCloth Instance not exist with this id!!!");
@@ -151,5 +153,11 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
         productInstanceCloth.setProduct(productCloth);
         productInstanceCloth.setDateCreated(LocalDate.now());
         productCloth.getProductInstances().add(productInstanceRepository.save(productInstanceCloth));
+    }
+
+    @Override
+    public boolean isExistProductInstance(String productInstanceId) {
+        if (productInstanceRepository.findProductInstanceById(productInstanceId) == null) return false;
+        else return true;
     }
 }

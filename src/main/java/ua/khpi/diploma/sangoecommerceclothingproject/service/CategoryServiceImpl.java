@@ -7,6 +7,7 @@ import ua.khpi.diploma.sangoecommerceclothingproject.dto.CategoryDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.mapper.CategoryMapper;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.Category;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -28,7 +29,25 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public void updateCategoryDto(CategoryDto categoryDto) {
+        Category category = categoryRepository.findCategoryById(categoryDto.getId());
+        category.setTitle(categoryDto.getTitle());
+        categoryRepository.save(category);
+    }
+
+    @Override
     public Category findCategoryByTitle(String title) {
         return categoryRepository.findCategoryByTitle(title.toLowerCase());
+    }
+
+    @Override
+    public CategoryDto findCategoryById(String id) {
+        return mapper.fromCategory(categoryRepository.findCategoryById(id));
+    }
+
+    @Override
+    @Transactional
+    public void deleteCategoryById(String id) {
+        categoryRepository.deleteById(id);
     }
 }

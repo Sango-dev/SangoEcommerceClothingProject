@@ -8,10 +8,6 @@
     <meta charset="UTF-8" />
     <title>Про товар</title>
     <head th:replace="fragments/header :: header-css"></head>
-    <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-            rel="stylesheet"
-    />
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
@@ -316,7 +312,7 @@
 
         <!--Price-->
         <div class="flex mt-10">
-            <div th:text="${productInstance.product.price} + '₴'" class="mr-1">
+            <div th:text="${productInstance.product.price} + ' ₴'" class="mr-1">
                 40
             </div>
         </div>
@@ -497,34 +493,6 @@
         </div>
     </div>
 </div>
-<footer class="h-32 flex justify-between bg-neutral-100 px-10">
-    <div
-            class="justify-self-center text-5xl my-auto text-black-500 font-mono font-bold"
-    >
-        <i style='font-size:48px' class='fas'>&#xf553;</i>
-    </div>
-
-    <div class="my-auto text-xl">Автор: Клименчук Олександр©</div>
-
-    <div class="mx-4 w-fit my-auto">
-        <div>Підтримка:</div>
-        <div>
-            Email:<a
-                href="mailto:test@mail.com"
-                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
-        >test@mail.com</a
-        >
-        </div>
-        <div></div>
-        <div>
-            Phone:<a
-                href="tel:09929328437"
-                class="underline text-indigo-700 cursor-pointer hover:text-indigo-800"
-        >09929328437</a
-        >
-        </div>
-    </div>
-</footer>
 </body>
 </html>
 

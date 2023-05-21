@@ -9,4 +9,7 @@ public interface BrandService {
     List<BrandDto> findAll();
     void saveBrandDto(BrandDto brandDto);
     Brand findBrandByTitle(String title);
+    BrandDto findBrandById(String id);
+    void updateBrandDto(BrandDto brandDto);
+    void deleteBrandById(String id);
 }

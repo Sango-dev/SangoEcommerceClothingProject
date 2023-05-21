@@ -5,6 +5,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.UserDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.user.User;
 
+import java.util.List;
+
 public interface UserService extends UserDetailsService {
 	User findFirstByNickName(String name);
 
@@ -19,4 +21,6 @@ public interface UserService extends UserDetailsService {
 	void updatePassword(UserDto user);
 
 	UserDto getUserDtoByNickName(String name);
+
+	List<UserDto> getClients();
 }

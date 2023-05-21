@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8" />
+    <title>Клієнти</title>
+    <head th:replace="fragments/header :: header-css"> </head>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="w-full flex justify-left mx-2 mt-1">
+    <div class="mx-2">
+        <a th:href="@{/users/profile}" class="underline text-indigo-700 hover:text-indigo-800"
+        >Повернутися назад</a
+        >
+    </div>
+</div>
+<div class="my-10">
+    <table align="center" width="1500px">
+        <thead class="text-xl bg-neutral-100">
+        <tr>
+            <th>№</th>
+            <th>Нікнейм</th>
+            <th>ФІО</th>
+            <th>Електронна пошта</th>
+            <th>Номер телефона</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody class="border-b"  th:each="user, iterStat: ${users}">
+        <tr>
+            <td th:text="${iterStat.index + 1}" align="center"></td>
+            <td align="center" th:text="${user.nickName}">Нік</td>
+            <td align="center" th:text="${user.firstName + ' ' + user.lastName}">ФІО</td>
+            <td align="center" th:text="${user.email}">Пошта</td>
+            <td align="center" th:text="${user.phone}">Номер телефона</td>
+            <td>
+                <a th:href="@{/users/{nickname}/update-password(nickname=${user.nickName})}"
+                >Змінити пароль</a
+                >
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

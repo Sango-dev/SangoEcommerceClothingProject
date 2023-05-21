@@ -88,4 +88,10 @@ public class UserServiceImpl implements UserService {
         user.setPassword(PASSWORD_ENCODER.encode(userDto.getPassword()));
         userRepository.save(user);
     }
+
+    @Override
+    public List<UserDto> getClients() {
+        return mapper.fromUserList(userRepository.findAllByRoleClient());
+    }
+
 }

@@ -25,5 +25,6 @@ public class OrderDto {
     private PaymentOptions payment;
     private DeliveryOptions delivery;
     private OrderStatus status;
+    private UserDto user;
     private List<OrderDetailsDto> details;
 }
