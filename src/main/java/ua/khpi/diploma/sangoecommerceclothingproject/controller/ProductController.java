@@ -50,7 +50,7 @@ public class ProductController {
         return "productInstances";
     }
 
-    @GetMapping(value = "/filter/list")
+    @GetMapping( "/filter/list")
     public String findAllProductInstancesWithFilters(
             @RequestParam(required = false) List<String> brands,
             @RequestParam(required = false) List<String> categories,
