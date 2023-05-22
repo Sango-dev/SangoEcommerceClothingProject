@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<ProductCloth, String> {
     @Query(value = "select * from products p where lower(p.title) like %:str% or lower(p.description) like %:str%", nativeQuery = true)
     List<ProductCloth> findProductsByParam(@Param("str") String param);
-    @Query(value = "select * from products p where lower(p.product_code) like %:code%", nativeQuery = true)
+    @Query(value = "select * from products p where lower(p.product_code) = :code", nativeQuery = true)
     ProductCloth findProductByProductCode(@Param("code") String productCode);
     ProductCloth findProductClothById(String id);
     ProductCloth findProductClothByProductCode(String productCode);

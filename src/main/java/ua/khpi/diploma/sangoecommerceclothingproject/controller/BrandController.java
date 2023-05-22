@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.BrandDto;
-import ua.khpi.diploma.sangoecommerceclothingproject.dto.CategoryDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.service.BrandService;
 
 import java.util.List;

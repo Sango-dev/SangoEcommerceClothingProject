@@ -10,5 +10,7 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+  mvc:
+    throwExceptionIfNoHandlerFound: true
 
 

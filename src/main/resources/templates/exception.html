@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Помилка</title>
+    <head th:replace="fragments/header :: header-css"></head>
+</head>
+<body class="bg-gray-100">
+<div th:replace="fragments/header :: header"></div>
+<div class="flex flex-col items-center justify-center h-screen">
+    <p class="text-3xl font-bold mb-4" th:text="${message}">Сторінку не знайдено!</p>
+    <a href="/product/list" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <div>До головної сторінки</div>
+    </a>
+</div>
+</body>
+</html>

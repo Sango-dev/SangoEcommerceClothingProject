@@ -115,6 +115,9 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
     @Override
     public ProductDto findProductWithInstancesByProductCode(String productCode) {
         ProductCloth productCloth = productRepository.findProductByProductCode(productCode);
+        if (productCloth == null) {
+            return null;
+        }
         ProductDto dto = productMapper.fromProduct(productCloth);
         List<ProductInstanceCloth> listProdInst = productCloth.getProductInstances();
         List<ProdInstanceIdPic> listProdIdPic = new ArrayList<>();

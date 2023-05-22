@@ -1,6 +1,7 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.*;
+import ua.khpi.diploma.sangoecommerceclothingproject.exception.CustomException;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.ProductInstancePage;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.Color;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.Gender;
@@ -58,6 +60,10 @@ public class ProductController {
             @RequestParam(required = false) String sort,
             Model model) {
 
+        if (sort.equals("non-sort") && brands == null && categories == null && genders == null && colors == null && sizes == null) {
+            return "redirect:/product/list";
+        }
+
         List<BrandDto> brandDtos = brandService.findAll();
         if (brands == null) {
             brands = brandDtos.stream().map(brandDto -> brandDto.getTitle()).collect(Collectors.toList());
@@ -83,6 +89,9 @@ public class ProductController {
         List<ProductInstanceDto> list = productInstanceService.findAllProductInstancesWithFilters(
                 colors, brands, categories, genders, sizes, sort);
 
+        if (list.isEmpty()) {
+            model.addAttribute("noMatch", true);
+        }
 
         model.addAttribute("productInstances", list);
         model.addAttribute("brands", brandDtos);
@@ -94,9 +103,15 @@ public class ProductController {
 
     @GetMapping("/search-by-param")
     public String searchByParam(Model model, @RequestParam("str") String param) {
+        if (param.isBlank()) {
+            return "redirect:/product/list";
+        }
         List<CategoryDto> categoryDtos = categoryService.findAll();
         List<BrandDto> brandDtos = brandService.findAll();
         final List<ProductInstanceDto> list = productInstanceService.findAllProductInstancesBySearchParam(param);
+        if (list.isEmpty()) {
+            model.addAttribute("noMatch", true);
+        }
         model.addAttribute("productInstances", list);
         model.addAttribute("brands", brandDtos);
         model.addAttribute("categories", categoryDtos);
@@ -106,9 +121,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}/info")
-    public String productInstanceInfo(@PathVariable String id, Model model) throws Exception {
+    @SneakyThrows
+    public String productInstanceInfo(@PathVariable String id, Model model) {
         ProductInstanceDto productInstanceDto = productInstanceService.findProductInstanceById(id);
-        //TODO If availble false
+        if (productInstanceDto.getAvailable() == false) {
+            throw new CustomException("Даний екземпляр товару недоступний!");
+        }
         List<ReviewDto> reviews = reviewService.findAllReviewsByProductInstanceId(id);
         if (reviews.isEmpty()) {
             model.addAttribute("rate", 0);
@@ -130,8 +148,16 @@ public class ProductController {
 
     @GetMapping("/admin-list/search-by-code")
     public String searchByCode(Model model, @RequestParam("code") String productCode) {
-        ProductDto product = productInstanceService.findProductWithInstancesByProductCode(productCode.trim().toLowerCase());
-        model.addAttribute("products", Collections.singletonList(product));
+        if (productCode.isBlank()) {
+            model.addAttribute("noMatch", true);
+        } else {
+            ProductDto product = productInstanceService.findProductWithInstancesByProductCode(productCode.trim().toLowerCase());
+            if (product == null) {
+                model.addAttribute("noMatch", true);
+            } else {
+                model.addAttribute("products", Collections.singletonList(product));
+            }
+        }
         model.addAttribute("isSearch", true);
         return "adminList";
     }
@@ -361,7 +387,6 @@ public class ProductController {
                                @RequestParam(required = true) String size,
                                Principal principal,
                                HttpServletRequest request) {
-        //TODO if prodInstance not available
         String link = request.getHeader("Referer");
         cartService.attachToShopCart(id, size, principal.getName());
         return "redirect:" + link;

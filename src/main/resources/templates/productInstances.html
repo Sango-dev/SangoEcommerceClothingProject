@@ -145,12 +145,19 @@
                         type="search"
                         placeholder="Пошук"
                         name="str"
+                        required
                 />
             </div>
         </form>
         <div class="pl-5 cursor-pointer" id="filter">
             👇🏼
         </div>
+    </div>
+</div>
+
+<div th:if="${noMatch}" class="flex flex-col min-h-screen items-center justify-center">
+    <div class="flex-grow text-3xl text-center font-bold mb-4">
+        Товари не знайдено!
     </div>
 </div>
 

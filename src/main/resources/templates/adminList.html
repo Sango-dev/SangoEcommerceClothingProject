@@ -31,10 +31,18 @@
                     placeholder="Пошук за кодом"
                     name="code"
                     style="font-size: 14px;"
+                    required
             />
         </div>
     </form>
 </div>
+
+<div th:if="${noMatch}" class="text-center">
+    <div class="text-3xl font-bold mb-4 mx-auto">
+        Товар не знайдено!
+    </div>
+</div>
+
 <div th:each="product : ${products}" class="my-10">
     <table align="center" width="1500px">
         <thead class="text-xl bg-neutral-100">
