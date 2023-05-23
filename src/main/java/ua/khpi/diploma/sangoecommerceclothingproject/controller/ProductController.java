@@ -392,6 +392,16 @@ public class ProductController {
         return "redirect:" + link;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/{id}/delete-product")
+    public String deleteCategory(
+            @PathVariable String id,
+            Model model
+    ) {
+        productService.deleteProductById(id);
+        return "redirect:/product/admin-list";
+    }
+
     private String incorrectInputData(ProductDto productDto, Model model, String errorMessage, String page) {
         model.addAttribute("product", productDto);
         model.addAttribute("errorMessage", errorMessage);

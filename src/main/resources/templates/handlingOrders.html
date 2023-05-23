@@ -87,7 +87,7 @@
             <td align="center" th:text="${order.phone}">номер телефона</td>
             <td align="center" th:text="${order.address}">адреса</td>
             <td align="center" th:text="${order.email}">пошта</td>
-            <td align="center" th:text="${order.sum   + ' ' + '$'}">сума</td>
+            <td align="center" th:text="${order.sum   + ' ' + '₴'}">сума</td>
             <td align="center" th:if="${order.delivery.toString() == 'SELF_DELIVERY'}">Самовивіз</td>
             <td align="center" th:if="${order.delivery.toString() == 'DELIVERY_COMPANY'}">Компанія доставки</td>
             <td align="center" th:if="${order.delivery.toString() == 'COURIER'}">Кур'єр</td>

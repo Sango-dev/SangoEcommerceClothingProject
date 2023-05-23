@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.BrandRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.CategoryRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dao.ProductRepository;
+import ua.khpi.diploma.sangoecommerceclothingproject.dao.ReviewRepository;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.ProductDto;
 import ua.khpi.diploma.sangoecommerceclothingproject.mapper.ProductMapper;
 import ua.khpi.diploma.sangoecommerceclothingproject.model.product.ProductCloth;
+
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +61,11 @@ public class ProductClothServiceImpl implements ProductClothService{
     @Override
     public ProductCloth findFirstByProductCode(String productCode) {
         return productRepository.findProductClothByProductCode(productCode);
+    }
+
+    @Override
+    @Transactional
+    public void deleteProductById(String id) {
+        productRepository.deleteById(id);
     }
 }

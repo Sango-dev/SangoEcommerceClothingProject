@@ -67,8 +67,17 @@
                 Категорія
             </td>
             <td>
-                <a th:href="@{/product/{id}/edit-product(id=${product.id})}"
-                >Змінити товар</a
+                <a
+                        align="center"
+                        style="font-size: 30px; cursor: pointer; margin: 0; padding: 10px;"
+                        th:href="@{/product/{id}/edit-product(id=${product.id})}"
+                >⭯</a
+                >
+                <a
+                        align="center"
+                        style="font-size: 30px; cursor: pointer; margin: 0; padding: 10px;"
+                        th:href="@{/product/{id}/delete-product(id=${product.id})}"
+                >❌</a
                 >
             </td>
         </tr>

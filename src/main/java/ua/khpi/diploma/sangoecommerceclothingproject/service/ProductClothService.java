@@ -9,4 +9,5 @@ public interface ProductClothService {
     void updateProduct(String prodId, ProductDto productDto);
     void addProduct(ProductDto productDto);
     ProductCloth findFirstByProductCode(String productCode);
+    void deleteProductById(String id);
 }

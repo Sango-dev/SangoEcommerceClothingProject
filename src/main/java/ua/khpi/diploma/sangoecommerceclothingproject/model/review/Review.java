@@ -36,11 +36,11 @@ public class Review {
     @Column(name = "picture", nullable = false, columnDefinition = "TEXT")
     private String picture;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductCloth product;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
