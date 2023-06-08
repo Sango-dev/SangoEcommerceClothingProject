@@ -135,7 +135,7 @@ public class UserController {
             @PathVariable("nickname") String nickName,
             @RequestParam("password") String password,
             @RequestParam("matchPassword") String matchPassword
-            ) {
+    ) {
 
         UserDto user = userService.getUserDtoByNickName(nickName);
         String pageReturn = "updatePassword";
@@ -154,6 +154,4 @@ public class UserController {
         userService.updatePassword(user);
         return "redirect:/users/list";
     }
-
-
 }

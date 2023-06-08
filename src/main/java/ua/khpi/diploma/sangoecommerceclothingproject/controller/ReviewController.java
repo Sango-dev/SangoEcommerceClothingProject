@@ -1,6 +1,7 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ReviewController {
     private final ReviewService reviewService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping
     public String listWithReviewsProducts(Principal principal, Model model) {
         List<ReviewDto> reviews = reviewService.getReviewsByUser(principal.getName());
@@ -23,6 +25,7 @@ public class ReviewController {
         return "accessToReview";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
     public String listWithReviewsProducts(@PathVariable("id") String reviewId, Model model) {
         ReviewDto review = reviewService.findReviewById(reviewId);
@@ -38,11 +41,4 @@ public class ReviewController {
         reviewService.saveReview(reviewId, rating, comment);
         return "redirect:/review";
     }
-
-
-
-
-
-
-
 }

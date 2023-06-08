@@ -24,6 +24,7 @@ import java.security.Principal;
 public class OrderController {
     private final OrderService orderService;
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/save-order")
     public String saveOrder(Principal principal, Model model, OrderDto orderDto) {
         String pageReturn = "orderDetails";
@@ -51,6 +52,7 @@ public class OrderController {
         return page;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/order-history")
     public String getOrderHistoryByUsername(
             @RequestParam(required = false, defaultValue = "0") int page,

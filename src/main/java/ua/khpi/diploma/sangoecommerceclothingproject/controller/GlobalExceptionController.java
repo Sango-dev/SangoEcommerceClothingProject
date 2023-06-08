@@ -10,15 +10,10 @@ import ua.khpi.diploma.sangoecommerceclothingproject.exception.CustomException;
 @EnableWebMvc
 @ControllerAdvice
 public class GlobalExceptionController {
-    @ExceptionHandler(Exception.class)
-    public String handleException(Exception ex, Model model) {
-        if (ex instanceof CustomException) {
-            model.addAttribute("message", ex.getMessage());
-            return "exception";
-        } else {
-            model.addAttribute("message", "Сторінку не знайдено!");
-            return "exception";
-        }
+    @ExceptionHandler(CustomException.class)
+    public String handleException(CustomException ex, Model model) {
+        model.addAttribute("message", ex.getMessage());
+        return "exception";
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

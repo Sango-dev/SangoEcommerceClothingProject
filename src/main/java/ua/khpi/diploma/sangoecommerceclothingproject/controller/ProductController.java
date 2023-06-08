@@ -139,6 +139,7 @@ public class ProductController {
         return "productInstanceInfo";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin-list")
     public String listForAdmin(Model model) {
         List<ProductDto> list = productInstanceService.findAllProductsWithInstances();
@@ -146,6 +147,7 @@ public class ProductController {
         return "adminList";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin-list/search-by-code")
     public String searchByCode(Model model, @RequestParam("code") String productCode) {
         if (productCode.isBlank()) {
@@ -382,6 +384,7 @@ public class ProductController {
         return "redirect:/product/admin-list";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/{id}/add-to-cart")
     public String attachToCart(@PathVariable String id,
                                @RequestParam(required = true) String size,
