@@ -122,8 +122,6 @@
         </div>
         <div class="fixed right-[150px] top-[200px] w-96 bg-neutral-100 p-10">
             <form th:action="@{/shop-cart}" method="post" class="flex flex-col">
-                <!--<button class="btn btn-info" type="submit" name="submit">Create Order</button>
-                <button class="btn btn-danger" type="submit" name="clear">Clear Cart</button>-->
                 <div
                         sec:authorize="isAuthenticated()"
                         class="flex flex-col gap-3"
@@ -157,20 +155,6 @@
                         Очистити кошик
                     </button>
                 </div>
-
-                <div sec:authorize="!isAuthenticated()" class="m-auto my-3">
-                    <div>
-                        To make a purchase, please
-                        <a
-                                href="/*"
-                                class="underline text-blue-600 hover:text-indigo-800"
-                        >Login</a
-                        >
-                    </div>
-
-                    <!--Link to login-->
-                </div>
-
                 <div class="flex p-2 text-xl font-bold justify-between">
                     <div class="mx-2">Усього:</div>
                     <p th:text="${totalPrice + ' ₴'}">124</p>

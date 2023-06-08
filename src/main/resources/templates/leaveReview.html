@@ -79,7 +79,7 @@
                 <div class="flex justify-between mt-1">
                     <div th:text="${review.titleOfReviewProduct}">title</div>
                     <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5"/>
+                        <input type="radio" id="star5" name="rating" value="5" required/>
                         <label for="star5">&#9733;</label>
                         <input type="radio" id="star4" name="rating" value="4"/>
                         <label for="star4">&#9733;</label>
@@ -98,6 +98,7 @@
                       name="comment"
                       placeholder="Comment"
                       class="resize-none w-[500px] h-32 p-2 border outline-0"
+                      required
               ></textarea>
                     <button type="submit"
                             class="w-full mt-1 flex justify-center bg-neutral-800 py-2 text-white text-xl font-bold hover:opacity-30">

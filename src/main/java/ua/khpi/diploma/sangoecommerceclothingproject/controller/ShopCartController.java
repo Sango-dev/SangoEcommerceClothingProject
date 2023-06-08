@@ -1,6 +1,7 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class ShopCartController {
     private final ShopCartService cartService;
     private final UserService userService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping
     public String showCart(Model model) {
         ShopCartDto dto = cartService.getCartDto();
@@ -30,6 +32,7 @@ public class ShopCartController {
         return "shopCart";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping(params = "store")
     public String saveCart(Principal principal) {
         if (principal != null) {
@@ -39,6 +42,7 @@ public class ShopCartController {
         return "redirect:/shop-cart";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping(params = "load")
     public String loadCart(Principal principal) {
         if (principal != null) {
@@ -48,6 +52,7 @@ public class ShopCartController {
         return "redirect:/shop-cart";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping(params = "confirm-order")
     public String commitCartToOrder(Model model, Principal principal) {
         OrderDto dto = cartService.commitCartToOrder(principal.getName());
@@ -55,24 +60,28 @@ public class ShopCartController {
         return "orderDetails";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping(params = "clear")
     public String clearCart() {
         cartService.flushShopCart();
         return "redirect:/shop-cart";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/removeItem")
     public String removeItem(@RequestParam("id") String id, @RequestParam("size") String size) {
         cartService.removeProdFromShopCartByIdAndSize(id, size);
         return "redirect:/shop-cart";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/incamount")
     public String addAmountToShopCart(@RequestParam("id") String id, @RequestParam("size") String size) {
         cartService.updateShopCartProductAmount(id, size, 1);
         return "redirect:/shop-cart";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/decamount")
     public String decAmountToShopCart(@RequestParam("id") String id, @RequestParam("size") String size) {
         cartService.updateShopCartProductAmount(id, size, -1);

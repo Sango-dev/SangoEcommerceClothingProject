@@ -25,6 +25,9 @@
                 th:field="*{nickName}"
                 th:value="${nickName}"
                 required
+                minlength="8"
+                maxlength="20"
+                pattern="[^\u0400-\u04FF]+"
                 placeholder="Нік"
                 class="w-full px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
         />
@@ -74,6 +77,9 @@
                     th:field="*{password}"
                     th:value="${password}"
                     required
+                    minlength="8"
+                    maxlength="15"
+                    pattern="[^\u0400-\u04FF]+"
                     placeholder="Пароль"
                     class="password w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
             />
@@ -86,6 +92,9 @@
                     th:field="*{matchingPassword}"
                     th:value="${matchingPassword}"
                     required
+                    minlength="8"
+                    maxlength="15"
+                    pattern="[^\u0400-\u04FF]+"
                     placeholder="Підтвердження пароля"
                     class="password w-72 px-3 py-1 outline-0 border-b focus:border-blue-400 my-3"
             />
