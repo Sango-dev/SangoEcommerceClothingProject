@@ -62,7 +62,7 @@ public class BrandController {
     ) {
         BrandDto brandDto = brandService.findBrandById(id);
         if (brandDto == null) {
-            throw new CustomException("Бренд з даним id не існує!");
+            throw new CustomException("Бренд з даним id не існує!!!");
         }
         model.addAttribute("brand", brandDto);
         model.addAttribute("update", true);
