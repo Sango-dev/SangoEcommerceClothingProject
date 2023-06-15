@@ -1,11 +1,13 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.CategoryDto;
+import ua.khpi.diploma.sangoecommerceclothingproject.exception.CustomException;
 import ua.khpi.diploma.sangoecommerceclothingproject.service.CategoryService;
 
 import java.util.List;
@@ -53,11 +55,15 @@ public class CategoryController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/update-category")
+    @SneakyThrows
     public String updateCategory(
             @PathVariable String id,
             Model model
     ) {
         CategoryDto categoryDto = categoryService.findCategoryById(id);
+        if (categoryDto == null) {
+            throw new CustomException("Категорії з даним id не існує!");
+        }
         model.addAttribute("category", categoryDto);
         model.addAttribute("update", true);
         return "category";

@@ -1,11 +1,13 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.khpi.diploma.sangoecommerceclothingproject.dto.BrandDto;
+import ua.khpi.diploma.sangoecommerceclothingproject.exception.CustomException;
 import ua.khpi.diploma.sangoecommerceclothingproject.service.BrandService;
 
 import java.util.List;
@@ -53,11 +55,15 @@ public class BrandController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/update-brand")
+    @SneakyThrows
     public String updateBrand(
             @PathVariable String id,
             Model model
     ) {
         BrandDto brandDto = brandService.findBrandById(id);
+        if (brandDto == null) {
+            throw new CustomException("Бренд з даним id не існує!");
+        }
         model.addAttribute("brand", brandDto);
         model.addAttribute("update", true);
         return "brand";

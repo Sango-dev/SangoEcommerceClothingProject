@@ -209,3 +209,225 @@ INSERT INTO products_instances(id, color, available, link_main_picture, link_fro
         '2023-03-11',
         '85f46668-c24b-11ed-afa1-0242ac120002'
         );
+
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('6c6a0bf8-0913-11ee-be56-0242ac120002',
+        'BLACK',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1ERvNOqRzuN6G5po2Pyux6XlkmpjL3SFS',
+        'http://drive.google.com/uc?export=view&id=1NObAmGjYwNntpDaLHG42pFwTIPK_kP5Z',
+        'http://drive.google.com/uc?export=view&id=10ZbGmmR1oeLEIOVgQ7rThLVcLW1QGdGV',
+        'Чорний',
+        '2023-06-10',
+        '6c6a0838-0913-11ee-be56-0242ac120002'
+        );
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('748aec26-0918-11ee-be56-0242ac120002',
+        'YELLOW',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1qxSG9_EVaePyt9TSRU2-pLTj8YjVn3zf',
+        'http://drive.google.com/uc?export=view&id=1OM9K1Tjyiqq154wntFuQahws0AveguMm',
+        'http://drive.google.com/uc?export=view&id=1MOrVsUhtAuMgFtsBxCW9yxh1UgYAqexg',
+        'Світло-жовтий',
+        '2023-06-09',
+        '748ae988-0918-11ee-be56-0242ac120002'
+        );
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('53df322c-0920-11ee-be56-0242ac120002',
+        'WHITE',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1ZM_wSpDE1E2yvXZVTKfmlLIbF4CNzrpj',
+        'http://drive.google.com/uc?export=view&id=1A18iYBOZEVBkrqxargQo3LG1pFOKAeMF',
+        'http://drive.google.com/uc?export=view&id=1XdPcLtchTD0JBm_EFehxw439hpI7z13j',
+        'Бежевий/Том і Джері',
+        '2023-06-08',
+        'db5f0b16-091e-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('ec10e20c-0920-11ee-be56-0242ac120002',
+        'BLACK',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1q7kaZnR2hMzGoLB4HZKBIRccHx_-bL1A',
+        'http://drive.google.com/uc?export=view&id=1UIEae3spj4hp_5tL26TfSE-97qOsG-nM',
+        'http://drive.google.com/uc?export=view&id=1c5reLzf1ptDkZkk41OvvPTSDlsFu-R4c',
+        'Чорний/The Notorious B.I.G',
+        '2023-06-06',
+        'db5f0b16-091e-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('62328d1a-0925-11ee-be56-0242ac120002',
+        'BLUE',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1879sJG2JpF9RZZePspB9lVtJ3jfwRMaH',
+        'http://drive.google.com/uc?export=view&id=1d3xj_DnNJp-OsHA5F2TZ43MAwCcn-IVi',
+        'http://drive.google.com/uc?export=view&id=14-tYf9Zo-XYcRXq7bqbPUitdYtX-V_x8',
+        'Яскраво-синій/Main',
+        '2023-06-09',
+        '8610cb30-0924-11ee-be56-0242ac120002'
+        );
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('61bafe06-09fe-11ee-be56-0242ac120002',
+        'BLACK',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1P3FjlcFxP2rvJ4n_KtRT9jK_BDH24xTG',
+        'http://drive.google.com/uc?export=view&id=1goYyzMi4hMDHgroCxfeGQEgkvEncy2Fp',
+        'http://drive.google.com/uc?export=view&id=1MckA4toqJCZKJ6_fCfawQ7k1GEIZtUtt',
+        'Чорний',
+        '2023-06-01',
+        'cb8dc31e-09fd-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('5f1244ce-0a90-11ee-be56-0242ac120002',
+        'GREEN',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1GLEJphtndjTbYG8oYfqWpnly9rXfFICN',
+        'http://drive.google.com/uc?export=view&id=1O9nZhZXuPo-ShErzVHFUcU30IlEHAPUr',
+        'http://drive.google.com/uc?export=view&id=1ujDVD7thPViWeLZhOneRPieidhzRINg9',
+        'Хакі',
+        '2023-06-01',
+        'cb8dc31e-09fd-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('ea5b34c8-0a90-11ee-be56-0242ac120002',
+        'PINK',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1ECyepj07H8MF-aNYkO7YexD43qw5hCKF',
+        'http://drive.google.com/uc?export=view&id=1uRBk9uJ6t86FQfXmEE-w4Sj1OOiTHrDs',
+        'http://drive.google.com/uc?export=view&id=1C5Sp2ATwScSj7Sf7NfLQQydL8NuKJ2eU',
+        'Світло-рожевий',
+        '2023-06-01',
+        'cb8dc31e-09fd-11ee-be56-0242ac120002'
+        );
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('b095a640-0a97-11ee-be56-0242ac120002',
+        'BLACK',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1HudfIlTBu5LFelkKF0Cbycxb4qwFoM6i',
+        'http://drive.google.com/uc?export=view&id=1hQS2Js5ir4LgMyqEkDfQ7iHa5EYoYQ8C',
+        'http://drive.google.com/uc?export=view&id=1UzFgrs2CHj_cBKhxGnwZFU3i79o3B-jO',
+        'Чорний',
+        '2023-05-25',
+        '8d40c4d8-0a95-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('49e54598-0a99-11ee-be56-0242ac120002',
+        'GREY',
+        'true',
+        'http://drive.google.com/uc?export=view&id=15yfZPM4QTBKM9YxhTcRxM22fT8_9G-8T',
+        'http://drive.google.com/uc?export=view&id=1Bt2UTVxBEW7ZAPmWNUsq88shN-51HfVU',
+        'http://drive.google.com/uc?export=view&id=146bu1bSRG5RJtswss6fX-YyhY_P8qzZp',
+        'Темно-сірий',
+        '2023-05-29',
+        '8d40c4d8-0a95-11ee-be56-0242ac120002'
+        );
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('f92fd9ee-0aa0-11ee-be56-0242ac120002',
+        'WHITE',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1kSDvGaY3f8y5QhWUC4RtzYLVS5Jiteyl',
+        'http://drive.google.com/uc?export=view&id=1Chwe1etYRM_CwBWovYsQpmzwVXc17lbE',
+        'http://drive.google.com/uc?export=view&id=1qi6azObo4yJZP5tNV87TAuGNSNDZ3yuI',
+        'Кремовий',
+        '2023-06-11',
+        'b2598006-0aa0-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('e9d3e216-0aa4-11ee-be56-0242ac120002',
+        'BLUE',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1W6n4CFlOmCpOXEq2QTb303edLjzytz2D',
+        'http://drive.google.com/uc?export=view&id=1yyLpVHQanA6qOU1f3FO_ZY1OWgkeAbSw',
+        'http://drive.google.com/uc?export=view&id=1Bw7jFCOGtf9lwtUVEguXPtWqWJYFDjTS',
+        'Джинсовий синій',
+        '2023-06-09',
+        '72950248-0aa4-11ee-be56-0242ac120002'
+        );
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('ff9edfba-0aa9-11ee-be56-0242ac120002',
+        'GREEN',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1_V2dEG_Z1DulWpKoQEYtdZZwmISUV7CM',
+        'http://drive.google.com/uc?export=view&id=12srhbvU5969AyBAsjb_yaMufuCvxXsdP',
+        'http://drive.google.com/uc?export=view&id=1nAn4oLhu2w-WQYhVhSgss3bFzCGIQTkJ',
+        'Зелений кактус',
+        '2023-06-08',
+        '88c330a8-0aa9-11ee-be56-0242ac120002'
+        );
+----------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('17ef6588-0aac-11ee-be56-0242ac120002',
+        'WHITE',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1dDkLh_UOW2Bx-Y59iE_KndfXU_H_7oMj',
+        'http://drive.google.com/uc?export=view&id=170ShB846MjadgOKJ2zYsrzFm5cApZ9Rm',
+        'http://drive.google.com/uc?export=view&id=1a-cf34lKtke8wGNfySAxoygD_3LysEXU',
+        'Світло-сірий меланж',
+        '2023-06-07',
+        'aaf1bd96-0aab-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('17ef6588-0aak-11ee-be56-0242ac120002',
+        'RED',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1eE6Qv0tJQmRlEDoKTkxa3lwWHK6hQx_B',
+        'http://drive.google.com/uc?export=view&id=1p1FeqJOXfdPViqX3OxmtC9qk64OxaMY-',
+        'http://drive.google.com/uc?export=view&id=1wRxv3NiF36cwPvVYNvSsFZE0Wit7OjhC',
+        'Червоний',
+        '2023-06-07',
+        'aaf1bd96-0aab-11ee-be56-0242ac120002'
+        );
+--------------------------------------------------------------------------------
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('17ef6566-0aak-11ee-be56-0242ac120002',
+        'BLACK',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1zrBxs6uWFULIxZ3TOcR7-ZfhjEyYs3Y6',
+        'http://drive.google.com/uc?export=view&id=11tM888PqUVKuBY1wLzJMXAxLU_l5RY-M',
+        'http://drive.google.com/uc?export=view&id=1j0KbQR_BnowzcCK5XqSwRTuJU8fYfFvg',
+        'Чорний',
+        '2023-06-11',
+        'aaf1bd97-0aab-11ee-be56-0242ac120002'
+        );
+
+INSERT INTO products_instances(id, color, available, link_main_picture, link_front_picture,
+    link_back_picture, color_definition, date_created, product_id)
+ VALUES('c6f208fc-0ab5-11ee-be56-0242ac120002',
+        'GREY',
+        'true',
+        'http://drive.google.com/uc?export=view&id=1efZAQs7i7QLyv4M8smYaMtAxoj0UMAN1',
+        'http://drive.google.com/uc?export=view&id=1mRNhpdjWYNHdiUHsHHmLeglVACn6KFAA',
+        'http://drive.google.com/uc?export=view&id=1Ua0Taf__wSG1D_YmKoCcIY_dA_wTdlbC',
+        'Сірий меланж',
+        '2023-06-07',
+        'aaf1bd97-0aab-11ee-be56-0342ac120002'
+        );

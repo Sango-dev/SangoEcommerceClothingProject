@@ -1,5 +1,6 @@
 package ua.khpi.diploma.sangoecommerceclothingproject.controller;
 
+import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +19,24 @@ public class GlobalExceptionController {
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleNotFoundError(Model model) {
+        model.addAttribute("message", "Сторінку не знайдено!");
+        return "exception";
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public String handleNumberFormatException(Model model) {
+        model.addAttribute("message", "Сторінку не знайдено!");
+        return "exception";
+    }
+
+    @ExceptionHandler(ConversionFailedException.class)
+    public String handleConversionFailedException(Model model) {
+        model.addAttribute("message", "Сторінку не знайдено!");
+        return "exception";
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgumentException(Model model) {
         model.addAttribute("message", "Сторінку не знайдено!");
         return "exception";
     }

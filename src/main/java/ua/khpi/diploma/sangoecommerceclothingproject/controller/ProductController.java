@@ -37,7 +37,6 @@ public class ProductController {
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(required = false, defaultValue = "0") int page) {
-
         int size = 10;
         Pageable pageable = PageRequest.of(page, size);
         ProductInstancePage productInstancePageResponse = productInstanceService.findAllProductInstances(pageable);
@@ -50,7 +49,7 @@ public class ProductController {
         return "productInstances";
     }
 
-    @GetMapping( "/filter/list")
+    @GetMapping("/filter/list")
     public String findAllProductInstancesWithFilters(
             @RequestParam(required = false) List<String> brands,
             @RequestParam(required = false) List<String> categories,
@@ -94,6 +93,9 @@ public class ProductController {
         }
 
         model.addAttribute("productInstances", list);
+        if (list.isEmpty()) {
+            model.addAttribute("noMatch", true);
+        }
         model.addAttribute("brands", brandDtos);
         model.addAttribute("categories", categoryDtos);
         model.addAttribute("totalPages", 0);
